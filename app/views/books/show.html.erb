@@ -1,0 +1,6 @@
+<h1><%= @book.name %></h1>
+<%= @book.price %>
+
+<%= link_to "Acheter", new_book_order_path(@book)  %>
+
+<%= link_to "Supprimer", book_path(@book), method: :delete, data: {confirm: "Etes-vous sur ?"} %>

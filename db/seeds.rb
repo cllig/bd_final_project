@@ -19,7 +19,9 @@ user1 =
     first_name: "John",
     last_name: "Doe",
     username: "Drako",
-    city: "Metz"
+    city: "Metz",
+    address: "15 rue panel",
+    postal_code: 45_785
   )
 
 Book.create(
