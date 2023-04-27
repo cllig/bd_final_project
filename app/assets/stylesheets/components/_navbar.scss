@@ -1,0 +1,17 @@
+.navbar-global {
+  justify-content: space-between;
+  background: white;
+}
+
+.navbar-global .navbar-collapse {
+  flex-grow: 0;
+}
+
+.navbar-global .navbar-brand img {
+  width: 40px;
+}
+
+.avatar {
+  width: 40px;
+  border-radius: 50%;
+}
