@@ -9,6 +9,7 @@ class User < ApplicationRecord
 
   has_many :books, dependent: :destroy
   has_many :orders, dependent: :destroy
+  has_one_attached :avatar, dependent: :destroy
 
   validates :first_name, presence: true
   validates :last_name, presence: true
@@ -17,4 +18,5 @@ class User < ApplicationRecord
   validates :address, presence: true
   validates :postal_code, presence: true
   validates :city, presence: true
+
 end
