@@ -4,9 +4,9 @@
       <% @books.each do |book| %>
         <%= link_to book_path(book), :class => "card" do %>
           <% if book.photos.attached? %>
-            <%= image_tag book.photos.first, class: "card-img"%>
+            <%= image_tag book.photos.first, class: "card-img" %>
           <% else %>
-            <%= image_tag "conversation.png", class: "card-img"%>
+            <%= image_tag "conversation.png", class: "card-img" %>
           <% end %>
           <div class="card-body">
             <div class="card-text">

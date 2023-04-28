@@ -52,3 +52,22 @@
   height: 42vh;
   object-fit: cover;
 }
+
+// show
+.default-img,
+.detail-book-carousel > img {
+  width: 100%;
+  border-radius: 5px;
+  object-fit: cover;
+  margin: auto 0;
+}
+
+.text-jutify {
+  text-align: justify;
+}
+
+.avatar-large {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+}
