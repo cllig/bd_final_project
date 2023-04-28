@@ -6,9 +6,11 @@
     <%= f.input :category, collection: Book::CATEGORY %>
     <%= f.input :name %>
     <%= f.input :price %>
-    <%= f.input :description %>
+    <%= f.input :description, as: :text, input_html: {rows: 5} %>
     <% if book.photos.attached? %>
-      <%# <%= image_tag book.photos., class: "avatar" %> %>
+      <% book.photos.each do |photo| %>
+        <%= image_tag photo, class: "avatar"%>
+      <% end %>
       <%= f.input :photos, as: :file, input_html: { multiple: true }, required: false, label: "Modifie tes photos" %>
     <% else %>
       <%= f.input :photos, as: :file, input_html: { multiple: true }, required: false, label: "Ajoute des photos" %>
@@ -16,6 +18,6 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, class: "btn btn-purple" %>
   </div>
 <% end %>
