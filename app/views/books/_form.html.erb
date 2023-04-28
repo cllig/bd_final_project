@@ -7,6 +7,12 @@
     <%= f.input :name %>
     <%= f.input :price %>
     <%= f.input :description %>
+    <% if book.photos.attached? %>
+      <%# <%= image_tag book.photos., class: "avatar" %> %>
+      <%= f.input :photos, as: :file, input_html: { multiple: true }, required: false, label: "Modifie tes photos" %>
+    <% else %>
+      <%= f.input :photos, as: :file, input_html: { multiple: true }, required: false, label: "Ajoute des photos" %>
+    <% end %>
   </div>
 
   <div class="form-actions">

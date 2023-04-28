@@ -58,6 +58,10 @@
                           input_html: { autocomplete: "city" },
                           label: "Ville"%>
             </div>
+            <%= f.input :avatar,
+                        as: :file,
+                        required: false,
+                        label: "Choisissez votre avatar" %>
         </div>
 
         <div class="form-actions">
