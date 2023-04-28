@@ -15,3 +15,16 @@
   width: 40px;
   border-radius: 50%;
 }
+
+.nav-link-purple {
+  background-color: $purple-300;
+  color: white;
+  padding: 4px;
+  border-radius: 4px;
+  margin: auto 2vh;
+
+  &:hover {
+    background-color: $purple-400;
+    color: white;
+  }
+}

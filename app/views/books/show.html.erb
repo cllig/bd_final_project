@@ -1,12 +1,56 @@
-<h1><%= @book.name %></h1>
-<%= @book.price %>
+<div class="container">
+  <div class="d-flex flex-wrap row">
 
-<% if @book.photos.attached? %>
-  <% @book.photos.each do |photo| %>
-      <%= image_tag photo %>
-  <% end %>
-<% end %>
+    <div class="detail-book-carousel col-12 col-md-4 col-lg-4 col-xl-4 text-center">
+      <% if @book.photos.attached? %>
+        <div id="carouselBook" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+            <% @book.photos.each_with_index do |photo, index| %>
+              <div class="carousel-item carousel-img <%= index == 0 ? "active" : ""%> ">
+                <%= image_tag photo, crop: :fill, class: "d-block w-100", id: "slide#{index} " %>
+              </div>
+            <% end %>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselBook" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselBook" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      <% else %>
+        <%= image_tag "conversation.png", class: "default-img" %>
+      <% end %>
+    </div>
 
-<%= link_to "Acheter", new_book_order_path(@book)  %>
+    <div class="details-book-infos col-12 col-md-8 col-lg-8 col-xl-8">
+      <h2 class="mb-4 mt-4"><%= @book.name %></h2>
+      <p class="mb-4 text-jutify"><%= @book.description %></p>
+      <p>Prix :</p>
+      <div class="d-flex mb-4 ms-4 text-center">
+        <h4><%= @book.price %></h4>
+        <p>€</p>
+      </div>
+      <p class="mb-2"><b>Vendu par :</b></p>
+      <div class="d-flex ms-4 mb-4">
+        <% if @book.user.avatar.attached? %>
+          <%= image_tag @book.user.avatar, class: "avatar-large me-2", crop: :fill %>
+        <% else %>
+          <%= image_tag "profile-user.png", class: "avatar-large me-2", crop: :fill%>
+        <% end %>
+        <div>
+          <p><b><%= @book.user.username %></b></p>
+          <p class="fw-light"><%= @book.user.city %></p>
+        </div>
+      </div>
+      <div class="text-center mt-5">
+        <%= link_to "Acheter", new_book_order_path(@book), class: "btn btn-lg btn-purple text-center" %>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 <%= link_to "Supprimer", book_path(@book), method: :delete, data: {confirm: "Etes-vous sur ?"} %>

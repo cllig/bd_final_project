@@ -10,6 +10,10 @@ $background: $light-gray;
 $paragraph: $black;
 $text: $black;
 
+.container {
+  margin: 4vh auto;
+}
+
 body {
   background-color: $background;
   color: $text;
@@ -59,18 +63,6 @@ h4 {
   font-size: clamp(22px, 3vw, 35px);
   font-family: $headers-font;
   font-weight: normal;
-}
-
-h5 {
-  font-family: $headers-font;
-  font-weight: 400;
-  font-size: clamp(35px, 5vw, 40px);
-}
-
-h6 {
-  font-family: $headers-font;
-  font-weight: 400;
-  font-size: clamp(52px, 6vw, 100px);
 }
 
 $border-radius: 2px;
