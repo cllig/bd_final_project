@@ -32,8 +32,8 @@
               <%= image_tag "profile-user.png", class: "dropdown-toggle avatar", id: "navbarDropdown", "data-bs-toggle":"dropdown", 'aria-haspopup': true, 'aria-expanded':false %>
             <% end %>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <%= link_to "Mes commandes", orders_path, class: "dropdown-item" %>
               <%= link_to "Modifier son profil", edit_user_registration_path, class: "dropdown-item" %>
-              <%= link_to "Another action", "#", class: "dropdown-item" %>
               <%= link_to "Se déconnecter", destroy_user_session_path, class: "dropdown-item", method: :delete %>
             </div>
           </li>
