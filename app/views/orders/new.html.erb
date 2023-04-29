@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row mx-auto">
-    <div class="col-3"></div>
-    <div class="col-6 p-3 bg-white text-dark rounded">
+    <div class="col-md-2 col-lg-2 col-xl-3"></div>
+    <div class="col-md-8 col-lg-8 p-3 col-xl-6 bg-white text-dark rounded">
       <div class="mb-5">
         <p class="fw-light mb-4">Commande</p>
         <div class="d-flex justify-content-between align-items-center">
@@ -9,7 +9,7 @@
             <%= image_tag @book.photos.first, class: "me-2 miniature-img" %>
             <p class="fw-bold"><%= @book.name %></p>
           </div>
-          <p class="fw-bold"><%= @book.price %> €</p>
+          <p class="fw-bold"><%= @book.price %>€</p>
         </div>
       </div>
 
@@ -18,10 +18,12 @@
         <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
         <p class="fw-light mb-4">Adresse de livraison :</p>
-        <%= f.input :delivery_address,  input_html: { value: (f.object.delivery_address.present?) ? f.object.delivery_address : current_user.address}, label: "Adresse" %>
-        <div class="d-flex justify-content-between">
-          <%= f.input :delivery_postal_code, input_html: { value: (f.object.delivery_postal_code.present?) ? f.object.delivery_postal_code : current_user.postal_code}, label: "Code postal"%>
-          <%= f.input :delivery_city, input_html: { value: (f.object.delivery_city.present?) ? f.object.delivery_city : current_user.city}, label: "Ville" %>
+        <div>
+          <%= f.input :delivery_address,  input_html: { value: (f.object.delivery_address.present?) ? f.object.delivery_address : current_user.address}, label: "Adresse" %>
+          <div class="d-flex justify-content-between">
+            <%= f.input :delivery_postal_code, input_html: { value: (f.object.delivery_postal_code.present?) ? f.object.delivery_postal_code : current_user.postal_code}, label: "Code postal"%>
+            <%= f.input :delivery_city, input_html: { value: (f.object.delivery_city.present?) ? f.object.delivery_city : current_user.city}, label: "Ville" %>
+          </div>
         </div>
 
         <div class="mb-5">
@@ -31,7 +33,6 @@
               <%= image_tag "paypal-logo.jpg", class: "avatar" %>
               <p class="fw-bold">PayPal</p>
             </div>
-            <p class="fw-bold"><%= @book.price %> €</p>
           </div>
         </div>
 
