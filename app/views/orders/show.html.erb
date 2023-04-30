@@ -1,1 +1,30 @@
-<h1>Détails commande</h1>
+<div class="container">
+  <h3>Détails de la commande</h3>
+
+  <div class="mx-5 bg-white p-4 rounded">
+    <p class="mb-4"><span class="fw-light">Commande passée le :</span> <%= @order.created_at.strftime('%D')%></p>
+
+    <p class="mb-4"><span class="fw-light">Vendeur :</span> <%= @order.book.user.username %></p>
+
+    <p class="mb-2 fw-light">Article :</p>
+    <div class="d-flex justify-content-start align-items-center mb-4 ms-5">
+      <%= image_tag @order.book.photos.first, class: "me-4 miniature-img" %>
+      <p class="fw-bold me-4"><%= @order.book.name %></p>
+      <p class="fw-bold"><%= @order.book.price %>€</p>
+    </div>
+
+    <div class="mb-4">
+      <p class="fw-light">Adresse de livraison :</p>
+      <div class="ms-5">
+        <p><%= @order.user.first_name %> <%= @order.user.last_name %></p>
+        <p><%= @order.delivery_address %></p>
+        <p><%= @order.delivery_postal_code %> <%= @order.delivery_city %></p>
+      </div>
+    </div>
+
+    <p class="mb-5"><span class="fw-light">Moyen de paiement :</span> PayPal</p>
+
+    <%= link_to "Annuler", order_path(@order), method: :delete, data: {confirm: "Voulez-vous vraiment annuler cette commande ?"}, class: "btn btn-outline-danger" %>
+
+  </div>
+</div>
