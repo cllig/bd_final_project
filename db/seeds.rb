@@ -1,59 +1,92 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
 puts "deleting seeds..."
 Order.destroy_all
 User.destroy_all
 Book.destroy_all
 
+
 puts "Seeds deleted ! Creating users ..."
 
+
+file0 = URI.open("https://images.unsplash.com/photo-1479936343636-73cdc5aae0c3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80")
+file1 = URI.open("https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80")
+file2 = URI.open("https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=466&q=80")
+file3 = URI.open("https://images.unsplash.com/photo-1528892952291-009c663ce843?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=344&q=80")
+file4 = URI.open("https://images.unsplash.com/photo-1504257432389-52343af06ae3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80")
+file5 = URI.open("https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80")
+file6 = URI.open("https://images.unsplash.com/photo-1516224498413-84ecf3a1e7fd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80")
+file7 = URI.open("https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80")
+file8 = URI.open("https://images.unsplash.com/photo-1624561172888-ac93c696e10c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDF8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60")
+file9 = URI.open("https://images.unsplash.com/photo-1526080652727-5b77f74eacd2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=876&q=80")
+file10 = URI.open("https://images.unsplash.com/photo-1593085512500-5d55148d6f0d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80")
+file11 = URI.open("https://images.unsplash.com/photo-1628260412297-a3377e45006f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80")
+file12 = URI.open("https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZSUyMHBpY3R1cmV8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60")
+file13 = URI.open("https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60")
+file14 = URI.open("https://images.unsplash.com/photo-1541534401786-2077eed87a74?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTZ8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60")
+file15 = URI.open("https://images.unsplash.com/photo-1586962358070-16a0f05b8e67?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Njl8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60")
+file16 = URI.open("https://images.unsplash.com/photo-1521806463-65fbb1ab7ff9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTAxfHxwcm9maWxlJTIwcGljdHVyZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60")
+file17 = URI.open("https://images.unsplash.com/photo-1515041219749-89347f83291a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80")
+file18 = URI.open("https://images.unsplash.com/photo-1611604548018-d56bbd85d681?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80")
+file19 = URI.open("https://images.unsplash.com/photo-1638803040283-7a5ffd48dad5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80")
+file20 = URI.open("https://images.unsplash.com/photo-1520468164108-7f393c152c59?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80")
+file21 = URI.open("https://images.unsplash.com/photo-1604883781269-d121d9ad20f6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80")
+file22 = URI.open("https://images.unsplash.com/photo-1584428018260-1a9bc0e15365?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1011&q=80")
+file23 = URI.open("https://images.unsplash.com/photo-1531214159280-079b95d26139?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjJ8fGNoYXJhY3RlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60")
+file24 = URI.open("https://images.unsplash.com/photo-1627843221135-995cc6e9f723?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTZ8fGNoYXJhY3RlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60")
+file25 = URI.open("https://images.unsplash.com/photo-1630207831419-3532bcb828d7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nzh8fGNoYXJhY3RlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60")
+
+
 user1 = User.create(username: "moriaaudi", first_name: "Jean", last_name: "Dupont", email: "jean@gmail.com", password: "aaaaaa", admin: false, city: "Marseille", address: "15 rue panel", postal_code: 13000 )
-  # user1.photo.attach(io: file28, filename: 'bar.png', content_type: 'image/png')
+  user1.avatar.attach(io: file0, filename: 'bar.png', content_type: 'image/png')
 user2 = User.create(username: "waybreadgranular", first_name: "Axel", last_name: "Martin", email: "axel@gmail.com", password: "aaaaaa", admin: false, city: "Paris", address: "15 rue panel", postal_code: 75000)
-   # user2.photo.attach(io: file21, filename: 'bar.png', content_type: 'image/png')
+  user2.avatar.attach(io: file1, filename: 'bar.png', content_type: 'image/png')
 user3 = User.create(username: "galileo", first_name: "Arthur", last_name: "Bernard", email: "arthur@gmail.com", password: "aaaaaa", admin: false, city: "Marseille", address: "15 rue panel", postal_code: 13000)
-   # user3.photo.attach(io: file22, filename: 'bar.png', content_type: 'image/png')
+  user3.avatar.attach(io: file2, filename: 'bar.png', content_type: 'image/png')
 user4 = User.create(username: "galileo125", first_name: "Evan", last_name: "Thomas", email: "evan@gmail.com", password: "aaaaaa", admin: false, city: "Marseille", address: "15 rue panel", postal_code: 13000)
-   # user4.photo.attach(io: file23, filename: 'bar.png', content_type: 'image/png')
+  user4.avatar.attach(io: file3, filename: 'bar.png', content_type: 'image/png')
 user5 = User.create(username: "galileo57", first_name: "Antoine", last_name: "Richard", email: "antoine@gmail.com", password: "aaaaaa", admin: false, city: "Marseille", address: "15 rue panel", postal_code: 13000)
-   # user5.photo.attach(io: file24, filename: 'bar.png', content_type: 'image/png')
+  user5.avatar.attach(io: file4, filename: 'bar.png', content_type: 'image/png')
 user6 = User.create(username: "pathsofglory", first_name: "Adam", last_name: "Durand", email: "adam@gmail.com", password: "aaaaaa", admin: false, city: "Paris", address: "15 rue panel", postal_code: 75000)
-   # user6.photo.attach(io: file25, filename: 'bar.png', content_type: 'image/png')
+  user6.avatar.attach(io: file5, filename: 'bar.png', content_type: 'image/png')
 user7 = User.create(username: "pathsofglory57", first_name: "Alexandre", last_name: "Dubois", email: "alexandre@gmail.com", password: "aaaaaa", admin: false, city: "Paris", address: "15 rue panel", postal_code: 75000)
-   # user7.photo.attach(io: file26, filename: 'bar.png', content_type: 'image/png')
+  user7.avatar.attach(io: file6, filename: 'bar.png', content_type: 'image/png')
 user8 = User.create(username: "pathsofglory755", first_name: "Carmen", last_name: "Garcia", email: "carmen@gmail.com", password: "aaaaaa", admin: false, city: "Paris", address: "15 rue panel", postal_code: 75000)
-   # user8.photo.attach(io: file33, filename: 'bar.png', content_type: 'image/png')
+  user8.avatar.attach(io: file7, filename: 'bar.png', content_type: 'image/png')
 user9 = User.create(username: "junonova", first_name: "Cesar", last_name: "Blanc", email: "cesar@gmail.com", password: "aaaaaa", admin: false, city: "Paris", address: "15 rue panel", postal_code: 45785)
-   # user9.photo.attach(io: file34, filename: 'bar.png', content_type: 'image/png')
+  user9.avatar.attach(io: file8, filename: 'bar.png', content_type: 'image/png')
 user10 = User.create(username: "junonova57", first_name: "Clara", last_name: "Serra", email: "clara@gmail.com", password: "aaaaaa", admin: false, city: "Paris", address: "15 rue panel", postal_code: 45785)
-   # user10.photo.attach(io: file20, filename: 'bar.png', content_type: 'image/png')
+  user10.avatar.attach(io: file9, filename: 'bar.png', content_type: 'image/png')
 user11 = User.create(username: "junonova12", first_name: "Celine", last_name: "Guisset", email: "celine@gmail.com", password: "aaaaaa", admin: false, city: "Bordeaux", address: "15 rue panel", postal_code: 30000)
-   # user11.photo.attach(io: file27, filename: 'bar.png', content_type: 'image/png')
+  user11.avatar.attach(io: file10, filename: 'bar.png', content_type: 'image/png')
 user12 = User.create(username: "junonova458", first_name: "Baptiste", last_name: "Mas", email: "baptiste@gmail.com", password: "aaaaaa", admin: false, city: "Bordeaux", address: "15 rue panel", postal_code: 30000)
-   # user12.photo.attach(io: file35, filename: 'bar.png', content_type: 'image/png')
+  user12.avatar.attach(io: file11, filename: 'bar.png', content_type: 'image/png')
 user13 = User.create(username: "ryebread", first_name: "Brian", last_name: "Pla", email: "brian@gmail.com", password: "aaaaaa", admin: false, city: "Bordeaux", address: "15 rue panel", postal_code: 30000)
-   # user13.photo.attach(io: file36, filename: 'bar.png', content_type: 'image/png')
+  user13.avatar.attach(io: file12, filename: 'bar.png', content_type: 'image/png')
 user14 = User.create(username: "ryebread5", first_name: "Caroline", last_name: "Sola", email: "caroline@gmail.com", password: "aaaaaa", admin: false, city: "Bordeaux", address: "15 rue panel", postal_code: 30000)
-   # user14.photo.attach(io: file29, filename: 'bar.png', content_type: 'image/png')
+  user14.avatar.attach(io: file13, filename: 'bar.png', content_type: 'image/png')
 user15 = User.create(username: "ryebread57", first_name: "Sarah", last_name: "Lopez", email: "sarah@gmail.com", password: "aaaaaa", admin: false, city: "Lyon", address: "15 rue panel", postal_code: 69000)
-   # user15.photo.attach(io: file32, filename: 'bar.png', content_type: 'image/png')
-User.create(username: "ryebread745", first_name: "Benoit", last_name: "Torrès", email: "benoit@gmail.com", password: "aaaaaa", admin: false, city: "Lyon", address: "15 rue panel", postal_code: 69000)
-User.create(username: "hamburger", first_name: "Jules", last_name: "Gil", email: "jules@gmail.com", password: "aaaaaa", admin: false, city: "Lyon", address: "15 rue panel", postal_code: 69000)
-User.create(username: "hamburger55", first_name: "Thomas", last_name: "Salvat", email: "thomas@gmail.com", password: "aaaaaa", admin: false, city: "Lyon", address: "15 rue panel", postal_code: 69000)
-User.create(username: "hamburger584", first_name: "Audrey", last_name: "Simon", email: "audrey@gmail.com", password: "aaaaaa", admin: false, city: "Lyon", address: "15 rue panel", postal_code: 69000)
-User.create(username: "artic5632", first_name: "Julia", last_name: "Sanchez", email: "julia@gmail.com", password: "aaaaaa", admin: false, city: "Brest", address: "15 rue panel", postal_code: 29000)
-User.create(username: "artic", first_name: "Adrien", last_name: "Petit", email: "adrien@gmail.com", password: "aaaaaa", admin: false, city: "Brest", address: "15 rue panel", postal_code: 29000)
-User.create(username: "artic52", first_name: "Alexis", last_name: "Robert", email: "alexis@gmail.com", password: "aaaaaa", admin: false, city: "Brest", address: "15 rue panel", postal_code: 29000)
-User.create(username: "artic78", first_name: "Ibrahim", last_name: "Thouvenin", email: "ibrahim@gmail.com", password: "aaaaaa", admin: false, city: "Brest", address: "15 rue panel", postal_code: 29000)
-User.create(username: "articartic", first_name: "Alexis", last_name: "Robert", email: "alexis@gmail.com", password: "aaaaaa", admin: false, city: "Brest", address: "15 rue panel", postal_code: 29000)
-User.create(username: "articarticartic", first_name: "Ibrahim", last_name: "Thouvenin", email: "ibrahim@gmail.com", password: "aaaaaa", admin: false, city: "Rennes", address: "15 rue panel", postal_code: 35000)
-User.create(username: "fishpear", first_name: "Juliette", last_name: "Montagne", email: "juliette@gmail.com", password: "aaaaaa", admin: false, city: "Rennes", address: "15 rue panel", postal_code: 35000)
+  user15.avatar.attach(io: file14, filename: 'bar.png', content_type: 'image/png')
+user16 = User.create(username: "ryebread745", first_name: "Benoit", last_name: "Torrès", email: "benoit@gmail.com", password: "aaaaaa", admin: false, city: "Lyon", address: "15 rue panel", postal_code: 69000)
+  user16.avatar.attach(io: file15, filename: 'bar.png', content_type: 'image/png')
+user17 = User.create(username: "hamburger", first_name: "Jules", last_name: "Gil", email: "jules@gmail.com", password: "aaaaaa", admin: false, city: "Lyon", address: "15 rue panel", postal_code: 69000)
+  user17.avatar.attach(io: file16, filename: 'bar.png', content_type: 'image/png')
+user18 = User.create(username: "hamburger55", first_name: "Thomas", last_name: "Salvat", email: "thomas@gmail.com", password: "aaaaaa", admin: false, city: "Lyon", address: "15 rue panel", postal_code: 69000)
+  user18.avatar.attach(io: file17, filename: 'bar.png', content_type: 'image/png')
+user19 = User.create(username: "hamburger584", first_name: "Audrey", last_name: "Simon", email: "audrey@gmail.com", password: "aaaaaa", admin: false, city: "Lyon", address: "15 rue panel", postal_code: 69000)
+  user19.avatar.attach(io: file18, filename: 'bar.png', content_type: 'image/png')
+user20 = User.create(username: "artic5632", first_name: "Julia", last_name: "Sanchez", email: "julia@gmail.com", password: "aaaaaa", admin: false, city: "Brest", address: "15 rue panel", postal_code: 29000)
+  user20.avatar.attach(io: file19, filename: 'bar.png', content_type: 'image/png')
+user21 =User.create(username: "artic", first_name: "Adrien", last_name: "Petit", email: "adrien@gmail.com", password: "aaaaaa", admin: false, city: "Brest", address: "15 rue panel", postal_code: 29000)
+  user21.avatar.attach(io: file20, filename: 'bar.png', content_type: 'image/png')
+user22 = User.create(username: "artic52", first_name: "Alexis", last_name: "Robert", email: "alexis@gmail.com", password: "aaaaaa", admin: false, city: "Brest", address: "15 rue panel", postal_code: 29000)
+  user22.avatar.attach(io: file21, filename: 'bar.png', content_type: 'image/png')
+user23 = User.create(username: "artic78", first_name: "Ibrahim", last_name: "Thouvenin", email: "ibrahim@gmail.com", password: "aaaaaa", admin: false, city: "Brest", address: "15 rue panel", postal_code: 29000)
+  user23.avatar.attach(io: file22, filename: 'bar.png', content_type: 'image/png')
+user24 = User.create(username: "articartic", first_name: "Alexis", last_name: "Robert", email: "alexis@gmail.com", password: "aaaaaa", admin: false, city: "Brest", address: "15 rue panel", postal_code: 29000)
+  user24.avatar.attach(io: file23, filename: 'bar.png', content_type: 'image/png')
+user25 = User.create(username: "articarticartic", first_name: "Ibrahim", last_name: "Thouvenin", email: "ibrahim@gmail.com", password: "aaaaaa", admin: false, city: "Rennes", address: "15 rue panel", postal_code: 35000)
+  user25.avatar.attach(io: file24, filename: 'bar.png', content_type: 'image/png')
+user26 = User.create(username: "fishpear", first_name: "Juliette", last_name: "Montagne", email: "juliette@gmail.com", password: "aaaaaa", admin: false, city: "Rennes", address: "15 rue panel", postal_code: 35000)
+  user26.avatar.attach(io: file25, filename: 'bar.png', content_type: 'image/png')
 User.create(username: "fishpear45", first_name: "Laurent", last_name: "Moreau", email: "laurent@gmail.com", password: "aaaaaa", admin: false, city: "Rennes", address: "15 rue panel", postal_code: 35000)
 User.create(username: "fishpear78", first_name: "Gilles", last_name: "Moreau", email: "gilles@gmail.com", password: "aaaaaa", admin: false, city: "Nantes", address: "15 rue panel", postal_code: 44000)
 User.create(username: "fishpear22", first_name: "Gabriel", last_name: "Navet", email: "gabriel@gmail.com", password: "aaaaaa", admin: false, city: "Nantes", address: "15 rue panel", postal_code: 44000)
@@ -70,8 +103,11 @@ User.create(username: "alpenglow55", first_name: "Evan", last_name: "Flocon", em
 User.create(username: "wine", first_name: "Maxime", last_name: "Durant", email: "maxime@gmail.com", password: "aaaaaa", admin: false, city: "Annecy", address: "15 rue panel", postal_code: 74000)
 User.create(username: "wine85", first_name: "Florine", last_name: "Ponsard", email: "florine@gmail.com", password: "aaaaaa", admin: false, city: "Marseille", address: "15 rue panel", postal_code: 13000)
 
+
 puts "users created ! Now creating books ..."
 
+
 Book.create( name: "BD1", category: "Drame", price: 2, description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type ", user: user1)
+
 
 puts "seeds created"
