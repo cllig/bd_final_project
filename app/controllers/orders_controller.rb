@@ -16,11 +16,11 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     @book = Book.find(params[:book_id])
-    @reservation.book = @book
-    @reservation.user = current_user
+    @order.book = @book
+    @order.user = current_user
 
     if @order.save
-      redirect_to order_path(@order)
+      redirect_to orders_path
     else
       render :new
     end
@@ -38,6 +38,6 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:user_id, :book_id)
+    params.require(:order).permit(:user_id, :book_id, :delivery_address, :delivery_postal_code, :delivery_city )
   end
 end
