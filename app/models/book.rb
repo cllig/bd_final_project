@@ -1,5 +1,5 @@
 class Book < ApplicationRecord
-  CATEGORY = [ "Action/Aventure", "Histoire/Bio", "Comédie", "Drame", "Fantastique", "Horreur", "Police/Thriller"]
+  CATEGORY = [ "Action/Aventure", "Histoire/Bio", "Comédie", "Drame", "Fantastique", "Roman Graphique", "Police/Thriller"]
 
   belongs_to :user
   has_one :order, dependent: :destroy
