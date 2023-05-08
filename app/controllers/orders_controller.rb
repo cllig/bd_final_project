@@ -16,6 +16,7 @@ class OrdersController < ApplicationController
   def new
     @book = Book.find(params[:book_id])
     @order = Order.new
+    authorize @order
   end
 
   def create
@@ -23,6 +24,7 @@ class OrdersController < ApplicationController
     @book = Book.find(params[:book_id])
     @order.book = @book
     @order.user = current_user
+    authorize @order
 
     if @order.save
       redirect_to orders_path
@@ -40,6 +42,7 @@ class OrdersController < ApplicationController
 
   def set_order
     @order = Order.find(params[:id])
+    authorize @order
   end
 
   def order_params

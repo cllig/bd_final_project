@@ -24,7 +24,8 @@
 
     <p class="mb-5"><span class="fw-light">Moyen de paiement :</span> PayPal</p>
 
-    <%= link_to "Annuler", order_path(@order), method: :delete, data: {confirm: "Voulez-vous vraiment annuler cette commande ?"}, class: "btn btn-outline-danger" %>
-
+    <% if policy(@order).destroy? %>
+      <%= link_to "Annuler", order_path(@order), method: :delete, data: {confirm: "Voulez-vous vraiment annuler cette commande ?"}, class: "btn btn-outline-danger" %>
+    <% end %>
   </div>
 </div>

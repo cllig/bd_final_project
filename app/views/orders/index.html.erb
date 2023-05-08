@@ -9,7 +9,9 @@
           <p class="fw-bold"><%= order.book.name %></p>
           <p class="fw-light">Commande du <%= order.created_at.strftime('%D') %></p>
         </div>
+        <% if policy(order).show? %>
         <%= link_to "voir plus", order_path(order), class: "me-2 btn btn-purple"%>
+        <% end %>
       </div>
     <% end %>
   <% end %>

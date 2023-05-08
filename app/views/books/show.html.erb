@@ -46,18 +46,20 @@
         </div>
       </div>
       <div class="text-center mt-5">
-        <%= link_to "Acheter", new_book_order_path(@book), class: "btn btn-lg btn-purple text-center" %>
+        <% if @book.user != current_user %>
+          <%= link_to "Acheter", new_book_order_path(@book), class: "btn btn-lg btn-purple text-center" %>
+        <% end %>
+
+        <% if policy(@book).edit? %>
+          <%= link_to "Modifier", edit_book_path(@book), class:"btn btn-purple" %>
+        <% end %>
+
+        <% if policy(@book).destroy? %>
+          <%= link_to "Supprimer", book_path(@book), method: :delete, data: {confirm: "Etes-vous sur ?"}, class:"btn btn-outline-danger" %>
+        <% end %>
       </div>
     </div>
 
   </div>
-
-  <% if policy(@book).edit? %>
-    <%= link_to "Modifier", edit_book_path(@book), class:"btn btn-purple" %>
-  <% end %>
-
-  <% if policy(@book).destroy? %>
-    <%= link_to "Supprimer", book_path(@book), method: :delete, data: {confirm: "Etes-vous sur ?"}, class:"btn btn-outline-danger" %>
-  <% end %>
 
 </div>
