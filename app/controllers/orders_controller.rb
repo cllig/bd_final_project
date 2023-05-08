@@ -2,7 +2,12 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :destroy]
 
   def index
+    @user = current_user
     @orders = Order.all
+    @current_user_orders = []
+    @orders.each do |order|
+      @current_user_orders << order if order.user == @user
+    end
   end
 
   def show

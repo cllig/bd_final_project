@@ -44,6 +44,7 @@ class BooksController < ApplicationController
 
   def set_books
     @book = Book.find(params[:id])
+    authorize @book
   end
 
   def book_params
