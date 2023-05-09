@@ -3,7 +3,11 @@ class BooksController < ApplicationController
   before_action :set_books, only: [:show, :edit, :update, :destroy]
 
   def index
-    @books = Book.all
+    if params[:query].present?
+      @books = Book.global_search(params[:query])
+    else
+      @books = Book.all
+    end
   end
 
   def show

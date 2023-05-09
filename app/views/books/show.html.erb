@@ -50,12 +50,15 @@
           <%= link_to "Acheter", new_book_order_path(@book), class: "btn btn-lg btn-purple text-center" %>
         <% end %>
 
-        <% if policy(@book).edit? %>
-          <%= link_to "Modifier", edit_book_path(@book), class:"btn btn-purple" %>
-        <% end %>
+        <% if user_signed_in?  %>
+          <% if policy(@book).edit? %>
+            <%= link_to "Modifier", edit_book_path(@book), class:"btn btn-purple" %>
+          <% end %>
 
-        <% if policy(@book).destroy? %>
-          <%= link_to "Supprimer", book_path(@book), method: :delete, data: {confirm: "Etes-vous sur ?"}, class:"btn btn-outline-danger" %>
+          <% if policy(@book).destroy? %>
+            <%= link_to "Supprimer", book_path(@book), method: :delete, data: {confirm: "Etes-vous sur ?"}, class:"btn btn-outline-danger" %>
+          <% end %>
+
         <% end %>
       </div>
     </div>
