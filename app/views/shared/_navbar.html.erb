@@ -12,13 +12,21 @@
       <ul class="navbar-nav me-auto">
 
         <li class="nav-item active">
-            <%= link_to "Catégories", "#", class: "nav-link" %>
-          </li>
+          <%= link_to "Catégories", "#", class: "nav-link" %>
+        </li>
 
 
-          <li class="nav-item">
-            <%= link_to "Searchbar", "#", class: "nav-link" %>
-          </li>
+        <li class="nav-item">
+          <%= form_with url: books_path, method: :get, class: "d-flex searchbar" do %>
+            <%= text_field_tag :query,
+              params[:query],
+              class: "form-control searchbar-input",
+              placeholder: "Rechercher une BD"
+            %>
+            <%= image_submit_tag("search-interface-symbol.png", class: "btn btn-purple searchbar-icon") %>
+          <% end %>
+        </li>
+
 
           <li class="nav-item">
             <%= link_to "Vends tes BD", new_book_path, class: "nav-link nav-link-purple" %>

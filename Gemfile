@@ -26,6 +26,7 @@ gem "devise"
 gem 'simple_form'
 gem 'open-uri'
 gem "pundit"
+gem "pg_search"
 
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'

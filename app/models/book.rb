@@ -9,4 +9,11 @@ class Book < ApplicationRecord
   validates :price, presence: true
   validates :category, presence: true
 
+  include PgSearch::Model
+  pg_search_scope :global_search,
+    against: {name: 'A', description: 'B', category: "C"},
+    using: {
+      tsearch: { prefix: true }
+    }
+
 end
