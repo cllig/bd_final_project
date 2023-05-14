@@ -7,10 +7,11 @@
     <p class="mb-4"><span class="fw-light">Vendeur :</span> <%= @order.book.user.username %></p>
 
     <p class="mb-2 fw-light">Article :</p>
-    <div class="d-flex justify-content-start align-items-center mb-4 ms-5">
+    <div class="d-flex justify-content-start align-items-center mb-4 ms-5 gap-3">
       <%= image_tag @order.book.photos.first, class: "me-4 miniature-img" %>
       <p class="fw-bold me-4"><%= @order.book.name %></p>
       <p class="fw-bold"><%= @order.book.price %>€</p>
+      <%= link_to "Voir l'annonce", book_path(@order.book), class:"btn btn-link" %>
     </div>
 
     <div class="mb-4">

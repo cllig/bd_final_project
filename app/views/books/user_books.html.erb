@@ -11,6 +11,9 @@
             <% else %>
               <%= image_tag "conversation.png", class: "card-img" %>
             <% end %>
+            <% if current_user_book.bought?  %>
+              <p class="bg-success text-white p-2">Vendu</p>
+            <% end %>
             <div class="card-body">
               <div class="card-text">
                 <h4><%= current_user_book.name %></h4>
