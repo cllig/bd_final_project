@@ -1,2 +1,11 @@
-<h1>Homepage</h1>
-<%= link_to "toutes les bd", books_path %>
+<div class="banner mt-5">
+  <div class="container text-center">
+    <h1>Achètes et vends à d'autres passionnés de BD !</h1>
+    <p>Vends les BD que tu ne liras plus et déniche des merveilles qui ne se trouvent plus en librairies !</p>
+    <div class="d-flex gap-5 mx-auto">
+      <%= link_to "Vends maintenant", new_book_path, class: "btn btn-yellow" %>
+      <p>ou</p>
+      <%= link_to "Trouve une BD", books_path, class: "btn btn-yellow" %>
+    </div>
+  </div>
+</div>
