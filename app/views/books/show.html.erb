@@ -46,23 +46,28 @@
         </div>
       </div>
       <div class="text-center mt-5">
-        <% if @book.user != current_user %>
-          <%= link_to "Acheter", new_book_order_path(@book), class: "btn btn-lg btn-purple text-center" %>
+        <% if @book.bought?  %>
+          <p class="bg-success text-white p-2 w-25 mx-auto rounded-2">Vendu !</p>
+         <% else %>
+          <% if @book.user != current_user %>
+            <%= link_to "Acheter", new_book_order_path(@book), class: "btn btn-lg btn-purple text-center" %>
+          <% end %>
         <% end %>
 
         <% if user_signed_in?  %>
-          <% if policy(@book).edit? %>
-            <%= link_to "Modifier", edit_book_path(@book), class:"btn btn-purple" %>
+          <% if @book.bought? %>
+            <h6 class="my-4">Votre BD a été achetée ! L'acheteur a déjà réglé les frais de port, vous allez reçevoir le bordereau d'envoi par mail, il ne vous reste plus qu'à l'imprimer et envoyer le colis.</h6>
+          <% else %>
+            <% if (policy(@book).edit?) %>
+              <%= link_to "Modifier", edit_book_path(@book), class:"btn btn-purple" %>
+            <% end %>
           <% end %>
-
           <% if policy(@book).destroy? %>
             <%= link_to "Supprimer", book_path(@book), method: :delete, data: {confirm: "Etes-vous sur ?"}, class:"btn btn-outline-danger" %>
           <% end %>
-
         <% end %>
       </div>
     </div>
 
   </div>
-
 </div>

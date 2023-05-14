@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :user_books]
   before_action :set_books, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -46,6 +46,16 @@ class BooksController < ApplicationController
     redirect_to books_path
   end
 
+  def user_books
+    @user = current_user
+    @books = Book.all
+    @current_user_books = []
+    authorize @books
+    @books.each do |book|
+      @current_user_books << book if book.user == @user
+    end
+  end
+
   private
 
   def set_books
@@ -54,6 +64,6 @@ class BooksController < ApplicationController
   end
 
   def book_params
-    params.require(:book).permit(:name, :category, :price, :description, :user_id, photos: [])
+    params.require(:book).permit(:name, :category, :price, :description, :bought, :user_id, photos: [])
   end
 end

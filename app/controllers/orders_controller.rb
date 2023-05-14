@@ -24,6 +24,7 @@ class OrdersController < ApplicationController
     @book = Book.find(params[:book_id])
     @order.book = @book
     @order.user = current_user
+    @order.book.update(bought: true)
     authorize @order
 
     if @order.save
@@ -35,6 +36,7 @@ class OrdersController < ApplicationController
 
   def destroy
     @order.destroy
+    @order.book.update(bought: false)
     redirect_to orders_path, notice: 'order deleted.'
   end
 

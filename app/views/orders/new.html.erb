@@ -6,7 +6,11 @@
         <p class="fw-light mb-4">Commande</p>
         <div class="d-flex justify-content-between align-items-center">
           <div class="d-flex align-items-center">
-            <%= image_tag @book.photos.first, class: "me-2 miniature-img" %>
+            <% if @book.photos.attached? %>
+              <%= image_tag @book.photos.first, class: "me-2 miniature-img" %>
+            <% else %>
+              <%= image_tag "conversation.png", class: "me-2 miniature-img" %>
+            <% end %>
             <p class="fw-bold"><%= @book.name %></p>
           </div>
           <p class="fw-bold"><%= @book.price %>€</p>
