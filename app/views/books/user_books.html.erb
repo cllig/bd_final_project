@@ -1,0 +1,25 @@
+<div class="container">
+  <h3 class="pb-5">Mes annonces en ligne</h3>
+
+  <div class="text-center">
+    <ul>
+      <div class="cards">
+        <% @current_user_books.each do |current_user_book| %>
+          <%= link_to book_path(current_user_book), :class => "card" do %>
+            <% if current_user_book.photos.attached? %>
+              <%= image_tag current_user_book.photos.first, class: "card-img" %>
+            <% else %>
+              <%= image_tag "conversation.png", class: "card-img" %>
+            <% end %>
+            <div class="card-body">
+              <div class="card-text">
+                <h4><%= current_user_book.name %></h4>
+                <p><%= current_user_book.price %> €</p>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </ul>
+  </div>
+</div>

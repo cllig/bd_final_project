@@ -21,4 +21,8 @@ class BookPolicy < ApplicationPolicy
   def destroy?
     record.user == user || user.admin?
   end
+
+  def user_books?
+    true
+  end
 end
