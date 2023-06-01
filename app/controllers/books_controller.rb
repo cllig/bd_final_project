@@ -8,6 +8,10 @@ class BooksController < ApplicationController
     else
       @books = Book.all
     end
+
+    if params[:category].present?
+      @books = @books.where(category: params[:category])
+    end
   end
 
   def show
