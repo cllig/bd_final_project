@@ -47,7 +47,7 @@ class BooksController < ApplicationController
 
   def destroy
     @book.destroy
-    redirect_to books_path
+    redirect_to books_path, notice: 'Article supprimé.'
   end
 
   def user_books

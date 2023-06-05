@@ -27,6 +27,7 @@ gem 'simple_form'
 gem 'open-uri'
 gem "pundit"
 gem "pg_search"
+gem 'rails-i18n', '~> 6.0' # For 6.x
 
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'

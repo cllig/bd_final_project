@@ -1,0 +1,9 @@
+fr:
+  activerecord:
+    errors:
+      models:
+        book:
+          attributes:
+            price:
+              greater_than_or_equal_to: "doit être un nombre supérieur ou égal à 1."
+              not_a_number: "doit être un nombre."

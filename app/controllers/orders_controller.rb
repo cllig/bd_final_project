@@ -28,7 +28,7 @@ class OrdersController < ApplicationController
     authorize @order
 
     if @order.save
-      redirect_to orders_path
+      redirect_to order_path(@order)
     else
       render :new
     end
@@ -37,7 +37,7 @@ class OrdersController < ApplicationController
   def destroy
     @order.destroy
     @order.book.update(bought: false)
-    redirect_to orders_path, notice: 'order deleted.'
+    redirect_to orders_path, notice: 'Commande annulée.'
   end
 
   private
