@@ -3,3 +3,13 @@
   height: 22vh;
   object-fit: cover;
 }
+
+.btn-min-width {
+  min-width: 11vh;
+}
+
+@include media-breakpoint-down(sm) {
+  .width-100 {
+    width: 100%;
+  }
+}

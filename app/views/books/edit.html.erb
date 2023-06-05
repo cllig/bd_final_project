@@ -1,9 +1,12 @@
 <div class="container">
-  <div class="row">
-    <div class="col-6 ">
 
+    <%= link_to books_path do %>
+      <%= image_tag "arrow.svg", class: 'btn-arrow'%>
+    <% end %>
+
+  <div class="d-flex row justify-content-center">
+    <div class="col-sm-10 col-xl-6 d-flex justify-content-center">
       <%= render "form", book: @book %>
-
     </div>
   </div>
 </div>
