@@ -15,7 +15,7 @@
             <div class="card-body">
               <div class="card-text">
                 <h4><%= book.name %></h4>
-                <p><%= book.price %> €</p>
+                <p><%= book.price.to_s.gsub('.', ',') %> €</p>
               </div>
             </div>
           <% end %>

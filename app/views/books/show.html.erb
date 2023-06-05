@@ -30,7 +30,7 @@
       <p class="mb-4 text-jutify"><%= @book.description %></p>
       <p>Prix :</p>
       <div class="d-flex mb-4 ms-4 text-center">
-        <h4><%= @book.price %></h4>
+        <h4><%= @book.price.to_s.gsub('.', ',') %></h4>
         <p>€</p>
       </div>
       <p class="mb-2"><b>Vendu par :</b></p>
