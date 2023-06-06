@@ -1,10 +1,4 @@
 <div class="container text-center">
-
-  <%= @books.count %>
-  <%= Book.count %>
-
-  <%== pagy_nav(@pagy) %>
-
   <ul>
     <div class="cards">
       <% @books.each do |book| %>

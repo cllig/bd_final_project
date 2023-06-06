@@ -28,7 +28,6 @@ gem 'open-uri'
 gem "pundit"
 gem "pg_search"
 gem 'rails-i18n', '~> 6.0' # For 6.x
-gem 'pagy', '~> 6.0' # omit patch digit
 
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'
