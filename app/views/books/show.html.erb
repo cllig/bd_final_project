@@ -1,7 +1,11 @@
 <div class="container">
-  <div class="d-flex flex-wrap row">
 
-    <div class="detail-book-carousel col-12 col-md-4 col-lg-4 col-xl-4 text-center">
+  <%= link_to books_path do %>
+    <%= image_tag "arrow.svg", class: 'btn-arrow'%>
+  <% end %>
+
+  <div class="d-flex flex-wrap row justify-content-center">
+    <div class="detail-book-carousel col-12 col-md-10 col-lg-4 col-xl-4 text-center">
       <% if @book.photos.attached? %>
         <div id="carouselBook" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">
@@ -68,6 +72,5 @@
         <% end %>
       </div>
     </div>
-
   </div>
 </div>

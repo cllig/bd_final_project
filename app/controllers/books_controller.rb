@@ -27,7 +27,7 @@ class BooksController < ApplicationController
     @book.user = current_user
     authorize @book
    if @book.save
-      redirect_to books_path
+      redirect_to book_path(@book)
     else
       render :new
     end

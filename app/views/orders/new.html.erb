@@ -1,49 +1,54 @@
 <div class="container">
-  <div class="row mx-auto">
-    <div class="col-md-2 col-lg-2 col-xl-3"></div>
-    <div class="col-md-8 col-lg-8 p-3 col-xl-8 bg-white text-dark rounded">
-      <div class="mb-5">
-        <p class="fw-light mb-4">Commande</p>
-        <div class="d-flex justify-content-between align-items-center">
-          <div class="d-flex align-items-center">
-            <% if @book.photos.attached? %>
-              <%= image_tag @book.photos.first, class: "me-2 miniature-img" %>
-            <% else %>
-              <%= image_tag "conversation.png", class: "me-2 miniature-img" %>
-            <% end %>
-            <p class="fw-bold"><%= @book.name %></p>
-          </div>
-          <p class="fw-bold"><%= @book.price.to_s.gsub('.', ',') %>€</p>
+
+  <%= link_to book_path(@book) do %>
+    <%= image_tag "arrow.svg", class: 'btn-arrow'%>
+  <% end %>
+
+  <div class="col-sm-8 col-md-12 col-lg-12 col-xl-10 p-5 bg-white text-dark rounded mx-auto">
+    <div class="mb-5">
+      <p class="fw-light mb-4">Commande</p>
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center">
+          <% if @book.photos.attached? %>
+            <%= image_tag @book.photos.first, class: "me-2 miniature-img" %>
+          <% else %>
+            <%= image_tag "conversation.png", class: "me-2 miniature-img" %>
+          <% end %>
+          <p class="fw-bold"><%= @book.name %></p>
+        </div>
+        <p class="fw-bold"><%= @book.price.to_s.gsub('.', ',') %>€</p>
+      </div>
+    </div>
+
+    <%= simple_form_for [@book, @order] do |f| %>
+      <%= f.error_notification %>
+      <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+      <p class="fw-light mb-4">Adresse de livraison :</p>
+      <div class="col-md-8 col-xl-6 mx-auto mb-5">
+        <%= f.input :delivery_address,  input_html: { value: (f.object.delivery_address.present?) ? f.object.delivery_address : current_user.address}, label: "Adresse" %>
+        <div class="d-flex justify-content-between">
+          <%= f.input :delivery_postal_code, input_html: { value: (f.object.delivery_postal_code.present?) ? f.object.delivery_postal_code : current_user.postal_code}, label: "Code postal"%>
+          <%= f.input :delivery_city, input_html: { value: (f.object.delivery_city.present?) ? f.object.delivery_city : current_user.city}, label: "Ville" %>
         </div>
       </div>
 
-      <%= simple_form_for [@book, @order] do |f| %>
-        <%= f.error_notification %>
-        <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+      <p><span class="fw-light">Frais de livraison :</span> 2,50 €</p>
+      <p class="mb-5 fw-bold">Total : <%= (@book.price + 2.50).to_s.gsub('.', ',') %> €</p>
 
-        <p class="fw-light mb-4">Adresse de livraison :</p>
-        <div>
-          <%= f.input :delivery_address,  input_html: { value: (f.object.delivery_address.present?) ? f.object.delivery_address : current_user.address}, label: "Adresse" %>
-          <div class="d-flex justify-content-between">
-            <%= f.input :delivery_postal_code, input_html: { value: (f.object.delivery_postal_code.present?) ? f.object.delivery_postal_code : current_user.postal_code}, label: "Code postal"%>
-            <%= f.input :delivery_city, input_html: { value: (f.object.delivery_city.present?) ? f.object.delivery_city : current_user.city}, label: "Ville" %>
+      <div class="mb-5">
+        <p class="fw-light mb-4">Paiement :</p>
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center">
+            <%= image_tag "paypal-logo.jpg", class: "avatar" %>
+            <p class="fw-bold">PayPal</p>
           </div>
         </div>
+      </div>
 
-        <div class="mb-5">
-          <p class="fw-light mb-4">Paiement</p>
-          <div class="d-flex justify-content-between align-items-center">
-            <div class="d-flex align-items-center">
-              <%= image_tag "paypal-logo.jpg", class: "avatar" %>
-              <p class="fw-bold">PayPal</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-actions d-flex justify-content-center mt-4">
-          <%= f.button :submit, 'Acheter', class:"btn btn-purple" %>
-        </div>
-      <% end %>
-    </div>
+      <div class="form-actions d-flex justify-content-center mt-4">
+        <%= f.button :submit, 'Acheter', class:"btn btn-purple" %>
+      </div>
+    <% end %>
   </div>
 </div>

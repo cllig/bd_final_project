@@ -17,3 +17,23 @@
     color: white;
   }
 }
+
+.btn-arrow {
+  width: 2vh;
+  opacity: 0.3;
+  border-radius: 50px;
+  padding: 2px;
+
+  &:hover {
+    opacity: 0.5;
+    box-shadow: inset;
+  }
+}
+
+.btn-link {
+  color: $purple-400;
+
+  &:hover {
+    color: $purple-400;
+  }
+}
