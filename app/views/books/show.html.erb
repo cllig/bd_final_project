@@ -47,6 +47,11 @@
         <div>
           <p><b><%= @book.user.username %></b></p>
           <p class="fw-light"><%= @book.user.city %></p>
+          <% if @reviews.empty? %>
+            <p class="fw-light">pas encore d'évaluation</p>
+          <% else %>
+            <%= @average_rating %>
+          <% end %>
         </div>
       </div>
       <div class="text-center mt-5">

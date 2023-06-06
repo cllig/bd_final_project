@@ -15,6 +15,14 @@ class BooksController < ApplicationController
   end
 
   def show
+    @user = @book.user
+    @reviews = Review.where(user_id: @user.id)
+    @average_rating = @reviews.average(:rating)
+
+    # @user_reviews = []
+    # @reviews.each do |review|
+    #   @user_reviews << review if review.user == @user
+    # end
   end
 
   def new

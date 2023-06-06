@@ -31,6 +31,13 @@
     <p class="mb-5 fw-bold">Total : <%= (@order.book.price + 2.50).to_s.gsub('.', ',') %> €</p>
     <p class="mb-5"><span class="fw-light">Moyen de paiement utilisé :</span> PayPal</p>
 
+
+  <p>Laissez un avis au vendeur ! </p>
+    <div class="">
+        <%= render "reviews/new-review", order: @order, review: @review %>
+      </div>
+
+
     <div class="d-flex justify-content-center">
       <% if policy(@order).destroy? %>
         <%= link_to "Annuler", order_path(@order), method: :delete, data: {confirm: "Voulez-vous vraiment annuler cette commande ?"}, class: "btn btn-outline-danger" %>
