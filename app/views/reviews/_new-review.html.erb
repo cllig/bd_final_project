@@ -1,12 +1,20 @@
-<%= simple_form_for [@order, @review] do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <%= simple_form_for [@order, @review] do |f| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+ <div class='d-flex gap-4 mb-5'>
+    <div>
+      <% Review::AUTHORIZED_RATINGS.each do |index| %>
+        <i id="<%= index %>" class="review-rating far fa-star"></i>
+      <% end %>
 
 
-    <%= f.input :rating  %>
-    <%= f.input :comment, label: 'Commentaire'%>
+    <%= f.input :rating, as: :hidden %>
+ </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, 'Laisser votre avis !' %>
-  </div>
-<% end %>
+    <div class="form-actions">
+      <%= f.button :submit, 'Laisse votre avis !', class:'btn btn-purple' %>
+    </div>
+ </div>
+  <% end %>

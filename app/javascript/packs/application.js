@@ -13,3 +13,8 @@ Turbolinks.start();
 ActiveStorage.start();
 
 import "bootstrap";
+import { dynamicRating } from "./starsReview";
+
+document.addEventListener("turbolinks:load", () => {
+  dynamicRating();
+});

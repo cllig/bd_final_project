@@ -8,8 +8,6 @@
   <div class="col-sm-8 col-md-10 col-xl-10 mx-auto bg-white p-4 rounded">
     <p class="mb-4"><span class="fw-light">Commande passée le :</span> <%= @order.created_at.strftime('%d/%m/%y')%></p>
 
-    <p class="mb-4"><span class="fw-light">Vendeur :</span> <%= @order.book.user.username %></p>
-
     <p class="mb-2 fw-light">Article :</p>
     <div class="d-flex flex-wrap justify-content-start align-items-center mb-5 ms-5 gap-3">
       <%= image_tag @order.book.photos.first, class: "me-4 miniature-img" %>
@@ -31,16 +29,30 @@
     <p class="mb-5 fw-bold">Total : <%= (@order.book.price + 2.50).to_s.gsub('.', ',') %> €</p>
     <p class="mb-5"><span class="fw-light">Moyen de paiement utilisé :</span> PayPal</p>
 
-
-  <p>Laissez un avis au vendeur ! </p>
-    <div class="">
-        <%= render "reviews/new-review", order: @order, review: @review %>
+    <p class="fw-light">Vendeur :</p>
+    <div class="d-flex ms-4 mb-5">
+      <% if @order.book.user.avatar.attached? %>
+        <%= image_tag @order.book.user.avatar, class: "avatar-large me-2 my-auto", crop: :fill %>
+      <% else %>
+        <%= image_tag "profile-user.png", class: "avatar-large me-2 my-auto", crop: :fill%>
+      <% end %>
+      <div>
+        <p><b><%= @order.book.user.username %></b></p>
+        <p class="fw-light"><%= @order.book.user.city %></p>
+        <% if @order.book.user.reviews.empty? %>
+          <p class="fw-light">pas encore d'évaluation</p>
+        <% else %>
+          <p><%= @order.book.user.reviews.average(:rating).round(1) %> <i class="little-star fa-solid fa-star"></i> <span class='fw-light'>(<%= @order.book.user.reviews.count() %> évaluations)</span></p>
+        <% end %>
       </div>
+    </div>
 
+    <p>Laisse un avis au vendeur ! </p>
+    <%= render "reviews/new-review", order: @order, review: @review %>
 
     <div class="d-flex justify-content-center">
       <% if policy(@order).destroy? %>
-        <%= link_to "Annuler", order_path(@order), method: :delete, data: {confirm: "Voulez-vous vraiment annuler cette commande ?"}, class: "btn btn-outline-danger" %>
+        <%= link_to "Annuler la commande", order_path(@order), method: :delete, data: {confirm: "Voulez-vous vraiment annuler cette commande ?"}, class: "btn btn-outline-danger" %>
       <% end %>
     </div>
   </div>

@@ -1,3 +1,12 @@
-// Place all the styles related to the reviews controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+.fa-star {
+  color: #e5aa17;
+}
+
+.review-rating {
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+.little-star {
+  font-size: 12px;
+}
