@@ -3,15 +3,18 @@ class BooksController < ApplicationController
   before_action :set_books, only: [:show, :edit, :update, :destroy]
 
   def index
-    if params[:query].present?
-      @books = Book.global_search(params[:query])
-    else
-      @books = Book.all
-    end
+    @pagy, @books = pagy(Book.order(created_at: :desc))
 
-    if params[:category].present?
-      @books = @books.where(category: params[:category])
-    end
+
+    # if params[:query].present?
+    #   @books = Book.global_search(params[:query])
+    # else
+    #   @books = Book.all
+    # end
+
+    # if params[:category].present?
+    #   @books = @books.where(category: params[:category])
+    # end
   end
 
   def show
