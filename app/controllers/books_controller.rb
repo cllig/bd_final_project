@@ -15,6 +15,12 @@ class BooksController < ApplicationController
   end
 
   def show
+    @user = @book.user
+    @reviews = Review.where(user_id: @user.id)
+
+    if @reviews.present?
+      @average_rating = @reviews.average(:rating).round(1)
+    end
   end
 
   def new

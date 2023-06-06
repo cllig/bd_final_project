@@ -11,6 +11,7 @@ class OrdersController < ApplicationController
   end
 
   def show
+     @review = Review.new
   end
 
   def new
@@ -48,6 +49,6 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:user_id, :book_id, :delivery_address, :delivery_postal_code, :delivery_city )
+    params.require(:order).permit(:user_id, :book_id, :delivery_address, :delivery_postal_code, :delivery_city, :reviewed )
   end
 end

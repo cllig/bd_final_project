@@ -40,13 +40,18 @@
       <p class="mb-2"><b>Vendu par :</b></p>
       <div class="d-flex ms-4 mb-4">
         <% if @book.user.avatar.attached? %>
-          <%= image_tag @book.user.avatar, class: "avatar-large me-2", crop: :fill %>
+          <%= image_tag @book.user.avatar, class: "avatar-large me-2 my-auto", crop: :fill %>
         <% else %>
-          <%= image_tag "profile-user.png", class: "avatar-large me-2", crop: :fill%>
+          <%= image_tag "profile-user.png", class: "avatar-large me-2 my-auto", crop: :fill%>
         <% end %>
         <div>
           <p><b><%= @book.user.username %></b></p>
           <p class="fw-light"><%= @book.user.city %></p>
+          <% if @reviews.empty? %>
+            <p class="fw-light">pas encore d'évaluation</p>
+          <% else %>
+            <p><%= @average_rating %> <i class="little-star fa-solid fa-star"></i> <span class='fw-light'>(<%= @book.user.reviews.count() %> évaluations)</span></p>
+          <% end %>
         </div>
       </div>
       <div class="text-center mt-5">

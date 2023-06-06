@@ -1,0 +1,21 @@
+ <% if @order.reviewed? %>
+    <p class='ms-5 fw-light'>Tu as déjà évalué ce vendeur</p>
+  <% else %>
+    <%= simple_form_for [@order, @review] do |f| %>
+      <%= f.error_notification %>
+      <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+      <div class='d-flex row gap-4 mb-5'>
+        <div class='col-sm-12 col-md-6 col-xl-3'>
+          <% Review::AUTHORIZED_RATINGS.each do |index| %>
+            <i id="<%= index %>" class="review-rating far fa-star"></i>
+          <% end %>
+          <%= f.input :rating, as: :hidden %>
+        </div>
+
+        <div class="form-actions col-sm-12 col-md-6 col-xl-4">
+          <%= f.button :submit, 'Laisse ton avis !', class:'btn btn-purple' %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
