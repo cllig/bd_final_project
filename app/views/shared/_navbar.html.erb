@@ -1,7 +1,13 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-global">
   <div class="container-fluid">
     <%= link_to "/", class: "navbar-brand" do %>
-      <%= image_tag "conversation.png" %>
+      <div class='d-flex align-items-center'>
+        <%= image_tag "conversation.png", class:'logo-app' %>
+        <div>
+          <h5>Vintage</h5>
+          <h5>Comics</h5>
+        </div>
+      </div>
     <% end %>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
