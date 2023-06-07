@@ -1,6 +1,8 @@
 <div class="container">
 
-  <%= image_tag "arrow.svg", onclick: "window.history.back();", class: 'btn-arrow'%>
+  <%= link_to orders_path do %>
+    <%= image_tag "arrow.svg", class: 'btn-arrow'%>
+  <% end %>
 
   <h3>Détails de la commande</h3>
 
