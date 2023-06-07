@@ -3,14 +3,28 @@ class BooksController < ApplicationController
   before_action :set_books, only: [:show, :edit, :update, :destroy]
 
   def index
+    unsold_books = Book.where(bought: false)
+
     if params[:query].present?
-      @books = Book.global_search(params[:query])
+      books = unsold_books.global_search(params[:query])
     else
-      @books = Book.all
+      books = unsold_books
     end
 
     if params[:category].present?
-      @books = @books.where(category: params[:category])
+      books = books.where(category: params[:category])
+    end
+
+    @pagy, @books = pagy(books, items: 16)
+
+    respond_to do |format|
+      format.html
+      format.json {
+        render json: {
+          entries: render_to_string(partial: "books", formats: [:html]),
+          pagination: view_context.pagy_nav(@pagy)
+        }
+      }
     end
   end
 

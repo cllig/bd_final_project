@@ -1,0 +1,20 @@
+  <div class="cards">
+    <% @books.each do |book| %>
+      <%= link_to book_path(book), :class => "card" do %>
+        <% if book.photos.attached? %>
+          <%= image_tag book.photos.first, class: "card-img" %>
+        <% else %>
+          <%= image_tag "conversation.png", class: "card-img" %>
+        <% end %>
+        <% if book.bought?  %>
+          <p class="bg-success text-white p-2">Vendu</p>
+        <% end %>
+        <div class="card-body">
+          <div class="card-text">
+            <h4><%= book.name %></h4>
+            <p><%= book.price.to_s.gsub('.', ',') %> €</p>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+</div>
