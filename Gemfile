@@ -29,6 +29,7 @@ gem "pundit"
 gem "pg_search"
 gem 'rails-i18n', '~> 6.0' # For 6.x
 gem 'font-awesome-sass'
+gem 'pagy', '~> 6.0'
 
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'
