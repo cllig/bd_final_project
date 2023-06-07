@@ -14,6 +14,7 @@ ActiveStorage.start();
 
 import "bootstrap";
 import { dynamicRating } from "./starsReview";
+import "controllers";
 
 document.addEventListener("turbolinks:load", () => {
   dynamicRating();
