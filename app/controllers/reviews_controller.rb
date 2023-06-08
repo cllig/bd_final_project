@@ -3,7 +3,6 @@ class ReviewsController < ApplicationController
   def create
     @review = Review.new(review_params)
     @order = Order.find(params[:order_id])
-    @review.reviewer = current_user
     @review.user = @order.book.user
 
     if @review.save
@@ -15,6 +14,6 @@ class ReviewsController < ApplicationController
   end
 
   def review_params
-    params.require(:review).permit(:rating, :comment, :reviewer)
+    params.require(:review).permit(:rating, :comment)
   end
 end

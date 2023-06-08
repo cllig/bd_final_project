@@ -15,7 +15,7 @@ class BooksController < ApplicationController
       books = books.where(category: params[:category]) # SELECT * FROM book WHERE category = params[:category]
     end
 
-    @pagy, @books = pagy(books, items: 16)
+    @pagy, @books = pagy(books.order(created_at: :desc), items: 16)
 
     respond_to do |format|
       format.html

@@ -1,24 +1,24 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Voici mon projet de fin d'année : Une app de vente de BD d'occasion entre utilisateurs !
 
-Things you may want to cover:
+Projet réalisé en Ryby on Rails, et PostgreSQL.
 
-* Ruby version
+Pour lancer le projet une première fois, après l'avoir cloné :
 
-* System dependencies
+- bundle install
+- npm install
+- rails db:create
 
-* Configuration
+Pour importer la base de donnée :
 
-* Database creation
+- rails db < db_backup.dump
 
-* Database initialization
+Enfin, pour lancer le serveur :
 
-* How to run the test suite
+- rails s
 
-* Services (job queues, cache servers, search engines, etc.)
+En cas de soucis avec le dump de la base de données, j'ai décidé de laisser mon fichier de seeds, bien que j'ai conscience que niveau sécurité ce soit pas top. Mais dans ce cas, vous pouvez utiliser les commandes :
 
-* Deployment instructions
-
-* ...
+- rails db:migrate
+- rails db:seed
