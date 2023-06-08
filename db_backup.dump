@@ -1,0 +1,1221 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 12.10 (Ubuntu 12.10-0ubuntu0.20.04.1)
+-- Dumped by pg_dump version 12.10 (Ubuntu 12.10-0ubuntu0.20.04.1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: active_storage_attachments; Type: TABLE; Schema: public; Owner: claire
+--
+
+CREATE TABLE public.active_storage_attachments (
+    id bigint NOT NULL,
+    name character varying NOT NULL,
+    record_type character varying NOT NULL,
+    record_id bigint NOT NULL,
+    blob_id bigint NOT NULL,
+    created_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.active_storage_attachments OWNER TO claire;
+
+--
+-- Name: active_storage_attachments_id_seq; Type: SEQUENCE; Schema: public; Owner: claire
+--
+
+CREATE SEQUENCE public.active_storage_attachments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.active_storage_attachments_id_seq OWNER TO claire;
+
+--
+-- Name: active_storage_attachments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: claire
+--
+
+ALTER SEQUENCE public.active_storage_attachments_id_seq OWNED BY public.active_storage_attachments.id;
+
+
+--
+-- Name: active_storage_blobs; Type: TABLE; Schema: public; Owner: claire
+--
+
+CREATE TABLE public.active_storage_blobs (
+    id bigint NOT NULL,
+    key character varying NOT NULL,
+    filename character varying NOT NULL,
+    content_type character varying,
+    metadata text,
+    service_name character varying NOT NULL,
+    byte_size bigint NOT NULL,
+    checksum character varying NOT NULL,
+    created_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.active_storage_blobs OWNER TO claire;
+
+--
+-- Name: active_storage_blobs_id_seq; Type: SEQUENCE; Schema: public; Owner: claire
+--
+
+CREATE SEQUENCE public.active_storage_blobs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.active_storage_blobs_id_seq OWNER TO claire;
+
+--
+-- Name: active_storage_blobs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: claire
+--
+
+ALTER SEQUENCE public.active_storage_blobs_id_seq OWNED BY public.active_storage_blobs.id;
+
+
+--
+-- Name: active_storage_variant_records; Type: TABLE; Schema: public; Owner: claire
+--
+
+CREATE TABLE public.active_storage_variant_records (
+    id bigint NOT NULL,
+    blob_id bigint NOT NULL,
+    variation_digest character varying NOT NULL
+);
+
+
+ALTER TABLE public.active_storage_variant_records OWNER TO claire;
+
+--
+-- Name: active_storage_variant_records_id_seq; Type: SEQUENCE; Schema: public; Owner: claire
+--
+
+CREATE SEQUENCE public.active_storage_variant_records_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.active_storage_variant_records_id_seq OWNER TO claire;
+
+--
+-- Name: active_storage_variant_records_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: claire
+--
+
+ALTER SEQUENCE public.active_storage_variant_records_id_seq OWNED BY public.active_storage_variant_records.id;
+
+
+--
+-- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: claire
+--
+
+CREATE TABLE public.ar_internal_metadata (
+    key character varying NOT NULL,
+    value character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+ALTER TABLE public.ar_internal_metadata OWNER TO claire;
+
+--
+-- Name: books; Type: TABLE; Schema: public; Owner: claire
+--
+
+CREATE TABLE public.books (
+    id bigint NOT NULL,
+    name character varying,
+    category character varying,
+    price double precision,
+    description character varying,
+    user_id bigint NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    bought boolean DEFAULT false
+);
+
+
+ALTER TABLE public.books OWNER TO claire;
+
+--
+-- Name: books_id_seq; Type: SEQUENCE; Schema: public; Owner: claire
+--
+
+CREATE SEQUENCE public.books_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.books_id_seq OWNER TO claire;
+
+--
+-- Name: books_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: claire
+--
+
+ALTER SEQUENCE public.books_id_seq OWNED BY public.books.id;
+
+
+--
+-- Name: orders; Type: TABLE; Schema: public; Owner: claire
+--
+
+CREATE TABLE public.orders (
+    id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    book_id bigint NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    delivery_address character varying NOT NULL,
+    delivery_postal_code character varying NOT NULL,
+    delivery_city character varying NOT NULL,
+    reviewed boolean DEFAULT false
+);
+
+
+ALTER TABLE public.orders OWNER TO claire;
+
+--
+-- Name: orders_id_seq; Type: SEQUENCE; Schema: public; Owner: claire
+--
+
+CREATE SEQUENCE public.orders_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.orders_id_seq OWNER TO claire;
+
+--
+-- Name: orders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: claire
+--
+
+ALTER SEQUENCE public.orders_id_seq OWNED BY public.orders.id;
+
+
+--
+-- Name: reviews; Type: TABLE; Schema: public; Owner: claire
+--
+
+CREATE TABLE public.reviews (
+    id bigint NOT NULL,
+    rating integer,
+    comment character varying,
+    user_id bigint NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+ALTER TABLE public.reviews OWNER TO claire;
+
+--
+-- Name: reviews_id_seq; Type: SEQUENCE; Schema: public; Owner: claire
+--
+
+CREATE SEQUENCE public.reviews_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.reviews_id_seq OWNER TO claire;
+
+--
+-- Name: reviews_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: claire
+--
+
+ALTER SEQUENCE public.reviews_id_seq OWNED BY public.reviews.id;
+
+
+--
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: claire
+--
+
+CREATE TABLE public.schema_migrations (
+    version character varying NOT NULL
+);
+
+
+ALTER TABLE public.schema_migrations OWNER TO claire;
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: claire
+--
+
+CREATE TABLE public.users (
+    id bigint NOT NULL,
+    email character varying DEFAULT ''::character varying NOT NULL,
+    encrypted_password character varying DEFAULT ''::character varying NOT NULL,
+    reset_password_token character varying,
+    reset_password_sent_at timestamp without time zone,
+    remember_created_at timestamp without time zone,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    first_name character varying,
+    last_name character varying,
+    username character varying NOT NULL,
+    admin boolean DEFAULT false,
+    address character varying,
+    city character varying,
+    postal_code integer
+);
+
+
+ALTER TABLE public.users OWNER TO claire;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: claire
+--
+
+CREATE SEQUENCE public.users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_id_seq OWNER TO claire;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: claire
+--
+
+ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
+
+
+--
+-- Name: active_storage_attachments id; Type: DEFAULT; Schema: public; Owner: claire
+--
+
+ALTER TABLE ONLY public.active_storage_attachments ALTER COLUMN id SET DEFAULT nextval('public.active_storage_attachments_id_seq'::regclass);
+
+
+--
+-- Name: active_storage_blobs id; Type: DEFAULT; Schema: public; Owner: claire
+--
+
+ALTER TABLE ONLY public.active_storage_blobs ALTER COLUMN id SET DEFAULT nextval('public.active_storage_blobs_id_seq'::regclass);
+
+
+--
+-- Name: active_storage_variant_records id; Type: DEFAULT; Schema: public; Owner: claire
+--
+
+ALTER TABLE ONLY public.active_storage_variant_records ALTER COLUMN id SET DEFAULT nextval('public.active_storage_variant_records_id_seq'::regclass);
+
+
+--
+-- Name: books id; Type: DEFAULT; Schema: public; Owner: claire
+--
+
+ALTER TABLE ONLY public.books ALTER COLUMN id SET DEFAULT nextval('public.books_id_seq'::regclass);
+
+
+--
+-- Name: orders id; Type: DEFAULT; Schema: public; Owner: claire
+--
+
+ALTER TABLE ONLY public.orders ALTER COLUMN id SET DEFAULT nextval('public.orders_id_seq'::regclass);
+
+
+--
+-- Name: reviews id; Type: DEFAULT; Schema: public; Owner: claire
+--
+
+ALTER TABLE ONLY public.reviews ALTER COLUMN id SET DEFAULT nextval('public.reviews_id_seq'::regclass);
+
+
+--
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: claire
+--
+
+ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
+
+
+--
+-- Data for Name: active_storage_attachments; Type: TABLE DATA; Schema: public; Owner: claire
+--
+
+COPY public.active_storage_attachments (id, name, record_type, record_id, blob_id, created_at) FROM stdin;
+1	avatar	User	1	1	2023-06-07 16:50:36.208809
+2	avatar	User	2	2	2023-06-07 16:50:36.748897
+3	avatar	User	3	3	2023-06-07 16:50:37.235908
+4	avatar	User	4	4	2023-06-07 16:50:37.718334
+5	avatar	User	5	5	2023-06-07 16:50:38.224211
+6	avatar	User	6	6	2023-06-07 16:50:38.702186
+7	avatar	User	7	7	2023-06-07 16:50:39.216465
+8	avatar	User	8	8	2023-06-07 16:50:39.731503
+9	avatar	User	9	9	2023-06-07 16:50:40.221676
+10	avatar	User	10	10	2023-06-07 16:50:40.722813
+11	avatar	User	11	11	2023-06-07 16:50:41.202408
+12	avatar	User	12	12	2023-06-07 16:50:41.72205
+13	avatar	User	13	13	2023-06-07 16:50:42.233709
+14	avatar	User	14	14	2023-06-07 16:50:42.729946
+15	avatar	User	15	15	2023-06-07 16:50:43.217989
+16	avatar	User	16	16	2023-06-07 16:50:43.713631
+17	avatar	User	17	17	2023-06-07 16:50:44.208937
+18	avatar	User	18	18	2023-06-07 16:50:44.705547
+19	avatar	User	19	19	2023-06-07 16:50:45.214925
+20	avatar	User	20	20	2023-06-07 16:50:45.715888
+21	avatar	User	21	21	2023-06-07 16:50:46.231673
+22	avatar	User	22	22	2023-06-07 16:50:46.737222
+23	avatar	User	23	23	2023-06-07 16:50:47.235077
+24	avatar	User	24	24	2023-06-07 16:50:47.733182
+25	avatar	User	25	25	2023-06-07 16:50:48.237866
+26	avatar	User	26	26	2023-06-07 16:50:48.739491
+27	photos	Book	1	27	2023-06-07 16:51:09.946974
+28	photos	Book	1	28	2023-06-07 16:51:10.009703
+29	photos	Book	2	29	2023-06-07 16:51:10.118814
+30	photos	Book	3	30	2023-06-07 16:51:10.221318
+31	photos	Book	3	31	2023-06-07 16:51:10.28746
+32	photos	Book	4	32	2023-06-07 16:51:10.376575
+33	photos	Book	5	33	2023-06-07 16:51:10.460534
+34	photos	Book	5	34	2023-06-07 16:51:10.528961
+35	photos	Book	6	35	2023-06-07 16:51:10.639499
+36	photos	Book	6	36	2023-06-07 16:51:10.710159
+37	photos	Book	7	37	2023-06-07 16:51:10.81007
+38	photos	Book	7	38	2023-06-07 16:51:10.872458
+39	photos	Book	8	39	2023-06-07 16:51:10.953926
+40	photos	Book	8	40	2023-06-07 16:51:11.020669
+41	photos	Book	8	41	2023-06-07 16:51:11.0887
+42	photos	Book	8	42	2023-06-07 16:51:11.164809
+43	photos	Book	9	43	2023-06-07 16:51:11.252884
+44	photos	Book	9	44	2023-06-07 16:51:11.30806
+45	photos	Book	10	45	2023-06-07 16:51:11.379154
+46	photos	Book	10	46	2023-06-07 16:51:11.437049
+47	photos	Book	11	47	2023-06-07 16:51:20.162786
+48	photos	Book	11	48	2023-06-07 16:51:20.219694
+49	photos	Book	12	49	2023-06-07 16:51:20.321835
+50	photos	Book	13	50	2023-06-07 16:51:20.423216
+51	photos	Book	13	51	2023-06-07 16:51:20.485204
+52	photos	Book	14	52	2023-06-07 16:51:20.586921
+53	photos	Book	14	53	2023-06-07 16:51:20.648833
+54	photos	Book	15	54	2023-06-07 16:51:20.727995
+55	photos	Book	15	55	2023-06-07 16:51:20.785831
+56	photos	Book	16	56	2023-06-07 16:51:20.88201
+57	photos	Book	16	57	2023-06-07 16:51:20.935976
+58	photos	Book	17	58	2023-06-07 16:51:21.007558
+59	photos	Book	17	59	2023-06-07 16:51:21.060746
+60	photos	Book	18	60	2023-06-07 16:51:21.134536
+61	photos	Book	18	61	2023-06-07 16:51:21.18897
+62	photos	Book	18	62	2023-06-07 16:51:21.25854
+63	photos	Book	19	63	2023-06-07 16:51:21.345519
+64	photos	Book	19	64	2023-06-07 16:51:21.396547
+65	photos	Book	20	65	2023-06-07 16:51:21.495083
+66	photos	Book	20	66	2023-06-07 16:51:21.564002
+67	photos	Book	21	67	2023-06-07 16:51:44.836166
+68	photos	Book	21	68	2023-06-07 16:51:44.88347
+69	photos	Book	22	69	2023-06-07 16:51:44.98856
+70	photos	Book	22	70	2023-06-07 16:51:45.060108
+71	photos	Book	23	71	2023-06-07 16:51:45.149744
+72	photos	Book	23	72	2023-06-07 16:51:45.219512
+73	photos	Book	24	73	2023-06-07 16:51:45.317065
+74	photos	Book	24	74	2023-06-07 16:51:45.387025
+75	photos	Book	25	75	2023-06-07 16:51:45.490906
+76	photos	Book	25	76	2023-06-07 16:51:45.576278
+77	photos	Book	26	77	2023-06-07 16:51:45.690051
+78	photos	Book	26	78	2023-06-07 16:51:45.76382
+79	photos	Book	27	79	2023-06-07 16:51:45.861175
+80	photos	Book	27	80	2023-06-07 16:51:45.936045
+81	photos	Book	28	81	2023-06-07 16:51:46.011982
+82	photos	Book	28	82	2023-06-07 16:51:46.074249
+83	photos	Book	29	83	2023-06-07 16:51:46.16979
+84	photos	Book	29	84	2023-06-07 16:51:46.227585
+85	photos	Book	30	85	2023-06-07 16:51:46.310962
+86	photos	Book	30	86	2023-06-07 16:51:46.373848
+87	photos	Book	31	87	2023-06-07 16:52:44.288704
+88	photos	Book	31	88	2023-06-07 16:52:44.331457
+89	photos	Book	32	89	2023-06-07 16:52:44.467696
+90	photos	Book	32	90	2023-06-07 16:52:44.593056
+91	photos	Book	33	91	2023-06-07 16:52:44.720085
+92	photos	Book	33	92	2023-06-07 16:52:44.775511
+93	photos	Book	34	93	2023-06-07 16:52:44.888942
+94	photos	Book	34	94	2023-06-07 16:52:44.973821
+95	photos	Book	35	95	2023-06-07 16:52:45.0755
+96	photos	Book	35	96	2023-06-07 16:52:45.1353
+97	photos	Book	36	97	2023-06-07 16:52:45.224338
+98	photos	Book	36	98	2023-06-07 16:52:45.28568
+99	photos	Book	37	99	2023-06-07 16:52:45.401943
+100	photos	Book	37	100	2023-06-07 16:52:45.463559
+101	photos	Book	38	101	2023-06-07 16:52:45.558869
+102	photos	Book	38	102	2023-06-07 16:52:45.636472
+103	photos	Book	39	103	2023-06-07 16:52:45.734564
+104	photos	Book	39	104	2023-06-07 16:52:45.790572
+105	photos	Book	40	105	2023-06-07 16:52:45.881171
+106	photos	Book	40	106	2023-06-07 16:52:45.928622
+107	photos	Book	41	107	2023-06-07 16:52:55.648943
+108	photos	Book	41	108	2023-06-07 16:52:55.706632
+109	photos	Book	42	109	2023-06-07 16:52:55.810337
+110	photos	Book	42	110	2023-06-07 16:52:55.892026
+111	photos	Book	43	111	2023-06-07 16:52:55.997337
+112	photos	Book	43	112	2023-06-07 16:52:56.066017
+113	photos	Book	44	113	2023-06-07 16:52:56.168339
+114	photos	Book	44	114	2023-06-07 16:52:56.23807
+115	photos	Book	44	115	2023-06-07 16:52:56.400529
+116	photos	Book	45	116	2023-06-07 16:52:56.61031
+117	photos	Book	45	117	2023-06-07 16:52:56.68434
+118	photos	Book	45	118	2023-06-07 16:52:56.747768
+119	photos	Book	45	119	2023-06-07 16:52:56.820366
+120	photos	Book	46	120	2023-06-07 16:52:56.924383
+121	photos	Book	46	121	2023-06-07 16:52:56.989123
+122	photos	Book	47	122	2023-06-07 16:52:57.085625
+123	photos	Book	47	123	2023-06-07 16:52:57.135831
+124	photos	Book	48	124	2023-06-07 16:52:57.220706
+125	photos	Book	48	125	2023-06-07 16:52:57.277362
+126	photos	Book	49	126	2023-06-07 16:52:57.384885
+127	photos	Book	49	127	2023-06-07 16:52:57.47243
+128	photos	Book	50	128	2023-06-07 16:53:05.065287
+129	photos	Book	51	129	2023-06-07 16:53:05.154801
+130	photos	Book	51	130	2023-06-07 16:53:05.233959
+131	photos	Book	52	131	2023-06-07 16:53:05.320917
+132	photos	Book	52	132	2023-06-07 16:53:05.386815
+133	photos	Book	53	133	2023-06-07 16:53:05.489532
+134	photos	Book	54	134	2023-06-07 16:53:05.570907
+135	photos	Book	54	135	2023-06-07 16:53:05.633026
+136	photos	Book	55	136	2023-06-07 16:53:05.714865
+137	photos	Book	55	137	2023-06-07 16:53:05.776119
+138	photos	Book	56	138	2023-06-07 16:53:05.865111
+139	photos	Book	56	139	2023-06-07 16:53:05.926805
+140	photos	Book	57	140	2023-06-07 16:53:06.002303
+141	photos	Book	57	141	2023-06-07 16:53:06.058132
+142	photos	Book	58	142	2023-06-07 16:53:06.134316
+143	photos	Book	58	143	2023-06-07 16:53:06.18869
+144	photos	Book	59	144	2023-06-07 16:53:06.267233
+145	photos	Book	59	145	2023-06-07 16:53:06.330252
+146	photos	Book	60	146	2023-06-07 16:53:18.531351
+147	photos	Book	60	147	2023-06-07 16:53:18.583076
+148	photos	Book	61	148	2023-06-07 16:53:18.688689
+149	photos	Book	61	149	2023-06-07 16:53:18.919327
+150	photos	Book	62	150	2023-06-07 16:53:19.016713
+151	photos	Book	62	151	2023-06-07 16:53:19.079519
+152	photos	Book	63	152	2023-06-07 16:53:19.197793
+153	photos	Book	63	153	2023-06-07 16:53:19.257991
+154	photos	Book	64	154	2023-06-07 16:53:19.339382
+155	photos	Book	64	155	2023-06-07 16:53:19.391294
+156	photos	Book	65	156	2023-06-07 16:53:19.461777
+157	photos	Book	65	157	2023-06-07 16:53:19.514559
+158	photos	Book	66	158	2023-06-07 16:53:19.576079
+159	photos	Book	66	159	2023-06-07 16:53:19.625183
+160	photos	Book	67	160	2023-06-07 16:53:19.733442
+161	photos	Book	67	161	2023-06-07 16:53:19.796228
+162	photos	Book	68	162	2023-06-07 16:53:19.873954
+163	photos	Book	68	163	2023-06-07 16:53:19.927662
+164	photos	Book	69	164	2023-06-07 16:53:20.010963
+165	photos	Book	69	165	2023-06-07 16:53:20.062083
+166	photos	Book	70	166	2023-06-07 16:59:12.8756
+167	photos	Book	70	167	2023-06-07 16:59:12.893739
+168	photos	Book	71	168	2023-06-07 17:00:10.155828
+169	photos	Book	71	169	2023-06-07 17:00:10.1711
+170	photos	Book	72	170	2023-06-07 17:03:16.704945
+171	photos	Book	72	171	2023-06-07 17:03:16.722748
+175	photos	Book	73	175	2023-06-07 17:04:58.32495
+176	photos	Book	74	176	2023-06-07 17:05:54.28387
+177	photos	Book	74	177	2023-06-07 17:05:54.301034
+178	photos	Book	74	178	2023-06-07 17:05:54.318631
+179	photos	Book	75	179	2023-06-07 17:07:47.03613
+180	photos	Book	75	180	2023-06-07 17:07:47.055168
+181	photos	Book	76	181	2023-06-07 17:42:45.859038
+182	photos	Book	76	182	2023-06-07 17:42:45.875756
+183	photos	Book	76	183	2023-06-07 17:42:45.890452
+184	photos	Book	77	184	2023-06-07 17:44:13.949279
+185	photos	Book	77	185	2023-06-07 17:44:13.96658
+186	photos	Book	77	186	2023-06-07 17:44:13.982135
+187	photos	Book	78	187	2023-06-07 17:46:09.105411
+188	photos	Book	78	188	2023-06-07 17:46:09.120796
+189	photos	Book	78	189	2023-06-07 17:46:09.138058
+190	photos	Book	79	190	2023-06-07 17:47:40.398819
+191	photos	Book	79	191	2023-06-07 17:47:40.411859
+192	photos	Book	79	192	2023-06-07 17:47:40.425705
+193	photos	Book	79	193	2023-06-07 17:47:40.439407
+194	photos	Book	79	194	2023-06-07 17:47:40.45173
+195	photos	Book	80	195	2023-06-07 17:49:45.370576
+196	photos	Book	81	196	2023-06-07 17:50:47.491544
+197	photos	Book	81	197	2023-06-07 17:50:47.510316
+198	photos	Book	81	198	2023-06-07 17:50:47.531407
+\.
+
+
+--
+-- Data for Name: active_storage_blobs; Type: TABLE DATA; Schema: public; Owner: claire
+--
+
+COPY public.active_storage_blobs (id, key, filename, content_type, metadata, service_name, byte_size, checksum, created_at) FROM stdin;
+1	yiz76dryozu9ujsaq1z04ldkljws	bar.png	image/jpeg	{"identified":true,"width":580,"height":580,"analyzed":true}	local	57471	cLBZQ+cUZWc5MdhGzWOEHA==	2023-06-07 16:50:36.202375
+2	jfg2757da2t7knyactitygx52kqn	bar.png	image/jpeg	{"identified":true,"width":387,"height":581,"analyzed":true}	local	40810	VyGNJRvic75VfgVdA/fX3g==	2023-06-07 16:50:36.73174
+3	i8az45jnju5ul8ocqyens52gpnqr	bar.png	image/jpeg	{"identified":true,"width":466,"height":580,"analyzed":true}	local	34267	E2mM3g4GbX9BMXh3ciORbg==	2023-06-07 16:50:37.23184
+4	pjwh9gwob9nx439gyf6klfdng9k9	bar.png	image/jpeg	{"identified":true,"width":344,"height":581,"analyzed":true}	local	26017	cCvOLY5Jl8gcjUxkg9Aypw==	2023-06-07 16:50:37.71361
+5	hvm5zb77h9cwky4k43x599qd6ekk	bar.png	image/jpeg	{"identified":true,"width":387,"height":580,"analyzed":true}	local	38383	AsTFXUIXaouT/6CRmIULDg==	2023-06-07 16:50:38.220291
+6	tr63dwprci0irp0qncsxivngtvdt	bar.png	image/jpeg	{"identified":true,"width":387,"height":581,"analyzed":true}	local	53668	wRg/2O0/eECTVMMje/2CBA==	2023-06-07 16:50:38.698085
+7	dkbrhwaa3d1t8rf43juxds6i1uw7	bar.png	image/jpeg	{"identified":true,"width":387,"height":581,"analyzed":true}	local	28861	gBIzQgAUmk3dkvlGR9T9tw==	2023-06-07 16:50:39.210182
+8	tvj7zcthut098ltcugk0827ix9m9	bar.png	image/jpeg	{"identified":true,"width":870,"height":580,"analyzed":true}	local	80380	t1SYch+UqIJaSipMmFAoCQ==	2023-06-07 16:50:39.725944
+9	mxy35p6dpqzfuhxenmkmo71e6bn0	bar.png	image/jpeg	{"identified":true,"width":800,"height":1195,"analyzed":true}	local	94968	sJQTpyY3q+32397Z2GGkYQ==	2023-06-07 16:50:40.217421
+10	epnx9rkhoc2vwh78sgsil5z18zhm	bar.png	image/jpeg	{"identified":true,"width":876,"height":580,"analyzed":true}	local	68789	WhFoF5mXxwbdedNSaWIlrA==	2023-06-07 16:50:40.717883
+11	nn7yk6m69nvi3xfkrh26ogmep2fz	bar.png	image/jpeg	{"identified":true,"width":580,"height":580,"analyzed":true}	local	40485	xOsG4h8FzAPXr/Rd8y6YzQ==	2023-06-07 16:50:41.198281
+12	bcqklsu9tloiyj47gvlv306jhsna	bar.png	image/jpeg	{"identified":true,"width":774,"height":581,"analyzed":true}	local	19296	xgDM9JjpOgY5Yg0oPVU/Eg==	2023-06-07 16:50:41.717681
+13	vlsibhnyw824ycydpn1ooaf3tfvu	bar.png	image/jpeg	{"identified":true,"width":800,"height":1200,"analyzed":true}	local	62391	tYxind7ZT9KEslVVwlR8TQ==	2023-06-07 16:50:42.22913
+14	1ke58cw5zuw5febzth52vfpwelc6	bar.png	image/jpeg	{"identified":true,"width":800,"height":1200,"analyzed":true}	local	133884	9puV9KW9ZM8FSIWnK43QWQ==	2023-06-07 16:50:42.724759
+15	s2ohjsnkzjmjq8zddlf4czyi92uk	bar.png	image/jpeg	{"identified":true,"width":800,"height":800,"analyzed":true}	local	49755	AAQNneZrHI6Ht3tWKx1h+Q==	2023-06-07 16:50:43.213683
+16	jrzcolh7adim7h22cjbbtinbw9wf	bar.png	image/jpeg	{"identified":true,"width":800,"height":1424,"analyzed":true}	local	190824	7PS9ggRyDn8yppngnPXcvw==	2023-06-07 16:50:43.708551
+17	oh09a3jozeqrm8op35ae1pqafpd8	bar.png	image/jpeg	{"identified":true,"width":800,"height":533,"analyzed":true}	local	45868	azEOqoWa0TAIcJoow9j2uQ==	2023-06-07 16:50:44.204192
+18	9g5pmxxnsx8978338m249j8kso3u	bar.png	image/jpeg	{"identified":true,"width":774,"height":581,"analyzed":true}	local	97971	OpygtIGFFsFyxDVncN8M9w==	2023-06-07 16:50:44.701337
+19	01ovuw75no7irkgi7bgsrysd8p2s	bar.png	image/jpeg	{"identified":true,"width":870,"height":580,"analyzed":true}	local	81537	FMzovSEjxqIGxAmA42RTPg==	2023-06-07 16:50:45.210222
+20	in4baea9y46ru28i3qj2so0ljz4a	bar.png	image/jpeg	{"identified":true,"width":774,"height":581,"analyzed":true}	local	23431	rmz3YNF9k7bAEr4GrZiQ3Q==	2023-06-07 16:50:45.711359
+21	3o0ddobztchpd94cwvf48d9fau6u	bar.png	image/jpeg	{"identified":true,"width":870,"height":580,"analyzed":true}	local	131380	vhwI/wJTVGczf3B6UYBIbQ==	2023-06-07 16:50:46.226569
+22	4u4v9j22p0fz5wqhosm0xguudk7g	bar.png	image/jpeg	{"identified":true,"width":387,"height":581,"analyzed":true}	local	24917	leJCd5KlCez+8Edw5vhxFg==	2023-06-07 16:50:46.732654
+23	y516z46akfxrhfbhlj26lddij9bg	bar.png	image/jpeg	{"identified":true,"width":1011,"height":580,"analyzed":true}	local	104735	QeTnmV/dv2SUXjg3cFnf9Q==	2023-06-07 16:50:47.229777
+24	8y5fgbmxswknq1oyf8taqjnktwqx	bar.png	image/jpeg	{"identified":true,"width":500,"height":333,"analyzed":true}	local	13065	ROJL246uLiiQmHinpr/sog==	2023-06-07 16:50:47.728526
+25	od9mbul3l6jumedc4grq4bikky9g	bar.png	image/jpeg	{"identified":true,"width":500,"height":375,"analyzed":true}	local	14432	3QuQmPWpCoyDVV64vHLc0A==	2023-06-07 16:50:48.233161
+26	6m70hfb3wcuplylf3io4l6o0nclr	bar.png	image/jpeg	{"identified":true,"width":500,"height":281,"analyzed":true}	local	28322	C2gYKQhoH+nVIFsrslI0uw==	2023-06-07 16:50:48.733492
+27	aasx282yrgprr2m1z7862som0pjv	action1.png	image/jpeg	{"identified":true,"width":599,"height":800,"analyzed":true}	local	85517	g/Hhebo4NDOWZiX7T6inNw==	2023-06-07 16:51:09.941457
+28	j9ssqb05t513t96ttny16kv2visx	action2.png	image/jpeg	{"identified":true,"width":600,"height":796,"analyzed":true}	local	110973	wtlCe4ve73OIIVadtDXc6w==	2023-06-07 16:51:09.988342
+29	rtpfzgozjx6vois09esd1egogqly	action1.png	image/jpeg	{"identified":true,"width":400,"height":502,"analyzed":true}	local	108379	VBvW2bBfC8fzuxDuXpmvew==	2023-06-07 16:51:10.11307
+30	v8j9pwva96dps2mggl7p8lq6ys6x	action1.png	image/jpeg	{"identified":true,"width":585,"height":800,"analyzed":true}	local	69578	afbnMmr0SGhBg4o3XnkOZQ==	2023-06-07 16:51:10.21485
+31	2dqk7scb6sdlslqelmnwxxdg37o3	action2.png	image/jpeg	{"identified":true,"width":582,"height":800,"analyzed":true}	local	115101	/JGVfjtOD7F0xGA7np4c6A==	2023-06-07 16:51:10.271302
+32	pjho60d1xo8efmysn8qth58v3w9c	action1.png	image/jpeg	{"identified":true,"width":382,"height":501,"analyzed":true}	local	67376	0vODH13XkfbD0KKPQAedgg==	2023-06-07 16:51:10.369513
+33	6pjjgy2p9732m89wnipgt2ut24oc	action1.png	image/jpeg	{"identified":true,"width":564,"height":800,"analyzed":true}	local	101157	QtC8tNCJg+QcZ6xzXFKq+w==	2023-06-07 16:51:10.45261
+34	7zg0g2gws7dsy30s2y04tmnad968	action2.png	image/jpeg	{"identified":true,"width":561,"height":800,"analyzed":true}	local	140249	x6jJpqsWNoYxIU1huOXdHg==	2023-06-07 16:51:10.507206
+35	v7q5w730xatgx3566z2durldhf7p	action1.png	image/jpeg	{"identified":true,"width":593,"height":800,"analyzed":true}	local	81166	JFQdr1897FBtmjR0cnI22A==	2023-06-07 16:51:10.631503
+36	tj472q0ys4wo5uj6mnymjaxob0bf	action2.png	image/jpeg	{"identified":true,"width":592,"height":800,"analyzed":true}	local	65869	u1H5wjxY9MzzsRIukQZ5QA==	2023-06-07 16:51:10.692572
+37	evh49izpquwowhvxndkt8zsldzev	action1.png	image/jpeg	{"identified":true,"width":570,"height":800,"analyzed":true}	local	79266	t9nBSaqeEZxu+pGZ/TJq8Q==	2023-06-07 16:51:10.795737
+38	b5s89hpha88h8i415kyfwevekbok	action2.png	image/jpeg	{"identified":true,"width":553,"height":800,"analyzed":true}	local	275511	Svs6m7wfAVHeVCnjrKTFew==	2023-06-07 16:51:10.859088
+39	bbtl4gnu7cqazv4njxeea6g2z9pa	action1.png	image/jpeg	{"identified":true,"width":140,"height":200,"analyzed":true}	local	8241	tT3W/6irZuDl3OyVUaTscQ==	2023-06-07 16:51:10.942658
+40	a8v3gepqg9clwm30ggfj5umurrtf	action2.png	image/jpeg	{"identified":true,"width":150,"height":198,"analyzed":true}	local	7292	17QkmKeQKoE1vRphK33TqA==	2023-06-07 16:51:10.995727
+41	z2q11nltalcsy2s36zsn8imoskgw	action2.png	image/jpeg	{"identified":true,"width":150,"height":198,"analyzed":true}	local	8039	TvBqJYOUCYcrqUnppykALw==	2023-06-07 16:51:11.070301
+42	8eh68n9mbjvx287l1pt1e5dao2ca	action2.png	image/jpeg	{"identified":true,"width":150,"height":198,"analyzed":true}	local	8039	TvBqJYOUCYcrqUnppykALw==	2023-06-07 16:51:11.14421
+43	kc1ntstvqkeparo8f93jygvkawqs	action1.png	image/jpeg	{"identified":true,"width":565,"height":800,"analyzed":true}	local	62503	MCmBkjrH42Ilmo3rrAl8Sg==	2023-06-07 16:51:11.245471
+44	55xkbjm42a9h06zx8geuaglrnnj0	action2.png	image/jpeg	{"identified":true,"width":565,"height":800,"analyzed":true}	local	68511	M41b+JLbgAHjFPT0QaECyQ==	2023-06-07 16:51:11.295921
+45	dqu4evymwlebos1wmctn2c3qjjzf	action1.png	image/jpeg	{"identified":true,"width":500,"height":690,"analyzed":true}	local	63731	uX3Ca2sRPUFoGqx3wqOSmA==	2023-06-07 16:51:11.373994
+46	a1wom6kfs8jlbity0xd7mnvfztb4	action2.png	image/jpeg	{"identified":true,"width":500,"height":690,"analyzed":true}	local	63731	uX3Ca2sRPUFoGqx3wqOSmA==	2023-06-07 16:51:11.412342
+47	zxp5mqy2jgj5fum9zmfmcpn1wjit	bio.png	image/jpeg	{"identified":true,"width":568,"height":800,"analyzed":true}	local	594113	w80JBM8Tgrks9hKxljmIIA==	2023-06-07 16:51:20.156817
+48	khrikleanhh0c9s5idpgwbyzteq8	bio.png	image/jpeg	{"identified":true,"width":561,"height":800,"analyzed":true}	local	281415	4b+TwAkUqYC7V+6S1Rj3hA==	2023-06-07 16:51:20.208868
+49	gj21tywhgl8wjo2oxvq8cm5m74tk	bio.png	image/jpeg	{"identified":true,"width":600,"height":726,"analyzed":true}	local	519246	+GERtlE5xLFhqeHiVeS+Sg==	2023-06-07 16:51:20.306729
+50	zyvirjf18zkeqarb8xvly3l06lic	bio.png	image/jpeg	{"identified":true,"width":569,"height":800,"analyzed":true}	local	74497	Hm7MUzDpIu+p+Tc1gBndYQ==	2023-06-07 16:51:20.416035
+51	gkb6zc0bryyghr0vk2nqkrwnff0l	bio.png	image/jpeg	{"identified":true,"width":518,"height":800,"analyzed":true}	local	89169	R9cMO1hPyhRZFkL6qsNUcA==	2023-06-07 16:51:20.467268
+52	a5xzojiqoyepeea0wqpn5h7nkl7f	bio.png	image/jpeg	{"identified":true,"width":600,"height":767,"analyzed":true}	local	56690	lvCchpo22JvCxAzaHJQpwQ==	2023-06-07 16:51:20.581407
+53	61js3e1xjrnfhq8tssxxejo1byhr	bio.png	image/jpeg	{"identified":true,"width":600,"height":772,"analyzed":true}	local	96261	TOrq2EqppuswD/Hep144Hw==	2023-06-07 16:51:20.636603
+54	zty1qegbj7strh7p1fm2x2l30mgh	bio.png	image/jpeg	{"identified":true,"width":556,"height":800,"analyzed":true}	local	85933	ZzdTcFeBmRAicSqW4uyzWg==	2023-06-07 16:51:20.722219
+55	wtn1izustaibybg269at3j902l9q	bio.png	image/jpeg	{"identified":true,"width":550,"height":800,"analyzed":true}	local	90725	ynu+NHwgf3+gRNn3oJZGpA==	2023-06-07 16:51:20.769509
+56	kcodmfhzw68vr831phqpf1m5ny7m	bio.png	image/jpeg	{"identified":true,"width":550,"height":800,"analyzed":true}	local	49377	/fPqXto6GTS2bwd6HjIr3A==	2023-06-07 16:51:20.876428
+57	x5m2uo3l04owlyuumie7czq2urz2	bio.png	image/jpeg	{"identified":true,"width":560,"height":800,"analyzed":true}	local	96623	PQu5jNB3b3vb+ITPw03+0Q==	2023-06-07 16:51:20.923058
+58	esbgfl5yj4c1x1h25pt8pgkqnawa	bio.png	image/jpeg	{"identified":true,"width":150,"height":221,"analyzed":true}	local	6786	5yc61YCMsLOx+3ujBH9Lbg==	2023-06-07 16:51:20.997579
+59	iuig6963x93wjs2tkeigsptvy1oc	bio.png	image/jpeg	{"identified":true,"width":492,"height":700,"analyzed":true}	local	71986	cY8IFL2ChaGnTTjMhv/KOA==	2023-06-07 16:51:21.042841
+60	7x54qa9cclgrbtd439uqq3r3le6m	bio.png	image/jpeg	{"identified":true,"width":148,"height":200,"analyzed":true}	local	6193	4gaX2Ae522W5ZmDW+Gy7xQ==	2023-06-07 16:51:21.126237
+61	waa5cv630d7gpugejmaaedqpn4vt	bio.png	image/jpeg	{"identified":true,"width":150,"height":189,"analyzed":true}	local	9675	qg2MECLbWQKi2xYw3m37SQ==	2023-06-07 16:51:21.169936
+62	r8wq54qib3wswnbcxcxukq21lan3	bio.png	image/jpeg	{"identified":true,"width":144,"height":200,"analyzed":true}	local	10115	4osVklD35hJiBXqxhPCO0g==	2023-06-07 16:51:21.236212
+63	kfjpto9bvt9glt6v6t22eqegll99	bio.png	image/jpeg	{"identified":true,"width":600,"height":789,"analyzed":true}	local	61318	HbKnbK25Dll2PgvpEOWRXw==	2023-06-07 16:51:21.333617
+64	5ijls10ctk7ab7ifc6o3k2flal8y	bio.png	image/jpeg	{"identified":true,"width":588,"height":800,"analyzed":true}	local	129997	3tIS3uLHrwUBlQKzyZTvKg==	2023-06-07 16:51:21.381889
+65	na5v9hgmb505b03wkqnu2zwysveh	bio.png	image/jpeg	{"identified":true,"width":600,"height":754,"analyzed":true}	local	399346	MN9s34nJ+d/raNK15ofSxA==	2023-06-07 16:51:21.485573
+66	eh9jzfx1ntr86e90nmf52gzp6128	bio.png	image/jpeg	{"identified":true,"width":600,"height":757,"analyzed":true}	local	184528	sa7chzCBxiQdMiVJJ2q78A==	2023-06-07 16:51:21.551826
+67	o6ermk64kdz0hn5y1mj4s6tf0zwa	comedie1.png	image/jpeg	{"identified":true,"width":600,"height":788,"analyzed":true}	local	53296	QMogJsQXm3YID861FIy6CA==	2023-06-07 16:51:44.829969
+68	m38u48iyc8k94mb52n8e7xw2n819	comedie2.png	image/jpeg	{"identified":true,"width":600,"height":788,"analyzed":true}	local	106403	166X+MhpBc5iULSLN+n4LQ==	2023-06-07 16:51:44.868733
+69	ghqr7aomfixq09i7043trvtpu7y8	comedie1.png	image/jpeg	{"identified":true,"width":591,"height":800,"analyzed":true}	local	525225	0YYZTjYpmp1z+FohEyEE1g==	2023-06-07 16:51:44.978912
+70	of6hizu6jrr13clq2l2a1h0ubp3y	comedie2.png	image/jpeg	{"identified":true,"width":584,"height":800,"analyzed":true}	local	251573	bekzBtRyEb0d9NtysF+m7w==	2023-06-07 16:51:45.039174
+71	7lgvhgcbtcp1t2wpvegopk2hhheg	comedie1.png	image/jpeg	{"identified":true,"width":545,"height":800,"analyzed":true}	local	453690	br7WbqGb4GBE/jsNFCpNZg==	2023-06-07 16:51:45.136553
+72	zdoe0lk1tof78cxlcsbcaknnl0t1	comedie2.png	image/jpeg	{"identified":true,"width":539,"height":800,"analyzed":true}	local	461157	VLHLOZzuF3FOQ8p4CnNCdg==	2023-06-07 16:51:45.209303
+73	ppkmub4e3ho3aohm8gpwte5o4n2r	comedie1.png	image/jpeg	{"identified":true,"width":563,"height":800,"analyzed":true}	local	472847	9HBVjy8uJ9ff5XD70Q/PCw==	2023-06-07 16:51:45.306613
+74	3kp4eiw039zlmos1g47fi9p5oae2	comedie2.png	image/jpeg	{"identified":true,"width":563,"height":800,"analyzed":true}	local	472847	9HBVjy8uJ9ff5XD70Q/PCw==	2023-06-07 16:51:45.373211
+75	vme27h9rdyg88n0cu7xvwk9phkeg	comedie1.png	image/jpeg	{"identified":true,"width":552,"height":800,"analyzed":true}	local	64719	mFRMK2muwDg3Iih8c78t3w==	2023-06-07 16:51:45.478739
+77	1pb8cr22ufva310bped5joqem1qw	comedie1.png	image/jpeg	{"identified":true,"width":550,"height":800,"analyzed":true}	local	619592	CkB63cx1UftJ50G4CTjQNw==	2023-06-07 16:51:45.682379
+76	qqoe4jt8cv0uc9alldwzg7klv94o	comedie2.png	image/jpeg	{"identified":true,"width":552,"height":800,"analyzed":true}	local	64719	mFRMK2muwDg3Iih8c78t3w==	2023-06-07 16:51:45.558229
+114	wqbdefds0z988wni4c6ky8hkdjvr	fantastique2.png	image/jpeg	{"identified":true,"width":600,"height":785,"analyzed":true}	local	520888	ufQUK0Ho6fjV9zWy9OVatA==	2023-06-07 16:52:56.224591
+78	w7qus64xn6jbl8d6rwgjhjt0w4jc	comedie2.png	image/jpeg	{"identified":true,"width":548,"height":800,"analyzed":true}	local	634509	ChS9L1c3jF8G2p4CTbpfOQ==	2023-06-07 16:51:45.740364
+79	tf4qms42qwbbppjgnqs8v4z3pncl	comedie1.png	image/jpeg	{"identified":true,"width":556,"height":800,"analyzed":true}	local	117918	iSUD7zDnvCRrmP4w6B6t/Q==	2023-06-07 16:51:45.843752
+80	ydqh4iaqjiahkzyhpes94xo0tqki	comedie2.png	image/jpeg	{"identified":true,"width":541,"height":800,"analyzed":true}	local	136598	INnn++qVpRfdAr8UJpK2DQ==	2023-06-07 16:51:45.913236
+81	t8a3xvwcg9bccs0jss4kb4rnpap7	comedie1.png	image/jpeg	{"identified":true,"width":600,"height":791,"analyzed":true}	local	170888	S5x9Gh4JYiluLA5z3xr2oQ==	2023-06-07 16:51:46.006245
+82	gbhj72b6pj6zvtu26bia2r2ujk3e	comedie2.png	image/jpeg	{"identified":true,"width":600,"height":787,"analyzed":true}	local	106864	/Ar6htHhLzCwCDf/BULcwQ==	2023-06-07 16:51:46.055872
+83	b8z66c7t0fjygaqxkwmcjikmts62	comedie1.png	image/jpeg	{"identified":true,"width":579,"height":800,"analyzed":true}	local	467270	YlmaLckI6HPFxb0golHpiA==	2023-06-07 16:51:46.161192
+84	31q9lkvx4x82yze5sg8c716im3kh	comedie2.png	image/jpeg	{"identified":true,"width":570,"height":800,"analyzed":true}	local	482525	6ozWzu/00ADAyYmgsz6dAQ==	2023-06-07 16:51:46.215796
+85	ytdh8h48em5hfp05990vf840zu2w	comedie1.png	image/jpeg	{"identified":true,"width":577,"height":800,"analyzed":true}	local	410086	MHnkRCisYaae5hqiu3rPww==	2023-06-07 16:51:46.297303
+86	8efqzcy85n49kwtl54c7vw0fo9fj	comedie2.png	image/jpeg	{"identified":true,"width":575,"height":800,"analyzed":true}	local	527238	7PG6zl+QFZYW4SeLy4+deg==	2023-06-07 16:51:46.355422
+87	zfiofz6sutmc8bs45qhih2k5l2gt	drame1.png	image/jpeg	{"identified":true,"width":600,"height":793,"analyzed":true}	local	513972	4eUIiGYDUzmmMqBIuapJiQ==	2023-06-07 16:52:44.283235
+88	0lpfj0qd8agunacb4nhopllaebxy	drame2.png	image/jpeg	{"identified":true,"width":600,"height":793,"analyzed":true}	local	513972	4eUIiGYDUzmmMqBIuapJiQ==	2023-06-07 16:52:44.319382
+89	meb5evxghtf7aavosppyn865uul5	drame1.png	image/jpeg	{"identified":true,"width":523,"height":800,"analyzed":true}	local	57332	QLWML749rz1LdmcTFZvj8A==	2023-06-07 16:52:44.458343
+90	03k41zrac23g9y8si6wgy9b7vxwy	drame2.png	image/jpeg	{"identified":true,"width":523,"height":800,"analyzed":true}	local	83034	JD+Z5ytioDXGatq9/e/voA==	2023-06-07 16:52:44.56427
+91	aqfugidqkxk6zaez8dps1h6a6jsw	drame1.png	image/jpeg	{"identified":true,"width":590,"height":800,"analyzed":true}	local	215449	C6I9XoKyq3LY4zVWSI2ltQ==	2023-06-07 16:52:44.712644
+92	zp0wwczctmwwkmh8t00dxme2c3id	drame2.png	image/jpeg	{"identified":true,"width":590,"height":800,"analyzed":true}	local	215449	C6I9XoKyq3LY4zVWSI2ltQ==	2023-06-07 16:52:44.765339
+93	3vpiv35uw08tpeeukvptrfudmiw9	drame1.png	image/jpeg	{"identified":true,"width":600,"height":776,"analyzed":true}	local	108413	NUD9JQa3EZhVzf8QxwH/dw==	2023-06-07 16:52:44.878631
+94	vxl6k3zz72u0tak6gb29ruha07h6	drame2.png	image/jpeg	{"identified":true,"width":600,"height":784,"analyzed":true}	local	127221	jMglmzy8L+qnwAMLV9pN9w==	2023-06-07 16:52:44.95956
+95	t9pm2ml8cbbmazdvuzpajac7iiah	drame1.png	image/jpeg	{"identified":true,"width":559,"height":800,"analyzed":true}	local	269494	WdZuczguf01pDIZApJTQ0Q==	2023-06-07 16:52:45.070756
+96	y6freuzgt1wegabaxzs8i8rc1cjx	drame2.png	image/jpeg	{"identified":true,"width":566,"height":800,"analyzed":true}	local	212936	R4YCJ24BDMgY+XcpneOm3Q==	2023-06-07 16:52:45.123927
+97	dtu4jw4ifkcg6v5qutrax1spoqyq	drame1.png	image/jpeg	{"identified":true,"width":587,"height":800,"analyzed":true}	local	53435	WXKKg6GLwuj1HHf29d6e7w==	2023-06-07 16:52:45.214904
+98	91h9vp4ys99xqsi79bew7gqv9zzm	drame2.png	image/jpeg	{"identified":true,"width":576,"height":800,"analyzed":true}	local	405025	FldFfemSG2wChHeCk9c5vw==	2023-06-07 16:52:45.273194
+99	pnl6mb8n3j1ldu5kcapgse8k5nar	drame1.png	image/jpeg	{"identified":true,"width":600,"height":763,"analyzed":true}	local	458783	IML7f1tX/T/6HhNsBA4Gug==	2023-06-07 16:52:45.386449
+100	cne8d61rvu7t72ums5or7nitog0z	drame2.png	image/jpeg	{"identified":true,"width":600,"height":782,"analyzed":true}	local	454967	Zu2rVjGbPRtnJla7+Bq42Q==	2023-06-07 16:52:45.446853
+101	wsjb8d6kfdleuf37mex6png983ay	drame1.png	image/jpeg	{"identified":true,"width":590,"height":800,"analyzed":true}	local	423075	0s//d/AVQumzbrUoderzbg==	2023-06-07 16:52:45.547752
+102	31vi7f19n4cp2xu1q96v3kcnq324	drame2.png	image/jpeg	{"identified":true,"width":600,"height":791,"analyzed":true}	local	577826	utAZkdacca7C/cHR9eecLA==	2023-06-07 16:52:45.62421
+103	d8ltx12pbzhqasfk0q11aiwv7ag1	drame1.png	image/jpeg	{"identified":true,"width":600,"height":785,"analyzed":true}	local	67305	ZgPvA8SVZgsl8Jr6MHLrpA==	2023-06-07 16:52:45.722694
+104	9g1rwbevc5agwikm77jm8fuarwn3	drame2.png	image/jpeg	{"identified":true,"width":600,"height":787,"analyzed":true}	local	434118	7D0s56rjskwOlHtHYdXmLA==	2023-06-07 16:52:45.778232
+105	7cvzwo82r8t3x8itzh1dtszbg154	drame1.png	image/jpeg	{"identified":true,"width":600,"height":798,"analyzed":true}	local	318754	XzqwW5jWWf+MR8518NwfHw==	2023-06-07 16:52:45.870434
+106	hkczkar7dyegs8pt3npmwg79j54h	drame2.png	image/jpeg	{"identified":true,"width":600,"height":791,"analyzed":true}	local	437829	H7af7eAu/ajk+NB9HHMp/A==	2023-06-07 16:52:45.918561
+107	e2muf2kzs87h5a3of88wmm5l887p	fantastique1.png	image/jpeg	{"identified":true,"width":600,"height":785,"analyzed":true}	local	98558	ExdH5I66G8ix7UB840jS1Q==	2023-06-07 16:52:55.642618
+108	r2ax56nekhv1fyo40t7odn3iyxcs	fantastique2.png	image/jpeg	{"identified":true,"width":600,"height":788,"analyzed":true}	local	556993	eyxYnIes8MscfRONwYdCmg==	2023-06-07 16:52:55.690709
+109	dvozoba8imhlqgqw39yuqvbuwtk7	fantastique1.png	image/jpeg	{"identified":true,"width":450,"height":690,"analyzed":true}	local	151163	fVdRkzr1yRKDm3DAoICHvw==	2023-06-07 16:52:55.802442
+110	gy5qcve7rwsxfzx55jmzyzrcl3dl	fantastique2.png	image/jpeg	{"identified":true,"width":480,"height":800,"analyzed":true}	local	70806	mpXGjU4z+BNhZVqPThvnfw==	2023-06-07 16:52:55.869479
+111	jjty0e10ahqjs8gqwmtmvhw9gax3	fantastique1.png	image/jpeg	{"identified":true,"width":530,"height":800,"analyzed":true}	local	342352	ZZDT0WPHnizvEOYB0y6YIg==	2023-06-07 16:52:55.990473
+112	ix92im0grilaqowppicltzcqhtzw	fantastique2.png	image/jpeg	{"identified":true,"width":510,"height":800,"analyzed":true}	local	489386	eke47Ulsg/MqTj9HFiMMEA==	2023-06-07 16:52:56.049628
+113	r8yq7wo0id1aoixuvjy48rb9cqmo	fantastique1.png	image/jpeg	{"identified":true,"width":600,"height":785,"analyzed":true}	local	520888	ufQUK0Ho6fjV9zWy9OVatA==	2023-06-07 16:52:56.154569
+115	r2i58y44fhowu8s44kv00dsdqq56	fantastique2.png	image/jpeg	{"identified":true,"width":533,"height":754,"analyzed":true}	local	218482	5AJXy0JYsvhxsbUq9CH44w==	2023-06-07 16:52:56.288146
+116	0d8dw70cir3bzk8hj6d7vwkai63f	fantastique1.png	image/jpeg	{"identified":true,"width":584,"height":800,"analyzed":true}	local	93535	OtDihw0mZ04dT+EqJ8uB1Q==	2023-06-07 16:52:56.598998
+117	07pj1ot4ush690wvbakahogp34w9	fantastique2.png	image/jpeg	{"identified":true,"width":584,"height":800,"analyzed":true}	local	93535	OtDihw0mZ04dT+EqJ8uB1Q==	2023-06-07 16:52:56.668498
+118	y7gcbheizix5fq3lecvs51pxrq1g	fantastique2.png	image/jpeg	{"identified":true,"width":573,"height":800,"analyzed":true}	local	72205	KHNrWHuNzizGfpkAGm8T7A==	2023-06-07 16:52:56.727505
+119	tdzky7zc5rwo14adq7b777fcjhuv	fantastique2.png	image/jpeg	{"identified":true,"width":571,"height":800,"analyzed":true}	local	95451	4HSt1xzrIYycTLmHXcaB6Q==	2023-06-07 16:52:56.804205
+120	4sk6jg43zrvtvmtqgwnr76yhhd3q	fantastique1.png	image/jpeg	{"identified":true,"width":600,"height":791,"analyzed":true}	local	74949	cUqF7xPOWn6vfCZz1KNncQ==	2023-06-07 16:52:56.915661
+121	bzbef98b089dts1zlvwqjlh0iloe	fantastique2.png	image/jpeg	{"identified":true,"width":595,"height":800,"analyzed":true}	local	89732	4zorc3D+k65C89MtITiI0w==	2023-06-07 16:52:56.975453
+122	w7p2m128io7o3xz1eysbp1emno81	fantastique1.png	image/jpeg	{"identified":true,"width":600,"height":786,"analyzed":true}	local	67121	WTBY8SGsMDpRiNDNP7tkOQ==	2023-06-07 16:52:57.078377
+123	gw29y59m2zsug8laej818d4efabb	fantastique2.png	image/jpeg	{"identified":true,"width":600,"height":786,"analyzed":true}	local	67121	WTBY8SGsMDpRiNDNP7tkOQ==	2023-06-07 16:52:57.123731
+124	4mzf1ungt7hnk03o4sl1vbjkqcu0	fantastique1.png	image/jpeg	{"identified":true,"width":600,"height":796,"analyzed":true}	local	67797	Om6lf4qgyKAk2uxCg4ZRlQ==	2023-06-07 16:52:57.214889
+125	5b7vhsqunm12jx8416i17a6tntan	fantastique2.png	image/jpeg	{"identified":true,"width":577,"height":800,"analyzed":true}	local	89581	0QNjQk5X62OAcE4KIsZ0Rw==	2023-06-07 16:52:57.265128
+126	zr7b2pazsrbmj78i6llzrzxwwqca	fantastique1.png	image/jpeg	{"identified":true,"width":595,"height":800,"analyzed":true}	local	65601	RODq0lXRezMz//R5Q5hXPw==	2023-06-07 16:52:57.376507
+127	r6c0bi246sxbbu97oeib5cbkltgn	fantastique2.png	image/jpeg	{"identified":true,"width":595,"height":800,"analyzed":true}	local	65601	RODq0lXRezMz//R5Q5hXPw==	2023-06-07 16:52:57.4574
+128	wooz7d28jlauvj58igmp6t4fi2li	roman_graphique1.png	image/jpeg	{"identified":true,"width":598,"height":800,"analyzed":true}	local	62257	bKH5UZB2N3z4+W0cavHG2Q==	2023-06-07 16:53:05.058951
+129	gf3jkzpow3i30kq93ihiysupi3w0	roman_graphique1.png	image/jpeg	{"identified":true,"width":447,"height":650,"analyzed":true}	local	242520	yq12RaPoM4kOPyYPBR5OmA==	2023-06-07 16:53:05.14728
+130	yrea9p3fyeo468j1hpwt6a56ocjm	roman_graphique2.png	image/jpeg	{"identified":true,"width":525,"height":750,"analyzed":true}	local	354962	itLsxR4mfipCY6rFyxc4JA==	2023-06-07 16:53:05.223223
+131	4cfafl3hwvc22clc1ti15u1amn2i	roman_graphique1.png	image/jpeg	{"identified":true,"width":593,"height":800,"analyzed":true}	local	106143	2J/Y3RSsrpHjDC5vOFjrjg==	2023-06-07 16:53:05.311647
+132	gyk0yd9w6iohb2b9cznhi67c75i2	roman_graphique2.png	image/jpeg	{"identified":true,"width":592,"height":800,"analyzed":true}	local	116126	V/VFgQfgT1VCn0zxrVds+g==	2023-06-07 16:53:05.367003
+133	nuq427adccuxmv3yyams76h21xe8	roman_graphique1.png	image/jpeg	{"identified":true,"width":586,"height":800,"analyzed":true}	local	105140	GtmywtceBBebDzdVhRwB+A==	2023-06-07 16:53:05.472557
+134	ctzsaswsaqaqazc5885u13a59p98	roman_graphique1.png	image/jpeg	{"identified":true,"width":560,"height":800,"analyzed":true}	local	46930	0SO8TBAZdtOnyuNO+FoAVg==	2023-06-07 16:53:05.565512
+135	343xk8y0x18w6i3wczrr3g00s3el	roman_graphique2.png	image/jpeg	{"identified":true,"width":569,"height":800,"analyzed":true}	local	49457	kTX5J1EF2TDixhCjyb28qg==	2023-06-07 16:53:05.617787
+136	srw6mwf60j50vrp990cxcwcuwewp	roman_graphique1.png	image/jpeg	{"identified":true,"width":559,"height":800,"analyzed":true}	local	46434	PHUCvywEnzfIHQQQX9hwyQ==	2023-06-07 16:53:05.708126
+137	8bch41b0gllona1ozsq17a4ydzz9	roman_graphique2.png	image/jpeg	{"identified":true,"width":544,"height":800,"analyzed":true}	local	61528	tqSIs5uXK9yrQx0kvTPWFw==	2023-06-07 16:53:05.764441
+138	z8o197prrla1itq9ot3vocqderib	roman_graphique1.png	image/jpeg	{"identified":true,"width":600,"height":607,"analyzed":true}	local	83686	fgbFk8HNeb5muCSxEfVLkQ==	2023-06-07 16:53:05.857983
+139	xut5vpjh4viqjmgx8tnulpcjjqy5	roman_graphique2.png	image/jpeg	{"identified":true,"width":600,"height":600,"analyzed":true}	local	60512	8TQhB5/gvB8aviC18FsS5Q==	2023-06-07 16:53:05.91723
+140	drp67ml76kbsrq15q2yf86swzscf	roman_graphique1.png	image/jpeg	{"identified":true,"width":595,"height":777,"analyzed":true}	local	138322	/Ivd+cf/VQGRpGyd94cclg==	2023-06-07 16:53:05.995925
+141	fxoeyhzde4rgfq3c1m3nq7ad1yd2	roman_graphique2.png	image/jpeg	{"identified":true,"width":554,"height":739,"analyzed":true}	local	108037	HMV9tbp3nIFwhOtogmdGSg==	2023-06-07 16:53:06.048348
+142	hgm26knrq8we2i1r2v4cxdm1cf1f	roman_graphique1.png	image/jpeg	{"identified":true,"width":600,"height":792,"analyzed":true}	local	74371	0hyjfv+n2eJ9CR+hgTvhAA==	2023-06-07 16:53:06.128903
+143	htdblxnsmm9sygsw42u3e0xkpjpb	roman_graphique2.png	image/jpeg	{"identified":true,"width":582,"height":800,"analyzed":true}	local	105341	3CBDRE4w5vVIK/cscNXoUA==	2023-06-07 16:53:06.174935
+144	wr5ncao0hza3ziwzl2tbq3hb6pl5	roman_graphique1.png	image/jpeg	{"identified":true,"width":600,"height":784,"analyzed":true}	local	97109	x61vuaUfk+yJ2NAzsSDeAg==	2023-06-07 16:53:06.261839
+145	j1fe366hke6ijq4xul2s4uq1u0yl	roman_graphique2.png	image/jpeg	{"identified":true,"width":584,"height":800,"analyzed":true}	local	112454	DEiLBhOCVCtcKUSx6kHMtg==	2023-06-07 16:53:06.309899
+146	7fl8f9iis8501tcbucmwrb525ztr	police1.png	image/jpeg	{"identified":true,"width":596,"height":800,"analyzed":true}	local	490331	akt4A2Op5N129FmLHn2vrg==	2023-06-07 16:53:18.524617
+147	nhf4evt9f3azqsy8oprpaivkrcix	police2.png	image/jpeg	{"identified":true,"width":596,"height":800,"analyzed":true}	local	383721	1aiZU+D/Su9/wYeLeNt6sw==	2023-06-07 16:53:18.569549
+148	ic299c0geadt68eu3ebbc77kkhs1	police1.png	image/jpeg	{"identified":true,"width":600,"height":762,"analyzed":true}	local	67181	hQRdhUsPs8pSvhVFoRBW+A==	2023-06-07 16:53:18.678942
+149	nlqc8mr0h9synuzlekqo6dotv4ak	police2.png	image/jpeg	{"identified":true,"width":600,"height":787,"analyzed":true}	local	78322	JfpmrtswIz97hzHYu13H6A==	2023-06-07 16:53:18.901916
+150	bnwtst9gnqljs5yov230woj5jpdi	police1.png	image/jpeg	{"identified":true,"width":600,"height":795,"analyzed":true}	local	56293	YCnL0SXReBtc+2DSIKEGeQ==	2023-06-07 16:53:19.007688
+151	afd9uwlb9cm8qtrwsgeb0tpovu6t	police2.png	image/jpeg	{"identified":true,"width":600,"height":795,"analyzed":true}	local	56293	YCnL0SXReBtc+2DSIKEGeQ==	2023-06-07 16:53:19.055355
+152	q02gox9u8o87h7liifcn59pkuodx	police1.png	image/jpeg	{"identified":true,"width":600,"height":785,"analyzed":true}	local	103770	xu93LjlVcZUx/p3HL+oH3g==	2023-06-07 16:53:19.190754
+153	njzfmyyxhcn4a3i2rxvy3v9gfxdm	police2.png	image/jpeg	{"identified":true,"width":600,"height":785,"analyzed":true}	local	103770	xu93LjlVcZUx/p3HL+oH3g==	2023-06-07 16:53:19.24547
+154	fgepogx4culo6llsbyj24wamq4bo	police1.png	image/jpeg	{"identified":true,"width":588,"height":800,"analyzed":true}	local	110550	T0jkVosJTlkecUe1eWSfHg==	2023-06-07 16:53:19.334711
+155	zam2ru7f126r48j4jn6b9f8fx7ea	police2.png	image/jpeg	{"identified":true,"width":593,"height":800,"analyzed":true}	local	120066	g7T9rDky5Mj1sT2H2K/VpA==	2023-06-07 16:53:19.380632
+156	24p8wgqyfyngpozhddagqwe2r9nb	police1.png	image/jpeg	{"identified":true,"width":459,"height":640,"analyzed":true}	local	91313	BlpOVzRVFP8wzDKbJZ9gPQ==	2023-06-07 16:53:19.454871
+157	m8zfumt2r8jjk3tg2hqiduad5eo7	police2.png	image/jpeg	{"identified":true,"width":556,"height":798,"analyzed":true}	local	377442	wzW9BnRXSdGYUSXpW1BX7w==	2023-06-07 16:53:19.50353
+158	o0bzw5jpndnge4s2lbko0niii4td	police1.png	image/jpeg	{"identified":true,"width":142,"height":196,"analyzed":true}	local	9894	UPTSp9WMD1mRUZb82bcfsg==	2023-06-07 16:53:19.566194
+159	1uq3opx1sgjybfs8jqkme9ngdc48	police2.png	image/jpeg	{"identified":true,"width":530,"height":755,"analyzed":true}	local	124631	JfntKnPM4TBzaxwSke/eYw==	2023-06-07 16:53:19.612816
+160	jmc81vnox5sr4eavs03jrsvrs9l3	police1.png	image/jpeg	{"identified":true,"width":579,"height":800,"analyzed":true}	local	79080	kkyv06dxVK97w73XgjvUzw==	2023-06-07 16:53:19.72681
+161	qvqq3foyod5gqp70qt5m4prshebv	police2.png	image/jpeg	{"identified":true,"width":537,"height":800,"analyzed":true}	local	61477	5RhRFHgsTfeVoW07BAis2A==	2023-06-07 16:53:19.784961
+162	yicxrugir86u4dlnyqs86jmpstwv	police1.png	image/jpeg	{"identified":true,"width":600,"height":787,"analyzed":true}	local	57398	hvrwJ4dneJNRLHvwTev+8w==	2023-06-07 16:53:19.864484
+164	o167avy1gdtbwdbk1n9aucjd17wi	police1.png	image/jpeg	{"identified":true}	local	93771	bs11hvQU33OITfd8SXSMbQ==	2023-06-07 16:53:20.006373
+163	rs3w7z5v7van0m4g2k3necal6e5q	police2.png	image/jpeg	{"identified":true,"width":584,"height":800,"analyzed":true}	local	112221	6KvmV07keskZMXYD/D5Q7A==	2023-06-07 16:53:19.913235
+165	xscepouaaago4a7cxvkj604o8mg2	police2.png	image/jpeg	{"identified":true}	local	103360	nrTm1qWKudnDFAibuG7dog==	2023-06-07 16:53:20.053343
+166	g7v6j0h4tjaukx9aqgbhcksp3itg	IMG_20230607_161642.jpg	image/jpeg	{"identified":true,"width":2135,"height":3209,"analyzed":true}	local	1018167	+zywFLFJZoXC0+sZzWgqiA==	2023-06-07 16:59:12.866064
+167	bh2ml3fy7uoe8zpckat0ytpjkbto	IMG_20230607_161649.jpg	image/jpeg	{"identified":true,"width":2136,"height":3017,"analyzed":true}	local	933672	C+biqph+XT48+d0/SHL/Pw==	2023-06-07 16:59:12.884854
+168	1k86ghwaobh3ee2ambvjtb66s3os	IMG_20230607_161606.jpg	image/jpeg	{"identified":true,"width":2122,"height":3192,"analyzed":true}	local	1326064	lh0BG99rAzD5htdEJKkmcQ==	2023-06-07 17:00:10.148578
+169	qsnzuq03n48lmn5hsh1beqwzqrs7	IMG_20230607_161613.jpg	image/jpeg	{"identified":true,"width":2136,"height":3666,"analyzed":true}	local	1362070	14rXQHHZGBMvGXiJ0S/eNQ==	2023-06-07 17:00:10.163106
+170	9fcm4iibihvw30g97soxbo2xpwua	IMG_20230607_161722.jpg	image/jpeg	{"identified":true,"width":3472,"height":4624,"analyzed":true}	local	4353459	VSjuQWit+VXs8lVkbQCbsw==	2023-06-07 17:03:16.695747
+171	v9mgir04l28ya1jggk4f09xpolm3	IMG_20230607_161727.jpg	image/jpeg	{"identified":true,"width":3472,"height":4624,"analyzed":true}	local	4384736	7G247Yt04j0V2RY6ROU8QQ==	2023-06-07 17:03:16.714334
+173	sgy1txga0a1jf0zs0oh6geztehw6	IMG_20230607_161801.jpg	image/jpeg	{"identified":true,"width":3472,"height":4624,"analyzed":true}	local	4288673	aES3cGobQgVcF+za7yPrcA==	2023-06-07 17:04:21.926425
+172	49fazyxq6s0bded2wtl49w1i3px3	IMG_20230607_161752.jpg	image/jpeg	{"identified":true,"width":3472,"height":4624,"analyzed":true}	local	4503317	3K2Gwy11a1COnHO+cJcsdw==	2023-06-07 17:04:21.911345
+174	ofk9hcciz02tchmcbfpqd8mgu8zq	IMG_20230607_161752.jpg	image/jpeg	{"identified":true,"width":3472,"height":4624,"analyzed":true}	local	4503317	3K2Gwy11a1COnHO+cJcsdw==	2023-06-07 17:04:43.648854
+175	f0unbjrhgs4vlgk6dlper1e6hl0s	IMG_20230607_161801.jpg	image/jpeg	{"identified":true,"width":3472,"height":4624,"analyzed":true}	local	4288673	aES3cGobQgVcF+za7yPrcA==	2023-06-07 17:04:58.318746
+178	y8zhmfw1rex7z8zpsxga56inwe89	IMG_20230607_161824.jpg	image/jpeg	{"identified":true,"width":3472,"height":4624,"analyzed":true}	local	2235537	awLbQZDPMAVO1ljacYbZ4Q==	2023-06-07 17:05:54.30917
+176	zx8vwet780btalba2tiqggs156e5	IMG_20230607_161813.jpg	image/jpeg	{"identified":true,"width":3472,"height":4624,"analyzed":true}	local	4337971	3WrBtbxHy08eFLJ1Oa7r0w==	2023-06-07 17:05:54.274696
+177	6wtepq28ztbv6j9cu5jj9cetn8l8	IMG_20230607_161818.jpg	image/jpeg	{"identified":true,"width":3472,"height":4624,"analyzed":true}	local	4552341	KnYdezfSnC/ZPQLYhfqPTw==	2023-06-07 17:05:54.291422
+180	cjs8bhd897xly5uq97qwntxt13ux	IMG_20230607_161841.jpg	image/jpeg	{"identified":true,"width":3472,"height":4624,"analyzed":true}	local	4009836	K+EQ+SFlvEESI48dxay9cQ==	2023-06-07 17:07:47.044987
+179	h69ovkd9hwvlv3mk4mifhlh09y64	IMG_20230607_161835.jpg	image/jpeg	{"identified":true,"width":3472,"height":4624,"analyzed":true}	local	3421729	ThB7Aj/Kx4WXKIexswfYrA==	2023-06-07 17:07:47.025826
+181	yx5tsfaj8llhbim4ptjrq5svop3n	IMG_20230607_161953.jpg	image/jpeg	{"identified":true,"width":3472,"height":4624,"analyzed":true}	local	4144789	wTbDdM2Gqqq650SC5aETIA==	2023-06-07 17:42:45.851873
+183	64jwthow2rgwmx3xqs4c7y2j4c5x	IMG_20230607_162002.jpg	image/jpeg	{"identified":true,"width":3472,"height":4624,"analyzed":true}	local	4443003	9OVhT+gY3Omvxb+7Bbnd1g==	2023-06-07 17:42:45.883403
+182	13ifedwg6dx5bdo89pbq6z3n8mhd	IMG_20230607_161958.jpg	image/jpeg	{"identified":true,"width":3472,"height":4624,"analyzed":true}	local	5186786	6AdsIs9F7q8VQMKNF7o8og==	2023-06-07 17:42:45.867782
+186	uf7uhntcmkhmr7f7pff99o0wdwao	IMG_20230607_162057.jpg	image/jpeg	{"identified":true,"width":3472,"height":4624,"analyzed":true}	local	4110577	snWBQ26v06hZBa+yfeKdlw==	2023-06-07 17:44:13.974616
+184	orafsuu1jf2h9yr09rbv4ur4ebw7	IMG_20230607_162047.jpg	image/jpeg	{"identified":true,"width":3472,"height":4624,"analyzed":true}	local	5222697	qulJs1w9ifKThd81je7etw==	2023-06-07 17:44:13.940225
+185	j4pyfrpi00gkctt084bj8uq57t6s	IMG_20230607_162052.jpg	image/jpeg	{"identified":true,"width":3472,"height":4624,"analyzed":true}	local	6082145	7jbwgqFROTHt7ORNqNeIJg==	2023-06-07 17:44:13.958592
+188	u9xcq99wrevkghv01e0sz7j287jy	IMG_20230607_162111.jpg	image/jpeg	{"identified":true,"width":3472,"height":4624,"analyzed":true}	local	4414223	XkI1LOsIunQ6FpLrGxUd4w==	2023-06-07 17:46:09.113928
+189	p2pklgm2yjzsn4py5v2h39m8zt71	IMG_20230607_162121.jpg	image/jpeg	{"identified":true,"width":3472,"height":4624,"analyzed":true}	local	4622322	BCboSbZT9MJih/eiuPn57Q==	2023-06-07 17:46:09.130428
+187	iqubx4q9lu5pxyz9a7g8keiighwi	IMG_20230607_162105.jpg	image/jpeg	{"identified":true,"width":3472,"height":4624,"analyzed":true}	local	5426838	q1ed7Gc9puofL5t6G0T7+Q==	2023-06-07 17:46:09.098432
+194	2uz9mjrog0n19v0buyrl6oijucqz	IMG_20230607_162242.jpg	image/jpeg	{"identified":true,"width":3472,"height":4624,"analyzed":true}	local	5428733	7WmWMhMIPjx4e5a4Gn2Kgg==	2023-06-07 17:47:40.446075
+192	8ryplk7jx29qcgpi5808b37qtw9v	IMG_20230607_162224.jpg	image/jpeg	{"identified":true,"width":3472,"height":4624,"analyzed":true}	local	5374200	pv8Y+lers6yeDDJU3U16zg==	2023-06-07 17:47:40.418307
+193	uky50hgd7lv39606rklr0zzem07o	IMG_20230607_162235.jpg	image/jpeg	{"identified":true,"width":3472,"height":4624,"analyzed":true}	local	5716056	jWSetcpxHazyiKLzLvrgRg==	2023-06-07 17:47:40.432685
+190	row6dbatlql0qiwgqm2f4j2n03xm	IMG_20230607_162212.jpg	image/jpeg	{"identified":true,"width":3472,"height":4624,"analyzed":true}	local	4763093	KWv1+LFPdOYPEoZOl2vSkA==	2023-06-07 17:47:40.392216
+191	cz5mowow8fxzyq068urztq8a9oee	IMG_20230607_162217.jpg	image/jpeg	{"identified":true,"width":3472,"height":4624,"analyzed":true}	local	4194970	f1WqC/eQ3osWQv6IqsINpg==	2023-06-07 17:47:40.405592
+195	sqkx6y932gdz3y3jv6l05640l9h3	IMG_20230607_162251.jpg	image/jpeg	{"identified":true,"width":3472,"height":4624,"analyzed":true}	local	4986969	FznFOW37HZE4CKNGShsWvg==	2023-06-07 17:49:45.361287
+198	7irgkzyw9capc0xv87kvvh9b9hde	IMG_20230607_162356.jpg	image/jpeg	{"identified":true,"width":3472,"height":4624,"analyzed":true}	local	5434412	XeFFhqt53XxFP58CahjNVg==	2023-06-07 17:50:47.520573
+196	ipobmz6ggk2ia06f1a1x4fs3kz2x	IMG_20230607_162347.jpg	image/jpeg	{"identified":true,"width":3472,"height":4624,"analyzed":true}	local	5776209	oIxU0Yd1acQAtChY9lWjGw==	2023-06-07 17:50:47.48274
+197	x5nl8176q36kd93l3136jkgqdk4h	IMG_20230607_162351.jpg	image/jpeg	{"identified":true,"width":3472,"height":4624,"analyzed":true}	local	5222411	sEGM8otIHl2EYgpgQ06zAQ==	2023-06-07 17:50:47.502713
+\.
+
+
+--
+-- Data for Name: active_storage_variant_records; Type: TABLE DATA; Schema: public; Owner: claire
+--
+
+COPY public.active_storage_variant_records (id, blob_id, variation_digest) FROM stdin;
+\.
+
+
+--
+-- Data for Name: ar_internal_metadata; Type: TABLE DATA; Schema: public; Owner: claire
+--
+
+COPY public.ar_internal_metadata (key, value, created_at, updated_at) FROM stdin;
+environment	development	2023-06-07 16:50:05.038339	2023-06-07 16:50:05.038339
+\.
+
+
+--
+-- Data for Name: books; Type: TABLE DATA; Schema: public; Owner: claire
+--
+
+COPY public.books (id, name, category, price, description, user_id, created_at, updated_at, bought) FROM stdin;
+1	Le Dernier Chamane	Action/Aventure	1.5	À la demande de ses parents explorateurs, la jeune Alyson a dû s’envoler pour l’Amazonie. Là-bas, elle lève une partie du voile sur « La Flèche d’or », une mystérieuse Société secrète dont fait partie son grand-père, aventurier lui aussi. Quel est le but de cette société secrète et pourquoi le médaillon d’Alyson brille-t-il si intensément par moment ? C’est ce qu’elle devra découvrir. Pour cela, il lui faut s’engouffrer dans la jungle, à la recherche d’un puissant chamane qui pourrait la guider. Acceptera-t-il de la prendre comme élève ? Aux côtés de sa mère, Alyson devra d’abord se frayer un chemin parmi la végétation luxuriante de la jungle tropicale. Quant à Benedict, l’ennemi juré de la Flèche d’or, il semble nourrir des desseins très particuliers au cœur d’une mine abandonnée et semble lui aussi à la recherche du vieux chamane… Qui le trouvera en premier ?\n	1	2023-06-07 16:51:09.892326	2023-06-07 16:51:10.020338	f
+2	HapPif Brithday	Action/Aventure	1	Pif le chien est né le 28 mars 1948 sous le crayon de l'espagnol José Cabrero Arnal, au rythme d'un Strip quotidien publié dans le journal l'Humanité, créé par Jean Jaurès.\nPif finira par donner son nom au magazine Vaillant, véritable creuset de la BD francophone.\nLes Éditions Vaillant et Pif Le Mag ont décidé de rendre hommage à ce personnage iconique, apprécié encore aujourd'hui par 61% des Français (source Harris interactive, sondage réalisé en mars 2022).\n\nTrès bon état	2	2023-06-07 16:51:10.039703	2023-06-07 16:51:10.124492	f
+5	Jim Cartouche	Action/Aventure	10	Courts récits parus dans le mensuel du même nom à partir de 1951.\n\nComme neuf\n\nSpécificités :\n- Tirage : 400 exemplaires.\n- Avec un Ex-libris collé dans la BD. Numéroté\n- D.l. 2022-10.550-3	5	2023-06-07 16:51:10.400237	2023-06-07 16:51:10.537984	f
+3	Ayak et Boris	Action/Aventure	4.5	Trois histoires courtes. Ayak, une jeune Inuit, découvre le monde en compagnie de son chien Por.\nLe Peintre et la Mer raconte l'histoire d'un peintre à qui il ne reste qu'une seule chose à peindre. Pierre et le Loup est une adaptation libre du conte de Prokofiev.	3	2023-06-07 16:51:10.146305	2023-06-07 16:51:10.294018	f
+4	Au Pays des Lignes	Action/Aventure	4	Au pays des lignes raconte l'histoire d'un drôle de petit bonhomme tout bleu chasseur de dragons. En montagne, dans un univers hostile et sauvage, il rencontre une petite fille rouge totalement perdue. Les deux enfants vont peu à peu tomber amoureux, se battre avec un monstre jaune, vivre ensemble toutes sortes d'aventures avant de retrouver les parents de la fillette. Très graphique, sans parole, dessiné au stylo bille et principalement en rouge et bleu, Au pays des lignes est une BD minimaliste mais avec une trame narrative forte. L'histoire très rythmée se déroule toujours à distance, jamais en gros plan. Par de simples petites lignes, droites ou courbes, sans fioritures, l'illustrateur arrive à rendre vivants ses personnages et à faire passer leurs émotions.	4	2023-06-07 16:51:10.309371	2023-06-07 16:51:10.383366	f
+9	La Princesse Maya	Action/Aventure	2	Mélipona va découvrir la méchanceté de certains hommes et la bonté de la Nature. Elevée avec un jaguar, elle va devenir l'élue des abeilles sacrées. Ce conte initiatique fera le bonheur des enfants, tout autant par la tendresse qui se dégage de l'histoire que la beauté des images qui les transportent au cœur de la civilisation Maya.	9	2023-06-07 16:51:11.193032	2023-06-07 16:51:11.313952	f
+6	Le Grand Labyrinthe	Action/Aventure	6	Lise adore jouer dans le petit labyrinthe de son jardin. Le problème, c'est qu'elle le connaît par cœur. Alors, c'est décidé, cette année, elle aura le plus grand labyrinthe du monde ! Ses parents se mettent au travail pour satisfaire ce désir... mais c'était sans compter sur le fait que la nature reprend souvent ses droits...	6	2023-06-07 16:51:10.558477	2023-06-07 16:51:10.718675	f
+8	Le Linceul, les 4 tomes	Action/Aventure	20	Lot des 4 tomes de la série Le Linceul\n\nRésumé du tome 1 :\nCathédrale de Turin, Italie. Des centaines de témoins assistent au vol spectaculaire du Saint Suaire, linceul supposé du Christ, mais aussi relique la plus célèbre et la plus controversée de l'histoire de la chrétienté. En quelques siècles de là, en 1359, dans un village de Champagne, un jeune chevalier chargé d'une mission secrète et un mystérieux moine franciscain enquêtent. Le linceul exposé dans la collégiale de Lirey est-il bien celui du Christ ? Laurent Bidot nous entraîne dans une enquête passionnante autour du Linceul du Christ, entrecoupée de scènes médiévales d'une grande rigueur.	8	2023-06-07 16:51:10.896641	2023-06-07 16:51:11.174749	f
+7	La Rage du Dragon	Action/Aventure	3.5	Excellent état, très bonne Bande desisnée !\n\nN'hésitez pas à me contacter pour plus d'informations !	7	2023-06-07 16:51:10.734681	2023-06-07 16:51:10.878194	f
+10	Moby Dick	Action/Aventure	7.5	Herman Melville, qui fut marin, s'inspira de faits réels pour donner  naissance à Moby Dick – un livre culte qui inscrivit un nouveau mythe dans la mémoire des hommes : celui de la baleine blanche.\nIl y raconte la quête furieuse, mystique et désespérée du Capitaine Achab et son dernier affrontement avec Moby Dick. Une quête folle adaptée et maîtrisée par deux talents, deux sensibilités – celles d'Olivier Jouvray et de Pierre Alary.	10	2023-06-07 16:51:11.326219	2023-06-07 16:51:11.444694	f
+14	Tintin au Pays des Savants	Histoire/Bio	4.5	Les savants occupent une place centrale, et plutôt mouvementée, dans les aventures de Tintin. Ils nous laissent l'empreinte de souvenirs indélébiles parmi lesquels une fuée à damier rouge et blanc, devenue bien plus célèbre que toutes les Ariane et Saturne réunies. Lorsque Hergé est né, les avions faisaient encore des sauts de puce. A sa mort, l'humanité avait connu la bombe atomique et avait pris pied sur la lune ! Hergé fit e Tintin un témoin de ces bouleversements, particulièrement des enthousiasmes, peurs, croyances et dangers qu caractérisent l'histoire de la science. Dans cet album, des scientifiques, chercheurs et journalistes voyagent, entre science et fiction, dans l'oeuvre de Hergé. Plus que du savoir, c'est l'apprentissage du monde qu'ils découvrent. L'ouvrage se termine par le pétillement des 'bulles de science' qui expliquent les multiples expérimentations scientifiques que l'on découvre dans l'oeuvre de Hergé.	13	2023-06-07 16:51:20.517675	2023-06-07 16:51:20.654918	f
+11	50 Artistes de Caricature et de Bande Dessinée Arabes	Histoire/Bio	15	Véritable kaléidoscope, cet ouvrage témoigne de la vitalité de la création contemporaine en caricature et bande dessinée en Tunisie, Égypte, Liban, Jordanie, Palestine, Syrie, Irak, Koweït, Arabie saoudite, Yémen, Bahreïn et Soudan.\nDans ces pages, les lecteurs francophones pourront découvrir une archive visuelle rare et précieuse, allant des caricatures parues dans les journaux et magazines égyptiens des années 60 aux plus récentes bandes dessinées et dessins de presse diffusés en ligne.\nLes lecteurs pourront également découvrir de nombreux auteurs jusqu'à présent méconnus en France : aux côtés de célèbres caricaturistes tels Naji Al Ali (Palestine) ou Nadia Khiari (Tunisie), l'ouvrage présente la satire mordante d'illustratrices telles Sara Qaed (Bahreïn) ou Manal Mohammad (Arabie Saoudite), qui critique dans ces vignettes l'absence d'égalité entre homme et femmes dans son pays.	10	2023-06-07 16:51:20.11336	2023-06-07 16:51:20.226098	f
+12	Arthur Rackham	Histoire/Bio	5	Arthur Rackham (1867-1939) est sans coup férir l'illustrateur pour la jeunesse le plus célèbre de son époque.\nC'est lui qui initia, des deux côtés de l'Atlantique, la tradition des grands et gros albums reprenant des textes classiques très largement illustrés : de Washington Irving à Andersen en passant par Poe, Shakespeare, Grimm ou Le Vent dans les saules, la fine fleur du conte et du merveilleux fut enluminée par ce grand maître, spécialiste des gnomes tordus, des arbres crochus et des couleurs fondues.	11	2023-06-07 16:51:20.243999	2023-06-07 16:51:20.332088	f
+13	Une Monographie	Histoire/Bio	12	Dino Battaglia fait partie avec Pratt, Crepax et Toppi de cette génération qui allait radicalement transformer la bande dessinée dans les années soixante-dix. La rigueur et la qualité de sa démarche demeurent d'une parfaite actualité. Ce livre retrace un parcours artistique en tous points remarquable.	12	2023-06-07 16:51:20.353735	2023-06-07 16:51:20.494975	f
+38	Les Innocents Coupables (Intégrale)	Drame	12	Janvier 1912. Quatre jeunes parisiens sont conduits dans une lointaine campagne. Condamnés à diverses peines, ils rejoignent la colonie pénitentiaire agricole Les Marronniers. Les poulbots vont découvrir et apprendre de nouvelles règles dans ce lieu que l'on appellera plus tard les bagnes d'enfants.\n\nCette intégrale contient :\n- Tome 1 : La Fuite\n- Tome 2 : La Trahison\n- Tome 3 : La Liberté\n\nExcellent état	11	2023-06-07 16:52:45.501511	2023-06-07 16:52:45.643597	f
+15	Sur la Tête de mon Père	Histoire/Bio	15	Du Vietnam à Madagascar en passant par la France et le Maroc, un hommage drôle et touchant au père de l’auteur, le fameux « Chanteur perdu » de Didier Tronchet.\n\nAvant de devenir un chanteur au succès éphémère dans les années 1970, Jean-Claude Rémy avait déjà pas mal de kilomètres au compteur, et ce malgré ses 25 ans. Fils d'un Français parti faire carrière en Indochine et d'une nourrice indigène, il est l'un de ces « petits bâtards » issus de la colonisation, comme il aime le dire.	14	2023-06-07 16:51:20.669103	2023-06-07 16:51:20.79536	f
+19	Yoni Tome 2	Histoire/Bio	8	Yoni Owens, agent très spécial de la F.C.I.A., reprend du service. Sa mission ? S'introduire au cour de New Utopia, la base secrète des rebelles de la zone TAZ enfin découverte par le supercalculateur de la F.C.I.A.\nSituée dans la mer des Caraibes infestée de requins, de barracudas et de mines sous-marines, l'île des cryptoanarchistes est réputée inviolable. D'autant que sur l'île, les cyber-arachnoides veillent à ce qu'aucun intrus ne puisse parvenir à la base rebelle.	18	2023-06-07 16:51:21.284844	2023-06-07 16:51:21.402722	f
+37	Toute une Vie dans des Sacs en Plastique	Drame	2	Un jeune garçon de 18 ans monte dans un taxi, direction l’hôtel habituel. Il emporte avec lui toute sa vie dans trois sacs en plastique et s’apprête à déclarer à un politicien quinquagénaire à qui il vend son corps, qu’il souhaite faire sa vie avec lui.\nEntre espoir et chantage, la discussion ne sera pas celle espérée. Car même si l’amour est évident, les attentes de l’un ne sont pas celles de l’autre.	13	2023-06-07 16:52:45.31028	2023-06-07 16:52:45.472998	f
+20	Tolstoï-Rabaté : Une Rencontre	Histoire/Bio	25	En 1997, Pascal Rabaté tombe par hasard sur le roman Ibicus ou les aventures du comte de Nevzorof d’Alexis Tolstoï, parent du célèbre Léon. Il s’attache au sort de ce petit fonctionnaire de Saint-Pétersbourg auquel une gitane a prédit aventures et succès.\nEn 1917, la révolution bolchévique gronde. Ibicus la fuit  de Moscou à Odessa sans jamais renoncer à faire fortune.\n\nPrix neuf : 30 €	19	2023-06-07 16:51:21.424958	2023-06-07 16:51:21.568981	f
+53	Demain Commence Aujourd'Hui	Roman Graphique	5	En 2009, la suissesse Kati Rickenbach revient à Hambourg avec son petit ami pour travailler comme illustratrice. Une ville qu'elle a connu 5 ans auparavant, alors étudiante en art. Son retour ravive ses souvenirs de cette époque marquée par l'insouciance, les amis, les flirts, les disputes, les sorties, les soirées... Une galerie de personnages traverse ce récit très dialogué qui se lit comme une comédie de moeurs, humoristique et sentimentale.	20	2023-06-07 16:53:05.411023	2023-06-07 16:53:05.498308	f
+79	Brindille lot de 2 tomes	Action/Aventure	9	Une jeune femme se réveille dans un village du Petit Peuple. Elle ne se souvient de rien, ni de son nom, ni de comment elle est arrivée ici. Alors qu’elle tente de retrouver la mémoire et découvre les habitants de ce monde, elle s’éveille peu à peu à des pouvoirs qu’elle ne contrôle pas.\r\n\r\nLot de 2 tomes. Possible de les vendre séparément	24	2023-06-07 17:47:40.375344	2023-06-08 10:22:28.656588	f
+16	Sur les Traces de Garcia Lorca	Histoire/Bio	10	En suivant un dédale de récits et témoignages de personnages qui ont partagé un moment de la vie (et de la mort) de Federico Garcia Lorca, l'auteur nous promène de Grenade à Madrid, de Lla Havane à New York, de fêtes en débats, en souvenirs et réflexions.\nL'œuvre, construite en une série de scénettes volontairement désordonnées du point de vue chronologique, parvient à recréer dans une atmosphère très intimiste, un portrait très réel et réaliste de celui qui fut l'un des plus grands poètes d'Espagne, volontairement sacrifié par les phalangistes qui purifiaient ainsi le pays d'un rouge doublé d'un homosexuel.\n\nNé a Grenade en 1972, Carlos Hernandez Sanchez est essentiellement connu en Espagne pour son travail d'illustrateur dans la presse quotidienne et particulièrement le journal Ideal, auquel il collabore depuis 1994. Il est également uteur de plusieurs livres pour enfants et romans graphiques.	15	2023-06-07 16:51:20.812359	2023-06-07 16:51:20.944515	f
+24	Le Petit Spirou : Le Roman du Film	Comédie	3	Pour le Petit Spirou, l’avenir est déjà écrit : il sera groom, comme tous les membres de sa famille avant lui. Et à la fin de l’année, il quittera ses amis pour partir étudier dans l’école réservée. Il ne lui reste donc plus que quelques semaines pour réaliser son rêve… et déclarer sa flamme à Suzette.\nHeureusement, Vertignasse, Ponchelot et Cassius, ses copains de toujours, sont là pour l’aider ! C’est parti pour l’aventure !	23	2023-06-07 16:51:45.248699	2023-06-07 16:51:45.400861	f
+17	Tibet La Fureur de Rire	Histoire/Bio	8	Il a 50 ans, les Editions du Lombard et le Journal Tintin s'enrichissaient d'un nouveau talent, celui de Tibet. En hommage à ses 50 années de fidélité, cette monographie est consacrée à l'intarissable créateur de Chick Bill et au dessinateur de Ric Hochet. Un ouvrage conçu et réalisé par Patrick Gaumer.	16	2023-06-07 16:51:20.957632	2023-06-07 16:51:21.068333	f
+21	Amore	Comédie	4	Qu'elles finissent mal, qu'elles finissent bien, impossible de rester de marbre devant ces histoires d'amour.	20	2023-06-07 16:51:44.781637	2023-06-07 16:51:44.892876	f
+18	Lot de 2 volumes Van Hamme	Histoire/Bio	16	Avec près de 18 millions d'albums vendus ces dix dernières années sur le seul marché francophone, Jean Van Hamme est devenu l'auteur le plus lu en France, et ce en touchant toutes les catégories d'âges, des plus jeunes avec sa série Thorgal, au moins jeunes avec Les Maîtres de l'Orge, en passant par les grandes séries tous publics que sont XIII et Largo Winch. Que ce soit à travers ses nombreux best-sellers ou en tant que directeur des Editions Dupuis, Van Hamme est un phénomène éditorial exceptionnel qui modifia véritablement le paysage de la bande dessinée. A travers des entretiens en profondeur richement illustrés, ce livre révèle la personnalité forte et contrastée d'un homme qui, après avoir parcouru le monde au service des multinationales, changea le cours de sa vie, à 37 ans, pour tenter de vivre en racontant des histoires. Pari gagné au-delà de tout espoir, pour celui qui fut consacré par ses pairs meilleur scénariste européen.	17	2023-06-07 16:51:21.085352	2023-06-07 16:51:21.268188	f
+22	Basse-Cour Baston	Comédie	4	Imaginez une ferme où les coqs, poules, vaches, chevaux et moutons frisent le record du monde de bêêêtise.\nUn jour, pour une sombre histoire de grain de maïs, les animaux se battent. La baston du siècle, que les fermiers peinent à arrêter mais qui a eu le mérite de faire réfléchir tout le monde.\nIls décident de vivre en paix, de s’aider, de s’aimer et d’être solidaires. C’est alors qu’une des poules voit au loin un nouveau grain de maïs…	21	2023-06-07 16:51:44.91047	2023-06-07 16:51:45.065922	f
+23	Bazooka	Comédie	1	Né dans un œuf dont on ignore la provenance, un être supérieur à l’allure démoniaque et au charisme fou va vivre un destin hors du commun. Il croise un singe dont il ne fait qu’une bouchée, s’ébat dans la mer avec de gentils poissons et finit par réserver une table dans un excellent restaurant.	22	2023-06-07 16:51:45.082231	2023-06-07 16:51:45.225727	f
+25	Les As de la Jungle Tome 6	Comédie	4	Les As de la jungle à la rescousse !Quand dans la jungle il y a un problème à résoudre ou une injustice à réparer, pas de souci : il suffit de tirer le signal des As de la Jungle pour qu'ils accourent à la rescousse ! Maurice, le pingouin-tigre, celui que tout le monde appelle « le grand guerrier tigre », n'hésite jamais à entraîner le reste de la troupe dans une nouvelle aventure. Pas question de partir sans Junior, le poisson-tigre, son fils adoptif et son meilleur élève de kung-fu, Miguel, le gorille, qui adore « taper taper taper » et manger des bananes, Gilbert, le tarsier, cerveau de la bande, toujours accroché à sa branche et souvent de mauvaise humeur, Batricia la chauve-souris au grand cœur et à la gaffe facile, et enfin l'artiste de la bande : Fred le phacochère-crooner, qui n'hésite pas à les accompagner quand il n'est pas en tournée à l'autre bout de la jungle. Mais qui garde le repaire des As quand ils sont en mission ? Al et Bob, les deux crapauds de la mare, inséparables et aux qualités multiples et insoupçonnées...Impossible de s'ennuyer avec cette bande de justiciers toujours partants pour l'aventure et dont les relations sont d'intarissables sources de comédie !	21	2023-06-07 16:51:45.420607	2023-06-07 16:51:45.588001	f
+26	Rouge, L'Île des Gribouilleurs	Comédie	13	Tandis que Rouge et ses amis jouent aux pirates dans les jardins du château, une tempête éclate. Les enfants s'abritent alors à bord d'un bateau abandonné, mais le vent va emporter la frêle embarcation dans les airs !\nAprès de longues heures de dérive, ils se découvrent perdus sur une île extraordinaire. Quelles joyeuses péripéties attendent nos amis ?	21	2023-06-07 16:51:45.633625	2023-06-07 16:51:45.772952	f
+27	Rouge et la Sorcière d'Automne (tome 2)	Comédie	15	Lors d'une partie de cache-cache, Rouge et ses amis découvrent un vieux puits. La nuit, une étrange mélodie s'en échappe et semble hypnotiser la princesse. Quelle créature mystérieuse peut bien vivre en ce lieu improbable ?	10	2023-06-07 16:51:45.79535	2023-06-07 16:51:45.941487	f
+36	Les Gens Heureux Lisent et Boivent du Café	Drame	4.5	Diane a perdu brusquement son mari et sa fille dans un accident de voiture. Dès lors, tout se fige en elle, à l’exception de son cœur qui continue de battre. Obstinément, douloureusement, Inutilement. Égarée dans les limbes du souvenir, elle ne retrouve plus le chemin de l’existence.\nAfin d’échapper à son entourage qui l’enjoint de reprendre pied, elle décide de s’exiler en Irlande, seule.	13	2023-06-07 16:52:45.159935	2023-06-07 16:52:45.291909	f
+30	Pullboy et le Pull-Over Violet	Comédie	3	Comme tous les petits garçons, Pullboy est parfois confronté à des problèmes qu'il ne peut résoudre seul. Quand cela se produit, il sait comment trouver de l'aide : Enfiler le pull magique !\nÀ chaque mission, sa couleur. Et hop ! Sitôt le pull enfilé, le voilà transporté dans une véritable caverne d'Ali Baba. À l'intérieur, il faudra trouver 4 éléments. Le parcours commence. Les objets trouvés, Pullboy pourra s'en servir pour se sortir de son problème.\nPullboy veut repeindre la palissade du jardin. Mais d'une part il est trop petit et enfin, le chat pourchassant un oiseau, a fait tomber le pot de peinture. Comment faire ? Zou ! Pullboy court vers son armoire magique... Cette fois, ce sera le pull violet. Le temps de passer sa tête et le voilà qui déboule dans la caverne aux trésors. Avec l'aide du lecteur, il faudra trouver : un clown, deux cuillères, un tonneau de myrtilles et un éléphant !\nDe retour au jardin, le clown expliquera comment propulser les myrtilles juteuses à l'aide des cuillères, et l'éléphant donnera aussi sa solution et révèlera son âme d'artiste. Enfin, Pullboy partagera la réussite de sa mission avec ses deux nouveaux amis, autour d'un goûter. Tout cela sous l’œil du chat, réconcilié avec l'oiseau espiègle.	13	2023-06-07 16:51:46.247183	2023-06-07 16:51:46.380014	f
+28	Prestige de l'Uniforme (Nouvelle Édition)	Comédie	11	Paul Forvolino est un chercheur qui végète dans un grand laboratoire. Il travaille trop, sans la moindre reconnaissance, néglige sa famille, ses amis. Jusqu'au jour où une expérience sur un lichen tourne mal et le contamine. Progressivement, le parasite prend le contrôle, le transforme. Ce qui semble d'abord être une bénédiction devient vite la ruine de sa vie sociale.\n\nLoo Hui Phang, scénariste, réalisatrice et artiste contemporaine, dénonce l'aliénation des sociétés contemporaines ; Hugues Micol utilise une palette rugueuse, qui évoque autant Der Blaue Reiter que Swamp Thing. Avant Vivès, Ruppert et Mulot, les auteurs croisent les mythes de la pop culture avec une critique acide de la société.\nL'album, précédemment paru dans la collection Expresso des Éditions Dupuis, avait été sélectionné avec pertinence au Festival d'Angoulême 2006. Une nouvelle édition dans le label de prestige Aire Libre lui offre une nouvelle vie... Les héros ne meurent jamais !	21	2023-06-07 16:51:45.955817	2023-06-07 16:51:46.083289	f
+29	Pullboy et le Pull-Over Jaune	Comédie	4	Pullboy tire une petite carriole, une poule endormie sur le couvercle, un ver de terre les suit, sous leurs pieds. Arrivés à destination, Pullboy sort le contenu de cette carriole et voici un beau cerf-volant !\nIl vole, vole, vole...et se prend dans les branches d'un arbre. Impossible de le décrocher. Pullboy a bien une petite idée. Il court dans sa chambre, ouvre son armoire magique et choisit le pull-over jaune !	21	2023-06-07 16:51:46.102022	2023-06-07 16:51:46.232663	f
+32	Alena	Drame	5	La vie d'Alena est un enfer. Depuis qu'elle est entrée à l'internat, elle se fait harceler tous les jours par Philippa et les filles de sa bande. Mais Joséphine, sa seule amie, n'a pas l'intention de la laisser subir ce calvaire plus longtemps. Puisqu'Alena ne rend pas les coups, puisqu'elle ne peut pas compter sur l'aide du conseiller d'orientation ou du directeur de cette maudite école, Joséphine va devoir prendre les choses en main elle-même. Mais il y a un problème : ça fait un an que Joséphine est morte.	11	2023-06-07 16:52:44.402635	2023-06-07 16:52:44.60555	f
+31	Zénith	Drame	10	Le rituel est immuable : tous les jours, au moment du passage du soleil au zénith, sous un ciel couleur jus d’orange, le potier et le souffleur de verre se retrouvent pour déjeuner. Assis à une table immense, ils se bornent à des échanges très formels autour de leurs sommeils troublés, alternant phases d’insomnie et rêves si saisissants qu’on croirait à des crises de somnambulisme.\nUn beau matin, l’un d’eux retrouve chez lui l’intégralité de son travail de la veille en morceaux éparpillés sur le sol. Fait d’autant plus troublant qu’il semble n’y avoir aucune trace d’effraction. C’est dans ses souvenirs qu’il va devoir tenter de répondre à cette énigme.	11	2023-06-07 16:52:44.251502	2023-06-07 16:52:44.336549	f
+34	Le Manoir	Drame	1	C'est par une lumineuse journée d'été mais dans l'épaisseur d'un bois sombre que les trois adolescents découvrirent le manoir.\nCourage, inconscience, défi, nul ne sait quel sentiment les anima quand ils se décidèrent à y pénétrer. Nul ne sait également ce qu'il advint d'eux.	11	2023-06-07 16:52:44.799412	2023-06-07 16:52:44.981166	f
+33	Camélia : Face à la Meute	Drame	3.5	Camélia retourne à l’internat après deux mois de vacances. Celle qu’on appelait Miss Bouboule au collège est devenue une lycéenne bien dans sa peau. Elle va retrouver son amie Justine et la vie semble lui sourire.\nMais c’est sans compter Valentine et sa clique qui vont la prendre en grippe. Et lorsqu’une simple photo est diffusée sur les réseaux sociaux, c’est la spirale du harcèlement qui emporte Camélia. Elle devient le souffre-douleur de tout l’internat.	12	2023-06-07 16:52:44.632796	2023-06-07 16:52:44.780753	f
+35	Le Muret	Drame	2.5	1988. Dans la grisaille ordinaire d’une petite commune, Rosie, 13 ans, se retrouve seule. Sa mère est partie et son père se plonge dans le travail.\nRongée par un quotidien morne et vide, elle perd pied et assiste, comme impuissante, à la transformation de sa personnalité, tantôt effrayée, tantôt déterminée face à cette noirceur qui l’envahit et trace sa nouvelle vie.	13	2023-06-07 16:52:44.997604	2023-06-07 16:52:45.139933	f
+39	Un Ennemi du Peuple	Drame	6	Le discret docteur Tomas Stockmann et son frère Peter, maire hâbleur et populiste, ont fondé ensemble un établissement thermal dont le succès assure la prospérité de leur petite île.\nTomas, qui ne cautionne pas la gestion qu'en fait son frère, s'est toutefois mis en retrait du projet, n'y assurant plus que la mission de médecin généraliste pour les touristes. Une tâche inintéressante qui va pourtant lui permettre de découvrir un terrible scandale sanitaire. Et l'obliger à entamer un combat contre son propre frère, notable soutenu par les pouvoirs de la finance, de la politique mais aussi par la majorité bêlante des électeurs de l'île.\n\nMenace écologique, mensonge politique et manipulation de l'opinion publique : plus d'un siècle après sa première représentation sur scène, Javi Rey revisite la pièce du dramaturge norvégien Henrik Ibsen (1828-1906), dont les problématiques restent d'une actualité totale. Un Ennemi du peuple est un album essentiel. Une histoire prenante doublée d'une surprenante réflexion sur le concept de démocratie.	22	2023-06-07 16:52:45.663295	2023-06-07 16:52:45.797875	f
+40	La Route du Grand Chien	Drame	3.5	Dans un monde de plus en plus hostile pour les animaux sauvages, Waluk et Esquimo tentent de survivre tout en veillant sur les petits de Valkia, partie chasser pour toute la troupe.\nAussi farceurs que curieux, les oursons donnent d'ailleurs bien du fil à retordre à Waluk et son vieil ami. Surtout le jour où un immense navire perd une partie de sa cargaison, alors qu'il se fraie un passage entre les blocs de glace... Pendant ce temps, les chiens du campement sont confrontés à de graves problèmes.	22	2023-06-07 16:52:45.824586	2023-06-07 16:52:45.9354	f
+46	Acqua Alta - Episode 1 -	Fantastique	4	Chaque année pendant sept jours, la cité secrète d’Ultréquinoxe,monumentale ville lacustre reliée au reste du monde par un pont immense sur lequel chemine le train Chimère-Express, ouvre ses portes pour un gigantesque carnaval. Des foules innombrables s’y pressent, non seulement pour s’y amuser mais portées par l’espoir : à Ultréquinoxe, il est en effet possible, le temps de la fête, de retrouver un disparu ou un être cher. On peut aussi, lors du célèbre banquet d’avril qui clôt les festivités, être tiré au sort pour devenir l’un des citoyens permanents de la ville. Cette année-là, deux participants inattendus rejoignent le carnaval : Luc et Matthieu, des appariteurs naufragés qui convoient une mystérieuse boîte commandée, disent-ils, par le maire de la cité…	3	2023-06-07 16:52:56.854105	2023-06-07 16:52:56.997468	f
+41	Le Bestiaire du Crépuscule (Édition Limitée)	Fantastique	20	Pour les enfants du quartier, le parc est un inoffensif jardin public. Mais pour son gardien, c'est un nid de sombres créatures qu'il est le seul à voir. Asocial et atteint d'un solide trouble de la rêverie compulsive, Providence s'est donné pour mission de protéger les promeneurs malgré eux. Sa tâche se complique lorsqu'un livre étrange sorti des eaux troubles du lac libère un bestiaire terrifiant et attire l'attention des très louches services psycho-sanitaires...\n\nTalonné par une nouvelle directrice bien plus versée dans le jargon du management que dans l'occulte et déterminée à gérer le parc comme une véritable start-up, le gardien lutte contre l'appel d'un autre monde. Noyé dans les brumes du lac, le reflet d'une étrange maison où il serait enfin en paix l'attire irrésistiblement.\n\nEdition limitée, introuvable aujourd'hui ! Prix d'achat : 30 €. La bd est en excellent état ! ;)	1	2023-06-07 16:52:55.604221	2023-06-07 16:52:55.713709	f
+45	20 000 Siècles sous les Mers, les 2 tomes	Fantastique	10	Lot des 2 tomes de la série :\n- L'Horreur dans la Tempête (tome 1)\n- Le Repaire de Cthulhu (tome 2)\n\nAprès avoir retrouvé la clé du sanctuaire sous-marin de Cthulhu dans le Pacifique, Nemo et ses compagnons engagent une course autour du monde pour tenter de détruire ce dieu malfaisant avant qu'il ne fonde sur l'Humanité et que ses rêves empoisonnés ne transforment Nemo en un monstre inhumain.\n	3	2023-06-07 16:52:56.541001	2023-06-07 16:52:56.832759	f
+47	Acqua Alta - Episode 2 -	Fantastique	4	Chaque année pendant sept jours, la cité secrète d’Ultréquinoxe,monumentale ville lacustre reliée au reste du monde par un pont immense sur lequel chemine le train Chimère-Express, ouvre ses portes pour un gigantesque carnaval. Des foules innombrables s’y pressent, non seulement pour s’y amuser mais portées par l’espoir : à Ultréquinoxe, il est en effet possible, le temps de la fête, de retrouver un disparu ou un être cher. On peut aussi, lors du célèbre banquet d’avril qui clôt les festivités, être tiré au sort pour devenir l’un des citoyens permanents de la ville. Cette année-là, deux participants inattendus rejoignent le carnaval : Luc et Matthieu, des appariteurs naufragés qui convoient une mystérieuse boîte commandée, disent-ils, par le maire de la cité…	3	2023-06-07 16:52:57.011945	2023-06-07 16:52:57.142153	f
+42	Zombie Walk tome 2 : L'Espoir	Fantastique	5	Voilà le deuxième tome de la série « Zombie Walk », prévue en cinq albums.\nNous retrouvons les deux personnages principaux du premier album, Mary et Franck, quelque part dans le nord de l'Italie, où leur ballon dirigeable s'est posé..\nPar ailleurs, à Marseille, nous découvrons de nouveaux héros, Laura et Fabio. Tous sont en proie à tout un continent envahi par les zombies, où la seule planche de salut semble être la voie maritime..\nMais avant d'en arriver là, nos personnages vont être confrontés aux bassesses de l'âme humaine, surtout en ces temps plus que troublés : les uns vont notamment rencontrer un mystérieux seigneur complètement mégalo, tandis que les autres croiseront la route des membres du laboratoire pharmaceutique de sinistre mémoire, à l'origine de l'épidémie de morts-vivants .	2	2023-06-07 16:52:55.731796	2023-06-07 16:52:55.903858	f
+43	Zombies : Mort et Vivant	Fantastique	5	Je les regarde faire depuis ma fenêtre.Ils sont là, tout près... Ils errent dans les rues pour débusquer les derniers survivants. Mais le Monde a-t-il finalement vraiment changé ?\n\nBD en excellent état, comme neuf !	2	2023-06-07 16:52:55.922441	2023-06-07 16:52:56.0725	f
+44	Le Bestiaire du Crépuscule	Fantastique	15	Pour les enfants du quartier, le parc est un inoffensif jardin public. Mais pour son gardien, c'est un nid de sombres créatures qu'il est le seul à voir. Asocial et atteint d'un solide trouble de la rêverie compulsive, Providence s'est donné pour mission de protéger les promeneurs malgré eux. Sa tâche se complique lorsqu'un livre étrange sorti des eaux troubles du lac libère un bestiaire terrifiant et attire l'attention des très louches services psycho-sanitaires...\nTalonné par une nouvelle directrice bien plus versée dans le jargon du management que dans l'occulte et déterminée à gérer le parc comme une véritable start-up, le gardien lutte contre l'appel d'un autre monde. Noyé dans les brumes du lac, le reflet d'une étrange maison où il serait enfin en paix l'attire irrésistiblement.	2	2023-06-07 16:52:56.090005	2023-06-07 16:52:56.44833	f
+51	Annie Sullivan & Helen Keller	Roman Graphique	8	Née en 1880 dans l'Alabama, la petite Helen Keller devient aveugle et sourde à l'âge de dix-neuf mois, suite à une maladie. Elle se trouve alors dans l'incapacité de communiquer avec son entourage, si ce n'est avec quelques gestes maladroits. Sa vie va être bouleversée l'année de ses six ans, quand ses parents engagent Annie Sullivan comme préceptrice. Elle-même malvoyante, celle-ci a appris à enseigner la langue des signes à l'Institut Perkins pour les aveugles. Elle va prendre en charge l'éducation d'Helen Keller, et, au fil des mois, réussir non seulement à établir un contact avec l'enfant, mais aussi à lui apprendre la langue des signes, puis l'écriture. Les deux femmes resteront amies à vie. Annie Sullivan et Helen Keller relate l'histoire de cette extraordinaire rencontre. Une véritable leçon d'humanité, magnifiquement dessinée par Joseph Lambert.	21	2023-06-07 16:53:05.088079	2023-06-07 16:53:05.239554	f
+49	Black Dog : Les Rêves de Paul Nash	Fantastique	12	Peintre surréaliste de la première moitié du XXe siècle, Paul Nash a vécu l’atrocité des tranchées de la Première guerre mondiale. Les cicatrices de cette épreuve ont marqué son œuvre à tout jamais.\nDave McKean décide de lui rendre hommage à travers cette biographie fantasmée. Entre réalité et illusion, il explore la fièvre créatrice de l’artiste en se projetant dans ses rêves, hantés par l’image perpétuelle d’un chien noir. Ni malveillant, ni bénin, ce spectre agit comme un présage, un messager, un ennemi... puis un ami.	6	2023-06-07 16:52:57.301691	2023-06-07 16:52:57.481002	f
+50	À la Fin des Catastrophes	Roman Graphique	8	Ce beau livre rassemble les grands dessins que Joann Sfar publie dans Paris Match. Des scènes aquarellées qui reflètent l'air du temps - un temps marqué par le Covid, mais pas seulement. Parisiens masqués et confinés, rues désertées, commerces, restaurants et cafés... En se glissant dans la tête de ses congénères et de leurs animaux de compagnie, l'auteur livre avec beaucoup d'humour et un brin de cynisme un instantané de notre société - l'image de notre rapport au monde.	21	2023-06-07 16:53:05.022915	2023-06-07 16:53:05.07097	f
+48	Arthur et la Vengeance de Maltazard (tome 1)	Fantastique	1	Arthur est au comble de lexcitation : cest aujourdhui la fin du dixième cycle de la Lune, et il va enfin pouvoir regagner le monde des Minimoys pour y retrouver Sélénia. Dans le village, tout est prêt pour laccueillir : un grand banquet a été organisé en son honneur, et la petite princesse a passé sa robe en pétales de rose Cest sans compter le père dArthur, qui choisit précisément ce jour tant attendu pour quitter plus tôt que prévu la maison de sa grand-mère. Au moment du départ, une araignée dépose dans les mains du jeune garçon, un grain de riz sur lequel est gravé un message de détresse. Pas de doute, Sélénia est en danger, et Arthur na plus quune idée en tête : voler à son secours !	7	2023-06-07 16:52:57.15511	2023-06-08 08:48:59.319344	t
+52	Apocalypstick	Roman Graphique	5	Barcelone, un couple à la dérive. Qui n'a jamais rêvé de pouvoir tout recommencer ?\nRobin se remet mal de la rupture de son couple. Il est un romancier à succès, et c'est sans doute grâce à son don d'écrivain que va germer l'idée qui lui permettra de reconquérir le coeur d'Alicia. Du jour au lendemain, il vend tous ses biens et raconte à qui veut l'entendre qu'il part pour un grand tour du monde, sans retour. Finalement, cela n'étonne personne : il a toujours dit qu'il détestait la ville. Surtout cette ville, Barcelone. Trop belle pour ne pas être mangé par elle. Donc il part. Enfin, il fait croire qu'il part. Car en vérité il ne fait que déménager sous une autre i dentité. Et s'il s'absente vraiment de Barcelone, c'est pour rentrer dans une petite clinique suisse où il fait modifier son apparence physique. Son visage change, bien sûr. Mais son corps aussi (quelques kilos en moins, ainsi que des grains de beauté). Exit donc Robin, place maintenant à Malo. Celui-ci va à la rencontre d'Alicia. Mais une seconde chance existe-t-elle réellement.	21	2023-06-07 16:53:05.256074	2023-06-07 16:53:05.396603	f
+54	Des Fourmis dans les Jambes	Roman Graphique	10	Alex a 33 ans, publicitaire ambitieux, il est marié, et a une petite fille adorable. La vie idéale ?... Non ! Depuis 13 ans, Alan se bat contre un ennemi invisible : la sclérose en plaques. Voici raconté en BD – et avec humour, son combat au quotidien pour avoir, coûte que coûte, une vie (presque) normale.\n\nLucide et réaliste, le témoignage bouleversant de Arnaud Gautelier (auteur du récit J'te plaque ma sclérose) est magistralement mis en image par Renaud Pennelle. Un roman graphique pertinent sur le handicap et sa place dans notre société. Indispensable !	4	2023-06-07 16:53:05.523503	2023-06-07 16:53:05.63765	f
+59	La Sainte Trinité	Roman Graphique	5	Deux hommes à l’allure de Don Quichotte et Sancho Pancha errent dans un désert. Ils sont visiblement exténués, quasiment morts de soif. Ce qui n’est pas s’en créer certaines tensions entre eux. Don Cordoba Igual de la Vilarubias, seigneur des Astramour et Grand d’Espagne reproche à son valet Zangra de ne plus rien avoir à boire. De son côté, Zangra en veut beaucoup à son maître d’avoir dû sacrifier sa vieille mule pour la manger (mais c’était elle ou lui). Et de se disputer pour savoir ce qu’est le pire : la soif ou la faim ? La conversation des deux bougres s’élèvent d’un cran dès lors qu’il s’agit de religion. 	1	2023-06-07 16:53:06.21042	2023-06-07 16:53:06.342888	f
+55	Dressing	Roman Graphique	6	On aurait sans doute tort de considérer Michael Deforge comme un dessinateur purement dévoué au bizarre, un obsédé du glauque et un apôtre du malsain. Certes, certes, certes, le prodige canadien s'aventure souvent dans des recoins bien sombres, et n'a pas peur de jouer avec les aspects les plus monstrueux de l'être humain.	11	2023-06-07 16:53:05.652534	2023-06-07 16:53:05.786951	f
+56	Histoires de Pebble Island	Roman Graphique	4	Histoires de Pebble Island nous présente les rythmes calmes de la vie sur une petite île. Une profonde méditation sur le choc visuel qu'on éprouve parfois quand la nature et les objets artificiels se rencontrent.	21	2023-06-07 16:53:05.805037	2023-06-07 16:53:05.93209	f
+61	Abymes tome3	Police/Thriller	3	Le troisième volet d'une trilogie qui joue habilement avec le réel comme avec la fiction, en passant par le vraisemblable\n\nQuand Valérie, étudiante dans le Quartier latin dans les années 90, découvre par hasard un album de bande dessinée réalisé par son homonyme dans la collection 'Aire Libre', la coïncidence l'amuse. Mais lorsqu'elle cherche à racheter l'album, vraisemblablement dérobé par une de ses coreligionnaires au foyer de jeunes filles qu'elle habite, elle s'aperçoit qu'il n'est référencé nulle part et qu'elle semble même être la seule à l'avoir jamais tenu entre ses mains.	11	2023-06-07 16:53:18.615225	2023-06-07 16:53:18.926736	f
+57	Halmé	Roman Graphique	6	En Corée, le jour anniversaire du décès d'un proche, les familles se réunissent autour d'un dîner rituel pour saluer les disparus et honorer leur mémoire. Choi Juhyun se souvient d'un de ces dîners traditionnels, dédié à sa grand-mère. Une femme née en 1911, qui a vécu l'occupation japonaise, la guerre entre le Nord et le Sud, la misère qui en a résulté : malgré la rudesse de ce destin, Choi Juhyun évoque avant tout une figure bienveillante et tendre. Le livre est dessiné à l'encre, quelques pages utilisent la technique du théâtre dombres coréen. Ce récit rend compte avec simplicité et émotion de l'intensité du lien entre petits-enfants et grands-parents.	20	2023-06-07 16:53:05.945284	2023-06-07 16:53:06.064105	f
+60	Une Erreur de Parcours	Police/Thriller	4	Dans une ville de l'Est de la France, Sylvestre Ruppert-Levansky, un président de cours d'assises entame son dernier procès, là où justement il a démarré sa carrière. Tout lui rappelle Rachel son premier amour et surtout Mathilde, une serial killeuse manipulatrice et diabolique.\nLe vieux juge a une réputations sans tâche. On le dit tolérant et juste. Mais un policier surgi de ce passé demande à le voir. Tout n'est peut-être pas aussi limpide que le veut la légende de Sylvestre le si bon président...	11	2023-06-07 16:53:18.485064	2023-06-07 16:53:18.589393	f
+58	J'Ai Pas Sommeil	Roman Graphique	3	Un petit garçon ne veut pas dormir, il se lance dans un voyage au bout de son rêve.	19	2023-06-07 16:53:06.07676	2023-06-07 16:53:06.195533	f
+62	Back World (tome 2)	Police/Thriller	3	Terry le hacker sent se refermer autour de lui le piège d'une réalité virtuelle qui pourrait bien lui coûter la vie la vraie. La suite d'un redoutable polar d'anticipation à l'action ciselée au pixel près par Corbeyran et Rollin.\nLorsqu'il a accepté contre une forte somme de pénétrer par effraction dans Back World, un jeu d'évasion virtuelle presque aussi tangible que notre bonne vieille réalité, Terry Hackman,loser invétéré mais hacker de génie,n'imaginait pas que sa vie,la vraie,allait changer. D'abord parce que les vigiles virtuels rencontrés dans Back World lui ont fait montre d'arguments à la brutalité terriblement concrète... Mais aussi parce qu'il y a rencontré la belle Khandi, une jeune femme aux arguments qui ne le sont pas moins ! Mais ce que Terry ignore, c'est que Back World n'est déjà plus un simple jeu. Un enjeu plutôt. Car Back World est capable de tuer. Et certaines personnes très haut placées sont prêtes à tout pour que cela ne se sache jamais. Terry ne le sait pas encore, mais il est devenu l'homme à abattre. Avec Corbeyran et Rollin au paddle, bienvenue dans une réalité virtuelle terrifiante, face à laquelle World of Warcraft passerait pour une aimable plaisanterie !	11	2023-06-07 16:53:18.94931	2023-06-07 16:53:19.089439	f
+63	Assassins (tome 2) : Le Vampire	Police/Thriller	4	Histoire de la sanglante carrière d'un criminel de légende : Peter Kurten (1883-1931)n celui qu'on a surnommé le vampire de Dusseldorf. Ce petit monsieur, vivant en apparence une vie tranquille auprès de son épouse, terrifia littéralement la ville allemande de Dusseldorf et ses environs à la fin des années 20. Pyromane, violeur, sadique, il assassina plus de vingt personnes s'acharnant à les mutiler et entretenant d'étranges correspondances avec la police ou les proches des victimes.	11	2023-06-07 16:53:19.110793	2023-06-07 16:53:19.263047	f
+65	Le Policier Qui Rit	Police/Thriller	6	Stockholm, 1967.Dans un quartier périphérique de la capitale suédoise, tard lors d'une soirée pluvieuse, neuf personnes ordinaires sont massacrées à l'arme à feu dans un bus de la ligne 47. Aucun mobile apparent, aucun indice sérieux. Il y a pourtant un détail surprenant dans cette sinistre affaire : l'une des victimes était un officier de police.Que faisait-il à cet endroit à cette heure, loin de son environnement habituel ? Le commissaire Martin Beck et son équipe se mettent au travail.	11	2023-06-07 16:53:19.4109	2023-06-07 17:06:15.066394	t
+64	e Cybertueur (tome 5) : La Secte	Police/Thriller	1.5	Le délire et la folie se sont emparés du monde et ont fait déferler la panique générale. Tout ça à cause de Kewin Mulford, jeune homme qui, une fois mort, continuait de vivre une existence virtuelle par le biais des réseaux informatiques, harcelant sans répit son ancienne aimée. Il était vite devenu l'ennemi public numéro un. L'inspecteur O'Grady avait pourtant réussi à l'anéantir. Du moins l'avait-il cru. Car Mulford continue de lui faire vivre un cauchemar absolu. D'autant plus qu'aujourd'hui, le FBI et même la Maison Blanche veulent à tout prix lui mettre la main dessus et l'empêcher d'agir. Est-ce parce qu'ils le croient fou, ou bien, pire encore, est-ce parce qu'ils sont eux aussi manipulés par Kewin, dangereux terroriste aussi fantomatique qu'informatique.\nCe dernier tome du cyber-cauchemar créé par Godard et Plumail est une formidable course poursuite haletante et sans répit.	11	2023-06-07 16:53:19.277502	2023-06-07 16:53:19.396327	f
+75	Journal d'un fantôme	Drame	10	Dans Journal d'un fantôme, Nicolas de Crécy nous emmène avec lui en voyage. En voyages pour être précis. Voyages au-delà des frontières pour commencer. Sans être vraiment casanier, Nicolas de Crécy n'aime cependant pas beaucoup voyager (trop loin). Car il lui faut prendre l'avion, et Nicolas déteste l'avion ! Dans Journal d'un fantôme, le vrai voyage proposé par l'auteur, est celui du processus créatif. Comment concilier créativité artistique et travail de commande? Comment faire quand on est un dessinateur qui apprécie une certaine solitude, pour sortir, aller croquer le monde et s'exposer ainsi au regard trop curieux des autres? Avec son humour si personnel, Nicolas de Crécy en profite pour poser quelques questions embarrassantes sur le statut de l'image dans notre monde et plus encore, sur celui du créateur.	10	2023-06-07 17:07:47.004514	2023-06-07 17:07:47.062734	f
+81	La belle mort	Fantastique	5	À quoi bon résister ? Voilà ce que se répètent jour après jour Wayne, Jeremiah et Scham, uniques survivants de l'invasion dévastatrice d'insectes extraterrestres.\r\nLa fin de l'humanité a eu lieu. Cherchant un but, une destinée justifiant leur futile présence dans un monde en ruine, ils ne se doutent pas qu'ils font partie d'un plan bien plus vaste, de quelque chose qui les dépasse complètement et qui implique un autre survivant...	26	2023-06-07 17:50:47.459205	2023-06-07 17:50:47.53777	f
+76	Ana et l'entremonde	Action/Aventure	4.5	1492. Îles Canaries. Ana et Domingo, deux jeunes orphelins, ravitaillent les navires faisant halte au port de Las Palmas. Alors qu'ils chargent le Santa Maria, ils se retrouvent embarqués dans la fameuse expédition de Christophe Colomb : direction les Indes ! Malheureusement pour eux, dans cette version de l’Histoire, la Terre est plate. Arrivés aux chutes du bout du monde, ils se retrouvent projetés dans un univers fantastique peuplé de pirates en tous genres : l’entremonde ! D’aventure en aventure, Ana, désormais séparée de ses amis, va devoir s’adapter à cette nouvelle contrée insolite, apprendre ses codes et apprivoiser ses curieux habitants. Peu à peu, elle va réaliser qu’un personnage menace l’entremonde et que ce lieu est encore plus surprenant qu’elle ne le pensait…	10	2023-06-07 17:42:45.831241	2023-06-07 17:42:45.896932	f
+78	Kodi	Comédie	5	Quelque part en Alaska, Katya passe ses vacances chez sa grand-mère. Ses seuls amis, elle les trouve dans les bandes dessinées.\r\nUn jour, sa route croise celle d'un ours kodiak. Blessé, affamé, il fait peine à voir. Pas le choix ! Il faut l'aider. La naissance d'une solide amitié, ça tient parfois à rien	24	2023-06-07 17:46:09.078668	2023-06-07 17:46:09.145238	f
+80	La boite à musique	Action/Aventure	2	Pour son huitième anniversaire, Nola, petite fille espiègle, reçoit de la part de son père Martin la boîte à musique de sa mère, Annah, récemment décédée. Cette boîte est un symbole pour la petite fille, mais très vite, la fillette croit voir des signes de vie à l'intérieur. Oui, elle ne rêve pas : quelqu'un lui fait signe et lui demande de l'aide.	26	2023-06-07 17:49:45.33841	2023-06-07 17:49:45.377777	f
+66	Les Clavicules de Salomon	Police/Thriller	2	En Août 1957, sur une île des Seychelles, une vieille femme trouve par hasard un coffre très ancien. Incapable de déchiffrer le parchemin qu'elle y découvre, elle le fait parvenir à la Bibliothèque Nationale de Paris. La clef de l'énigme se dissimulerait dans un ouvrage énigmatique, intitulé les clavicules de Salomon. Flash-back: Goa, comptoir portugais des Indes Orientales. Le vice-roi, Luis Xavier de Meneses, s'apprête à rentrer au Portugal. Pris dans une tempête, le 'Nossa Senhora do Cabo', qui transporte toute la fortune du vice-roi, est forcé d'accoster sur l'île Bourbon au large de Madagascar, repaire de forbans et de pirates. Si les malfrats comme les notables se sont battus pour récupérer ce sublime trésor, en 1957 au sein de la Bibliothèque Nationale, les conflits sont tout aussi violents et mesquins. Ce parchemin, censé indiquer l'emplacement de ce trésor, suscite bien des convoitises.	12	2023-06-07 16:53:19.535078	2023-06-08 08:53:27.033265	t
+70	Le retour à la terre	Comédie	2	Ah, la campagne, les petites fleurs, les bébêtes qui montent qui montent, et tout et tout... Quel citadin n'a rêvé d'aller s'y ressourcer ? Manu Larcenet a chopé le virus l'an dernier. A lui et à Mariette, sa compagne, le gazouillis des oiseaux, le doux bruit des ruisseaux et tout et tout ! Quand, comme Manu, on a passé sa vie en banlieue parisienne, ça change. Toujours timide, Manu était à cent années-lumière d'imaginer que le récit de sa nouvelle vie pouvait intéresser le moindre lecteur. Et puis, il est difficile de s'occuper d'un châtaignier de 45 mètres déposé dans son jardin par des voisins sympas tout en s'observant par la fenêtre !	1	2023-06-07 16:59:12.842824	2023-06-07 16:59:12.901168	f
+68	Poker: Short Stack (Tome1)	Police/Thriller	2	Le « Cercle » est tout-puissant. Composé d'hommes et de femmes au pouvoir sans limites, le « Cercle » est responsable de la mort des parents de Mark Middleton. Pour les éliminer, ce dernier a choisi d'exercer ses dons dans le seul domaine capable d'attirer leur attention : le poker ! Avant de devenir une étoile du circuit pro, il lui faut toutefois gravir les échelons et contenir son désir de vengeance. Car, dans cet univers impitoyable, il faut payer pour voir ! J.C. Derrien et S. Van Liemt font, mieux que jamais, rimer thriller et poker.	13	2023-06-07 16:53:19.817128	2023-06-07 16:53:19.937143	f
+69	Secrets Bancaires USA (tome 6) : Mafia Rouge	Police/Thriller	5	Conclusion magistrale d'une série qui révèle les dessous troubles de la finance internationale !\n\nCapelli et Horowitz sont maintenant persuadés que la mort de l'avocat fiscaliste Sam Simpson était un meurtre camouflé en accident. Ce dernier faisait profiter à d'obscurs clients étrangers des avantages fiscaux offerts par certains États américains. Cette piste amène nos agents du FBI à se pencher donc très sérieusement sur le milieu de la finance frauduleuse. Pire encore, la mafia russe elle-même serait impliquée.Servi par le trait dynamique de Dominique Hé dont le talent ne cesse de se bonifier, Philippe Richelle, scénariste d'Amours Fragiles et des Coulisses du Pouvoir, entraîne le lecteur dans une intrigue d'une densité et d'une subtilité trop rare en bande dessinée.	13	2023-06-07 16:53:19.952844	2023-06-07 16:53:20.069025	f
+71	Béa Wolf	Action/Aventure	10	Découvrez les exploits de la fière béa wolf, porte-drapeau de la cabane Coeur-d'arbre!\r\n\r\nLa cabane de Coeur-d'arbre est un sanctuaire créé par des enfants infatigables qui passent leurs journées à jouer, à manger des sucreries, à faire des bêtises et à repousser l'ombre de l'âge adulte. Mais un jour, leur sinistre voisin Grindle s'attaque à Coeur-d'arbre et transforme une dizaine d'entre eux en adolescents boutonneux ! Les survivants du premier assaut réclament un nouveau champion capable de les protéger... Ils ont besoin de béa wolf !	1	2023-06-07 17:00:10.129803	2023-06-07 17:00:10.177464	f
+72	Le retour à la terre T2	Comédie	5	Manu et Mariette ont émigré à la campagne. Manu veut faire un potager et Mariette un enfant. Mais Manu, qui fête dans la liesse la naissance de son premier radis, n'assume pas l'idée de l'enfant : c'est dur d'avouer à son bébé qu'on ne sait pas changer les vis platinées. Donc, il se planque dans les cartons de déménagement, qui traînent toujours au milieu du décor.	7	2023-06-07 17:03:16.670444	2023-06-07 17:03:16.729598	f
+73	Par les force des arbres	Histoire/Bio	8	Comment retrouver de l'air quand le quotidien et son rythme infernal nous étouffe ?\r\nEdouard Cortès a choisi, pour se libérer du « monde d'en bas », d'aller vers celui « du haut » : au bord du gouffre, il va quitter femme et enfants pendant plusieurs mois pour vivre dans une cabane de sa propre construction, nichée dans un arbre en pleine forêt. Loin des réseaux sociaux et du tumulte de la société, il trouve une échappatoire dans le silence et la contemplation solitaire, et redécouvre des sensations essentielles au bien-être de chacun. Après avoir retranscrit son histoire en roman, il laisse à Dominique Mermoux le soin d'adapter avec justesse et sensibilité cet étonnant récit de vie.	7	2023-06-07 17:04:21.895636	2023-06-07 17:04:58.33142	f
+74	L'homme gribouille	Roman Graphique	14	Dans la famille Couvreur, il y a Maud, 75 ans, auteur de romans pour enfants dont le succès n'a d'égal que la discrétion. Il y a Betty, sa fille au caractère ombrageux, sujette à des crises d'aphasie qui la privent littéralement de parole. Et il y a Clara, la fille de Betty, lycéenne brillante et fabulatrice qui rêve d'aller vivre avec son père à Londres…	7	2023-06-07 17:05:54.256346	2023-06-07 17:05:54.326368	f
+77	Un océan d'amour	Roman Graphique	8	Chaque matin, Monsieur part pêcher au large des côtes bretonnes. Mais ce jour-là, c'est lui qui est pêché par un effrayant bateau-usine. Pendant ce temps, Madame attend. Sourde aux complaintes des bigoudènes, convaincue que son homme est en vie, elle part à sa recherche. C'est le début d'un périlleux chassé-croisé, sur un océan dans tous ses états. Une histoire muette avec moult mouettes.	10	2023-06-07 17:44:13.918489	2023-06-07 17:44:13.991086	f
+67	Plein les Yeux	Police/Thriller	4	\nUn homme se retrouve au commissariat de police pour un interrogatoire. Un de ses collègues a été retrouvé mort dans des circonstances mystérieuses. Lui-même connaît des difficultés d'argent. Pourra-t-il reconstituer son emploi du temps et débrouiller des souvernirs que l'alcool rend confus ?\nCe polar à la trame simple et au traitement déroutant est signé par l'un des maîtres de la bande dessinée ibérique. Keko recycle ou détourne toute l'imagerie populaire des années 50, plongeant le lecteur dans un bain visuel psychédélique et envoûtant.	12	2023-06-07 16:53:19.656056	2023-06-08 08:48:05.24438	t
+\.
+
+
+--
+-- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: claire
+--
+
+COPY public.orders (id, user_id, book_id, created_at, updated_at, delivery_address, delivery_postal_code, delivery_city, reviewed) FROM stdin;
+1	7	65	2023-06-07 17:06:15.076192	2023-06-07 17:06:18.254316	15 rue panel	75000	Paris	t
+2	1	67	2023-06-08 08:48:05.252244	2023-06-08 08:48:10.559746	15 rue panel	13000	Marseille	t
+3	1	48	2023-06-08 08:48:59.324199	2023-06-08 08:49:03.963244	15 rue panel	13000	Marseille	t
+4	1	66	2023-06-08 08:53:27.043326	2023-06-08 08:53:33.117123	15 rue panel	13000	Marseille	t
+\.
+
+
+--
+-- Data for Name: reviews; Type: TABLE DATA; Schema: public; Owner: claire
+--
+
+COPY public.reviews (id, rating, comment, user_id, created_at, updated_at) FROM stdin;
+1	4	\N	11	2023-06-07 17:06:18.22215	2023-06-07 17:06:18.22215
+2	5	\N	12	2023-06-08 08:48:10.533628	2023-06-08 08:48:10.533628
+3	3	\N	7	2023-06-08 08:49:03.940166	2023-06-08 08:49:03.940166
+4	3	\N	12	2023-06-08 08:53:33.092056	2023-06-08 08:53:33.092056
+5	4	\N	24	2023-06-08 10:21:57.500563	2023-06-08 10:21:57.500563
+\.
+
+
+--
+-- Data for Name: schema_migrations; Type: TABLE DATA; Schema: public; Owner: claire
+--
+
+COPY public.schema_migrations (version) FROM stdin;
+20230426104357
+20230426104452
+20230426111053
+20230426111140
+20230427142918
+20230428142433
+20230514120636
+20230606121902
+20230606122843
+20230606162129
+20230608085116
+\.
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: claire
+--
+
+COPY public.users (id, email, encrypted_password, reset_password_token, reset_password_sent_at, remember_created_at, created_at, updated_at, first_name, last_name, username, admin, address, city, postal_code) FROM stdin;
+1	jean@gmail.com	$2a$12$g.aERUta4VvhqAq1ZA5sLe.sIscWdfrHZIZgmfYcRGtbRCH9fmJB.	\N	\N	\N	2023-06-07 16:50:36.056741	2023-06-07 16:50:36.214609	Jean	Dupont	moriaaudi	f	15 rue panel	Marseille	13000
+2	axel@gmail.com	$2a$12$IkAk5hunAq.Ed3etyUFkYOc8ewMjx9cVKgy8VdDRNzi3JC6TG/kVK	\N	\N	\N	2023-06-07 16:50:36.675295	2023-06-07 16:50:36.755835	Axel	Martin	waybreadgranular	f	15 rue panel	Paris	75000
+3	arthur@gmail.com	$2a$12$WNLp2RwexjjVVF8oGET31.GG6mwmPAin6ThgBERksYguNGy4ObVG2	\N	\N	\N	2023-06-07 16:50:37.200646	2023-06-07 16:50:37.239392	Arthur	Bernard	galileo	f	15 rue panel	Marseille	13000
+4	evan@gmail.com	$2a$12$KfMqCbMdrwfWjgdUJmWo.eSvoOho8S98bx1WIVnaxIz5UhTaHuef.	\N	\N	\N	2023-06-07 16:50:37.686214	2023-06-07 16:50:37.722091	Evan	Thomas	galileo125	f	15 rue panel	Marseille	13000
+5	antoine@gmail.com	$2a$12$IbDGSBDHsr3FLyDGPURoA.3YNXewPyYtq5.M7we6TJgh55.ws5Sty	\N	\N	\N	2023-06-07 16:50:38.192301	2023-06-07 16:50:38.227539	Antoine	Richard	galileo57	f	15 rue panel	Marseille	13000
+6	adam@gmail.com	$2a$12$9Qva4WxwSNY6hUQ8.CT3FeZ/Pvmm0fXkh0tp6OInbgbt2kh6pebjy	\N	\N	\N	2023-06-07 16:50:38.66609	2023-06-07 16:50:38.705952	Adam	Durand	pathsofglory	f	15 rue panel	Paris	75000
+7	alexandre@gmail.com	$2a$12$PCpAc6Scar88Gq4J5ZBfqOE3rd8VaO2JuhbC0kmmkFZDXsYFDjT4i	\N	\N	\N	2023-06-07 16:50:39.151107	2023-06-07 16:50:39.220921	Alexandre	Dubois	pathsofglory57	f	15 rue panel	Paris	75000
+8	carmen@gmail.com	$2a$12$oYbJjmtv.KeJ9/GYyv5wVeVEbNAkZXUKnbc7qUMzFSt1g2HvpQ6m2	\N	\N	\N	2023-06-07 16:50:39.691249	2023-06-07 16:50:39.735171	Carmen	Garcia	pathsofglory755	f	15 rue panel	Paris	75000
+9	cesar@gmail.com	$2a$12$lRAL3lI3V1P3f3.D4oJH0u9MfrbX3QcrFf1SdimMB6ZS6tzuu2Apa	\N	\N	\N	2023-06-07 16:50:40.183003	2023-06-07 16:50:40.225673	Cesar	Blanc	junonova	f	15 rue panel	Paris	45785
+10	clara@gmail.com	$2a$12$s0LlZnr6AjU3HA0h54B4TOE6/P/sx33pg6cAPbcV13iiepkCb622u	\N	\N	\N	2023-06-07 16:50:40.68994	2023-06-07 16:50:40.726801	Clara	Serra	junonova57	f	15 rue panel	Paris	45785
+11	celine@gmail.com	$2a$12$WH3Wa7ftbruyXCaulbTJDO3aOnogr3pr/HfzIBIjxC60Pt/SrsNN6	\N	\N	\N	2023-06-07 16:50:41.16982	2023-06-07 16:50:41.206325	Celine	Guisset	junonova12	f	15 rue panel	Bordeaux	30000
+12	baptiste@gmail.com	$2a$12$hE7Jtmol1RoZ1L13FsB8Ou3nbx6ohySxfWvuJZNTdc/xRZMWohquy	\N	\N	\N	2023-06-07 16:50:41.685011	2023-06-07 16:50:41.72598	Baptiste	Mas	junonova458	f	15 rue panel	Bordeaux	30000
+13	brian@gmail.com	$2a$12$biUgvBFxvMUEI630YfXw1.K1TtjTPIJhOlPJtaNZQgHgQbJoIBxAy	\N	\N	\N	2023-06-07 16:50:42.193954	2023-06-07 16:50:42.237559	Brian	Pla	ryebread	f	15 rue panel	Bordeaux	30000
+14	caroline@gmail.com	$2a$12$LG9gPg0XCFF.ts5aZu/AUeesoRBIEROjkYX6.SC3KU4zFd6kBttQC	\N	\N	\N	2023-06-07 16:50:42.687487	2023-06-07 16:50:42.734084	Caroline	Sola	ryebread5	f	15 rue panel	Bordeaux	30000
+15	sarah@gmail.com	$2a$12$E2asg6CS/HFf0.SILjBVdOGfmz/KT5UA6mMx1E6lcsrFImGUKRWiG	\N	\N	\N	2023-06-07 16:50:43.182973	2023-06-07 16:50:43.222691	Sarah	Lopez	ryebread57	f	15 rue panel	Lyon	69000
+16	benoit@gmail.com	$2a$12$A0vHHvZEjPTvEPLKd.z6VuQLivvNUO59J6jIzIQY2.bUQtp/z8Y/G	\N	\N	\N	2023-06-07 16:50:43.67221	2023-06-07 16:50:43.717962	Benoit	Torrès	ryebread745	f	15 rue panel	Lyon	69000
+17	jules@gmail.com	$2a$12$EB9ohyJF3Ub.qtxRtJyCFuFnVHoGhG56B4pjz4F0xBky725ywEihy	\N	\N	\N	2023-06-07 16:50:44.169652	2023-06-07 16:50:44.213337	Jules	Gil	hamburger	f	15 rue panel	Lyon	69000
+18	thomas@gmail.com	$2a$12$xvDZXPuqgiRAwelel51LYuAyF9ihso2sViNmMmUdtTVkkbjKTwJKK	\N	\N	\N	2023-06-07 16:50:44.667756	2023-06-07 16:50:44.709735	Thomas	Salvat	hamburger55	f	15 rue panel	Lyon	69000
+19	audrey@gmail.com	$2a$12$OF1Agf7t2beKa83wS8Akd.xixF1Oyzg9Tl89Ery.U2OYiR/hk58li	\N	\N	\N	2023-06-07 16:50:45.173397	2023-06-07 16:50:45.218824	Audrey	Simon	hamburger584	f	15 rue panel	Lyon	69000
+20	julia@gmail.com	$2a$12$7PFEBYezKOuddefcLjaCZOYEK/wLoMk1.4FxjUWOeSn9oLeN6DB8O	\N	\N	\N	2023-06-07 16:50:45.67201	2023-06-07 16:50:45.720055	Julia	Sanchez	artic5632	f	15 rue panel	Brest	29000
+21	adrien@gmail.com	$2a$12$9yeo3hN6daLvuEKb9SoH1ORg2FjJoFEkbF6pFXD32VXg6aWLqsf5G	\N	\N	\N	2023-06-07 16:50:46.193695	2023-06-07 16:50:46.236327	Adrien	Petit	artic	f	15 rue panel	Brest	29000
+22	alexis@gmail.com	$2a$12$z/1A9gkP4XTyn7sTW59p4u761SYJ4Jw.y1fprXuSBoDfivT/GxT/O	\N	\N	\N	2023-06-07 16:50:46.696211	2023-06-07 16:50:46.741667	Alexis	Robert	artic52	f	15 rue panel	Brest	29000
+23	ibrahim@gmail.com	$2a$12$4PLKtu.EWJcjGT9ZtXBq4Ocd.SphxCBjbMzADDMHdqro/JTpqgSDS	\N	\N	\N	2023-06-07 16:50:47.189642	2023-06-07 16:50:47.239228	Ibrahim	Thouvenin	artic78	f	15 rue panel	Brest	29000
+24	alex@gmail.com	$2a$12$bW7JHwp44E6QbzZtA8yONeO6/3KaKzMufSgp.WQyISIJxXHvWs0oC	\N	\N	\N	2023-06-07 16:50:47.692876	2023-06-07 16:50:47.737869	Alex	Robert	articartic	f	15 rue panel	Brest	29000
+25	ibram@gmail.com	$2a$12$fGhhKsuvxnLyVATeTQnVauVQvMfGQETiC/eFkrlRIzgpKZ1I1nOxO	\N	\N	\N	2023-06-07 16:50:48.195114	2023-06-07 16:50:48.242841	Ibra	Thouvenin	articarticartic	f	15 rue panel	Rennes	35000
+26	juliette@gmail.com	$2a$12$YFk7e5pWvG1Q9IShm.R8eusH/pJcKghsx/Z3hztIKwr0qe11lJX0y	\N	\N	\N	2023-06-07 16:50:48.696607	2023-06-07 16:50:48.74357	Juliette	Montagne	fishpear	f	15 rue panel	Rennes	35000
+27	laurent@gmail.com	$2a$12$8yA4p5cjm1P2j8WWHxqkYuJCX4ma6/PaMbXEJ4JYF9zdEGokCRSta	\N	\N	\N	2023-06-07 16:50:49.207585	2023-06-07 16:50:49.207585	Laurent	Moreau	fishpear45	f	15 rue panel	Rennes	35000
+28	gilles@gmail.com	$2a$12$JVEgX2pMlmBtq8kp7Kagq.mqz/IqDGaf7QFRGmiMZ2Ydb4EH4ma5K	\N	\N	\N	2023-06-07 16:50:49.661898	2023-06-07 16:50:49.661898	Gilles	Moreau	fishpear78	f	15 rue panel	Nantes	44000
+29	gabriel@gmail.com	$2a$12$SmR/STZgxQ.EyNrb63ULbumjSvfQ6UKIC6AHSzDTt8qsQOMqzi2Ze	\N	\N	\N	2023-06-07 16:50:50.117793	2023-06-07 16:50:50.117793	Gabriel	Navet	fishpear22	f	15 rue panel	Nantes	44000
+30	sohan@gmail.com	$2a$12$qloV/8IL7RFQyGyX6M66oOGv0XKjrGBzioInwyKhjcnD0TyX6kBWO	\N	\N	\N	2023-06-07 16:50:50.584078	2023-06-07 16:50:50.584078	Sohan	Lefevbre	fishpear5443	f	15 rue panel	Angers	49000
+31	lucas@gmail.com	$2a$12$f.A7lTMDWHffVH99bAlpcuHwJXeKCrermBlfK.CTRw840CJSnsS2C	\N	\N	\N	2023-06-07 16:50:51.066902	2023-06-07 16:50:51.066902	Lucas	Leroy	fishpearfishpear	f	15 rue panel	Angers	49000
+32	leo@gmail.com	$2a$12$7pRvM0Oi4dAVJmpZqcS6QOL7P/Eum4KkShEz0L8vyY1HM5npI2Pse	\N	\N	\N	2023-06-07 16:50:51.525548	2023-06-07 16:50:51.525548	Léo	Roux	fishpearfishpearfishpear	f	15 rue panel	Angers	49000
+33	gaspard@gmail.com	$2a$12$/qguGN1qFUtupqdGUv/NNOqEJyjCsUQZu5b.ePZXKvBilw3Qg5oU6	\N	\N	\N	2023-06-07 16:50:52.006645	2023-06-07 16:50:52.006645	Gaspard	Martin	kyanite	f	15 rue panel	Dijon	21000
+34	maxence@gmail.com	$2a$12$WUg8LsvzrXIywaFUP9TTqe5jMd4ifFuVNiqTseb8fgQxbB3E25m9m	\N	\N	\N	2023-06-07 16:50:52.448862	2023-06-07 16:50:52.448862	Maxence	Morel	kyanite5	f	15 rue panel	Dijon	21000
+35	sophie@gmail.com	$2a$12$ZTAACyvdFWyVgDOHBFrdnuaKoLhcxSZMeOzRYbUtZTL/U1ArDhONK	\N	\N	\N	2023-06-07 16:50:52.887334	2023-06-07 16:50:52.887334	Sophie	Fournier	kyanite56	f	15 rue panel	Dijon	21000
+36	kais@gmail.com	$2a$12$kqmePEfMKgbG89l3EWxuFOQSYNB2WXdhnIYewL9Lcko/iTcdwayh.	\N	\N	\N	2023-06-07 16:50:53.332602	2023-06-07 16:50:53.332602	Kais	petit	alpenglow	f	15 rue panel	Dijon	21000
+37	soan@gmail.com	$2a$12$SQubhDqPwCIdjAMzNtqhuuM9SiWelV3rrAKOJq061wwZ125C/CBJy	\N	\N	\N	2023-06-07 16:50:53.834484	2023-06-07 16:50:53.834484	Soan	Salla	alpenglow5	f	15 rue panel	Annecy	74000
+38	come@gmail.com	$2a$12$q5jSkhyAZU4NOnYfVXhGLOHVtLBFc2eYkfbQ2iG8I/OlMjx3pwCm.	\N	\N	\N	2023-06-07 16:50:54.30696	2023-06-07 16:50:54.30696	Come	Givre	alpenglow88	f	15 rue panel	Annecy	74000
+39	maxime@gmail.com	$2a$12$e3PB8xFxVY5b7/FhdazfCOz2FvQ1VtsPJ0BwjUukxE2GWiYOOPERe	\N	\N	\N	2023-06-07 16:50:55.188612	2023-06-07 16:50:55.188612	Maxime	Durant	wine	f	15 rue panel	Annecy	74000
+40	florine@gmail.com	$2a$12$c5gGl0xJxvXmefWoiv4fPufwYAXGdKqzrfm9f7KL0p7R/Nvu1JUwW	\N	\N	\N	2023-06-07 16:50:55.638563	2023-06-07 16:50:55.638563	Florine	Ponsard	wine85	f	15 rue panel	Marseille	13000
+41	nico@gmail.com	$2a$12$bYueMCE1Q/ifjQC6DTjBLenbbzoMW6v09bCMW1Zeg3mXu2ntbK1De	\N	\N	\N	2023-06-08 10:20:40.849742	2023-06-08 10:20:40.849742	Nicolas	Gil	Proto	t	15 rue panel	Lyon	69000
+\.
+
+
+--
+-- Name: active_storage_attachments_id_seq; Type: SEQUENCE SET; Schema: public; Owner: claire
+--
+
+SELECT pg_catalog.setval('public.active_storage_attachments_id_seq', 227, true);
+
+
+--
+-- Name: active_storage_blobs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: claire
+--
+
+SELECT pg_catalog.setval('public.active_storage_blobs_id_seq', 227, true);
+
+
+--
+-- Name: active_storage_variant_records_id_seq; Type: SEQUENCE SET; Schema: public; Owner: claire
+--
+
+SELECT pg_catalog.setval('public.active_storage_variant_records_id_seq', 1, false);
+
+
+--
+-- Name: books_id_seq; Type: SEQUENCE SET; Schema: public; Owner: claire
+--
+
+SELECT pg_catalog.setval('public.books_id_seq', 112, true);
+
+
+--
+-- Name: orders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: claire
+--
+
+SELECT pg_catalog.setval('public.orders_id_seq', 5, true);
+
+
+--
+-- Name: reviews_id_seq; Type: SEQUENCE SET; Schema: public; Owner: claire
+--
+
+SELECT pg_catalog.setval('public.reviews_id_seq', 5, true);
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: claire
+--
+
+SELECT pg_catalog.setval('public.users_id_seq', 41, true);
+
+
+--
+-- Name: active_storage_attachments active_storage_attachments_pkey; Type: CONSTRAINT; Schema: public; Owner: claire
+--
+
+ALTER TABLE ONLY public.active_storage_attachments
+    ADD CONSTRAINT active_storage_attachments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: active_storage_blobs active_storage_blobs_pkey; Type: CONSTRAINT; Schema: public; Owner: claire
+--
+
+ALTER TABLE ONLY public.active_storage_blobs
+    ADD CONSTRAINT active_storage_blobs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: active_storage_variant_records active_storage_variant_records_pkey; Type: CONSTRAINT; Schema: public; Owner: claire
+--
+
+ALTER TABLE ONLY public.active_storage_variant_records
+    ADD CONSTRAINT active_storage_variant_records_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: claire
+--
+
+ALTER TABLE ONLY public.ar_internal_metadata
+    ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: books books_pkey; Type: CONSTRAINT; Schema: public; Owner: claire
+--
+
+ALTER TABLE ONLY public.books
+    ADD CONSTRAINT books_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: orders orders_pkey; Type: CONSTRAINT; Schema: public; Owner: claire
+--
+
+ALTER TABLE ONLY public.orders
+    ADD CONSTRAINT orders_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: reviews reviews_pkey; Type: CONSTRAINT; Schema: public; Owner: claire
+--
+
+ALTER TABLE ONLY public.reviews
+    ADD CONSTRAINT reviews_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: claire
+--
+
+ALTER TABLE ONLY public.schema_migrations
+    ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: claire
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_active_storage_attachments_on_blob_id; Type: INDEX; Schema: public; Owner: claire
+--
+
+CREATE INDEX index_active_storage_attachments_on_blob_id ON public.active_storage_attachments USING btree (blob_id);
+
+
+--
+-- Name: index_active_storage_attachments_uniqueness; Type: INDEX; Schema: public; Owner: claire
+--
+
+CREATE UNIQUE INDEX index_active_storage_attachments_uniqueness ON public.active_storage_attachments USING btree (record_type, record_id, name, blob_id);
+
+
+--
+-- Name: index_active_storage_blobs_on_key; Type: INDEX; Schema: public; Owner: claire
+--
+
+CREATE UNIQUE INDEX index_active_storage_blobs_on_key ON public.active_storage_blobs USING btree (key);
+
+
+--
+-- Name: index_active_storage_variant_records_uniqueness; Type: INDEX; Schema: public; Owner: claire
+--
+
+CREATE UNIQUE INDEX index_active_storage_variant_records_uniqueness ON public.active_storage_variant_records USING btree (blob_id, variation_digest);
+
+
+--
+-- Name: index_books_on_user_id; Type: INDEX; Schema: public; Owner: claire
+--
+
+CREATE INDEX index_books_on_user_id ON public.books USING btree (user_id);
+
+
+--
+-- Name: index_orders_on_book_id; Type: INDEX; Schema: public; Owner: claire
+--
+
+CREATE INDEX index_orders_on_book_id ON public.orders USING btree (book_id);
+
+
+--
+-- Name: index_orders_on_user_id; Type: INDEX; Schema: public; Owner: claire
+--
+
+CREATE INDEX index_orders_on_user_id ON public.orders USING btree (user_id);
+
+
+--
+-- Name: index_reviews_on_user_id; Type: INDEX; Schema: public; Owner: claire
+--
+
+CREATE INDEX index_reviews_on_user_id ON public.reviews USING btree (user_id);
+
+
+--
+-- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: claire
+--
+
+CREATE UNIQUE INDEX index_users_on_email ON public.users USING btree (email);
+
+
+--
+-- Name: index_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: claire
+--
+
+CREATE UNIQUE INDEX index_users_on_reset_password_token ON public.users USING btree (reset_password_token);
+
+
+--
+-- Name: orders fk_rails_2640c262ee; Type: FK CONSTRAINT; Schema: public; Owner: claire
+--
+
+ALTER TABLE ONLY public.orders
+    ADD CONSTRAINT fk_rails_2640c262ee FOREIGN KEY (book_id) REFERENCES public.books(id);
+
+
+--
+-- Name: reviews fk_rails_74a66bd6c5; Type: FK CONSTRAINT; Schema: public; Owner: claire
+--
+
+ALTER TABLE ONLY public.reviews
+    ADD CONSTRAINT fk_rails_74a66bd6c5 FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
+-- Name: active_storage_variant_records fk_rails_993965df05; Type: FK CONSTRAINT; Schema: public; Owner: claire
+--
+
+ALTER TABLE ONLY public.active_storage_variant_records
+    ADD CONSTRAINT fk_rails_993965df05 FOREIGN KEY (blob_id) REFERENCES public.active_storage_blobs(id);
+
+
+--
+-- Name: books fk_rails_bc582ddd02; Type: FK CONSTRAINT; Schema: public; Owner: claire
+--
+
+ALTER TABLE ONLY public.books
+    ADD CONSTRAINT fk_rails_bc582ddd02 FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
+-- Name: active_storage_attachments fk_rails_c3b3935057; Type: FK CONSTRAINT; Schema: public; Owner: claire
+--
+
+ALTER TABLE ONLY public.active_storage_attachments
+    ADD CONSTRAINT fk_rails_c3b3935057 FOREIGN KEY (blob_id) REFERENCES public.active_storage_blobs(id);
+
+
+--
+-- Name: orders fk_rails_f868b47f6a; Type: FK CONSTRAINT; Schema: public; Owner: claire
+--
+
+ALTER TABLE ONLY public.orders
+    ADD CONSTRAINT fk_rails_f868b47f6a FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
