@@ -1,6 +1,6 @@
 <div class="container">
 
-  <%= image_tag "arrow.svg", onclick: "window.history.back();", class: 'btn-arrow'%>
+  <%= image_tag "arrow.svg", onclick: "window.history.back();", class: 'btn-arrow', alt: "flèche de retour"%>
 
   <div class="col-sm-8 col-md-12 col-lg-12 col-xl-10 p-5 bg-white text-dark rounded mx-auto">
     <div class="mb-5">
@@ -8,9 +8,9 @@
       <div class="d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center">
           <% if @book.photos.attached? %>
-            <%= image_tag @book.photos.first, class: "me-2 miniature-img" %>
+            <%= image_tag @book.photos.first, class: "me-2 miniature-img", alt: "avatar de l'utilisateur" %>
           <% else %>
-            <%= image_tag "conversation.png", class: "me-2 miniature-img" %>
+            <%= image_tag "conversation.png", class: "me-2 miniature-img", alt: "avatar par défaut" %>
           <% end %>
           <p class="fw-bold"><%= @book.name %></p>
         </div>
@@ -38,7 +38,7 @@
         <p class="fw-light mb-4">Paiement :</p>
         <div class="d-flex justify-content-between align-items-center">
           <div class="d-flex align-items-center">
-            <%= image_tag "paypal-logo.jpg", class: "avatar" %>
+            <%= image_tag "paypal-logo.jpg", class: "avatar", alt: "avatar du vendeur" %>
             <p class="fw-bold">PayPal</p>
           </div>
         </div>

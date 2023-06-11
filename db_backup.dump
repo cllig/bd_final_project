@@ -553,9 +553,6 @@ COPY public.active_storage_attachments (id, name, record_type, record_id, blob_i
 181	photos	Book	76	181	2023-06-07 17:42:45.859038
 182	photos	Book	76	182	2023-06-07 17:42:45.875756
 183	photos	Book	76	183	2023-06-07 17:42:45.890452
-184	photos	Book	77	184	2023-06-07 17:44:13.949279
-185	photos	Book	77	185	2023-06-07 17:44:13.96658
-186	photos	Book	77	186	2023-06-07 17:44:13.982135
 187	photos	Book	78	187	2023-06-07 17:46:09.105411
 188	photos	Book	78	188	2023-06-07 17:46:09.120796
 189	photos	Book	78	189	2023-06-07 17:46:09.138058
@@ -568,6 +565,9 @@ COPY public.active_storage_attachments (id, name, record_type, record_id, blob_i
 196	photos	Book	81	196	2023-06-07 17:50:47.491544
 197	photos	Book	81	197	2023-06-07 17:50:47.510316
 198	photos	Book	81	198	2023-06-07 17:50:47.531407
+228	photos	Book	113	228	2023-06-09 08:28:26.711834
+229	photos	Book	113	229	2023-06-09 08:28:26.719519
+230	photos	Book	113	230	2023-06-09 08:28:26.726948
 \.
 
 
@@ -774,6 +774,9 @@ COPY public.active_storage_blobs (id, key, filename, content_type, metadata, ser
 198	7irgkzyw9capc0xv87kvvh9b9hde	IMG_20230607_162356.jpg	image/jpeg	{"identified":true,"width":3472,"height":4624,"analyzed":true}	local	5434412	XeFFhqt53XxFP58CahjNVg==	2023-06-07 17:50:47.520573
 196	ipobmz6ggk2ia06f1a1x4fs3kz2x	IMG_20230607_162347.jpg	image/jpeg	{"identified":true,"width":3472,"height":4624,"analyzed":true}	local	5776209	oIxU0Yd1acQAtChY9lWjGw==	2023-06-07 17:50:47.48274
 197	x5nl8176q36kd93l3136jkgqdk4h	IMG_20230607_162351.jpg	image/jpeg	{"identified":true,"width":3472,"height":4624,"analyzed":true}	local	5222411	sEGM8otIHl2EYgpgQ06zAQ==	2023-06-07 17:50:47.502713
+229	ohjy73xdrh6zildc996heu6ygk9u	IMG_20230607_162111.jpg	image/jpeg	{"identified":true,"width":3472,"height":4624,"analyzed":true}	local	4414223	XkI1LOsIunQ6FpLrGxUd4w==	2023-06-09 08:28:26.716528
+230	m8zimq7r6zfo1wd7w5l7fyrbz2ax	IMG_20230607_162121.jpg	image/jpeg	{"identified":true,"width":3472,"height":4624,"analyzed":true}	local	4622322	BCboSbZT9MJih/eiuPn57Q==	2023-06-09 08:28:26.723686
+228	mwjw71la0zk0fgbw24qsl11sl9ef	IMG_20230607_162105.jpg	image/jpeg	{"identified":true,"width":3472,"height":4624,"analyzed":true}	local	5426838	q1ed7Gc9puofL5t6G0T7+Q==	2023-06-09 08:28:26.706634
 \.
 
 
@@ -826,10 +829,10 @@ COPY public.books (id, name, category, price, description, user_id, created_at, 
 21	Amore	Comédie	4	Qu'elles finissent mal, qu'elles finissent bien, impossible de rester de marbre devant ces histoires d'amour.	20	2023-06-07 16:51:44.781637	2023-06-07 16:51:44.892876	f
 18	Lot de 2 volumes Van Hamme	Histoire/Bio	16	Avec près de 18 millions d'albums vendus ces dix dernières années sur le seul marché francophone, Jean Van Hamme est devenu l'auteur le plus lu en France, et ce en touchant toutes les catégories d'âges, des plus jeunes avec sa série Thorgal, au moins jeunes avec Les Maîtres de l'Orge, en passant par les grandes séries tous publics que sont XIII et Largo Winch. Que ce soit à travers ses nombreux best-sellers ou en tant que directeur des Editions Dupuis, Van Hamme est un phénomène éditorial exceptionnel qui modifia véritablement le paysage de la bande dessinée. A travers des entretiens en profondeur richement illustrés, ce livre révèle la personnalité forte et contrastée d'un homme qui, après avoir parcouru le monde au service des multinationales, changea le cours de sa vie, à 37 ans, pour tenter de vivre en racontant des histoires. Pari gagné au-delà de tout espoir, pour celui qui fut consacré par ses pairs meilleur scénariste européen.	17	2023-06-07 16:51:21.085352	2023-06-07 16:51:21.268188	f
 22	Basse-Cour Baston	Comédie	4	Imaginez une ferme où les coqs, poules, vaches, chevaux et moutons frisent le record du monde de bêêêtise.\nUn jour, pour une sombre histoire de grain de maïs, les animaux se battent. La baston du siècle, que les fermiers peinent à arrêter mais qui a eu le mérite de faire réfléchir tout le monde.\nIls décident de vivre en paix, de s’aider, de s’aimer et d’être solidaires. C’est alors qu’une des poules voit au loin un nouveau grain de maïs…	21	2023-06-07 16:51:44.91047	2023-06-07 16:51:45.065922	f
-23	Bazooka	Comédie	1	Né dans un œuf dont on ignore la provenance, un être supérieur à l’allure démoniaque et au charisme fou va vivre un destin hors du commun. Il croise un singe dont il ne fait qu’une bouchée, s’ébat dans la mer avec de gentils poissons et finit par réserver une table dans un excellent restaurant.	22	2023-06-07 16:51:45.082231	2023-06-07 16:51:45.225727	f
 25	Les As de la Jungle Tome 6	Comédie	4	Les As de la jungle à la rescousse !Quand dans la jungle il y a un problème à résoudre ou une injustice à réparer, pas de souci : il suffit de tirer le signal des As de la Jungle pour qu'ils accourent à la rescousse ! Maurice, le pingouin-tigre, celui que tout le monde appelle « le grand guerrier tigre », n'hésite jamais à entraîner le reste de la troupe dans une nouvelle aventure. Pas question de partir sans Junior, le poisson-tigre, son fils adoptif et son meilleur élève de kung-fu, Miguel, le gorille, qui adore « taper taper taper » et manger des bananes, Gilbert, le tarsier, cerveau de la bande, toujours accroché à sa branche et souvent de mauvaise humeur, Batricia la chauve-souris au grand cœur et à la gaffe facile, et enfin l'artiste de la bande : Fred le phacochère-crooner, qui n'hésite pas à les accompagner quand il n'est pas en tournée à l'autre bout de la jungle. Mais qui garde le repaire des As quand ils sont en mission ? Al et Bob, les deux crapauds de la mare, inséparables et aux qualités multiples et insoupçonnées...Impossible de s'ennuyer avec cette bande de justiciers toujours partants pour l'aventure et dont les relations sont d'intarissables sources de comédie !	21	2023-06-07 16:51:45.420607	2023-06-07 16:51:45.588001	f
 26	Rouge, L'Île des Gribouilleurs	Comédie	13	Tandis que Rouge et ses amis jouent aux pirates dans les jardins du château, une tempête éclate. Les enfants s'abritent alors à bord d'un bateau abandonné, mais le vent va emporter la frêle embarcation dans les airs !\nAprès de longues heures de dérive, ils se découvrent perdus sur une île extraordinaire. Quelles joyeuses péripéties attendent nos amis ?	21	2023-06-07 16:51:45.633625	2023-06-07 16:51:45.772952	f
 27	Rouge et la Sorcière d'Automne (tome 2)	Comédie	15	Lors d'une partie de cache-cache, Rouge et ses amis découvrent un vieux puits. La nuit, une étrange mélodie s'en échappe et semble hypnotiser la princesse. Quelle créature mystérieuse peut bien vivre en ce lieu improbable ?	10	2023-06-07 16:51:45.79535	2023-06-07 16:51:45.941487	f
+23	Bazooka	Comédie	1	Né dans un œuf dont on ignore la provenance, un être supérieur à l’allure démoniaque et au charisme fou va vivre un destin hors du commun. Il croise un singe dont il ne fait qu’une bouchée, s’ébat dans la mer avec de gentils poissons et finit par réserver une table dans un excellent restaurant.	22	2023-06-07 16:51:45.082231	2023-06-09 08:27:31.935659	t
 36	Les Gens Heureux Lisent et Boivent du Café	Drame	4.5	Diane a perdu brusquement son mari et sa fille dans un accident de voiture. Dès lors, tout se fige en elle, à l’exception de son cœur qui continue de battre. Obstinément, douloureusement, Inutilement. Égarée dans les limbes du souvenir, elle ne retrouve plus le chemin de l’existence.\nAfin d’échapper à son entourage qui l’enjoint de reprendre pied, elle décide de s’exiler en Irlande, seule.	13	2023-06-07 16:52:45.159935	2023-06-07 16:52:45.291909	f
 30	Pullboy et le Pull-Over Violet	Comédie	3	Comme tous les petits garçons, Pullboy est parfois confronté à des problèmes qu'il ne peut résoudre seul. Quand cela se produit, il sait comment trouver de l'aide : Enfiler le pull magique !\nÀ chaque mission, sa couleur. Et hop ! Sitôt le pull enfilé, le voilà transporté dans une véritable caverne d'Ali Baba. À l'intérieur, il faudra trouver 4 éléments. Le parcours commence. Les objets trouvés, Pullboy pourra s'en servir pour se sortir de son problème.\nPullboy veut repeindre la palissade du jardin. Mais d'une part il est trop petit et enfin, le chat pourchassant un oiseau, a fait tomber le pot de peinture. Comment faire ? Zou ! Pullboy court vers son armoire magique... Cette fois, ce sera le pull violet. Le temps de passer sa tête et le voilà qui déboule dans la caverne aux trésors. Avec l'aide du lecteur, il faudra trouver : un clown, deux cuillères, un tonneau de myrtilles et un éléphant !\nDe retour au jardin, le clown expliquera comment propulser les myrtilles juteuses à l'aide des cuillères, et l'éléphant donnera aussi sa solution et révèlera son âme d'artiste. Enfin, Pullboy partagera la réussite de sa mission avec ses deux nouveaux amis, autour d'un goûter. Tout cela sous l’œil du chat, réconcilié avec l'oiseau espiègle.	13	2023-06-07 16:51:46.247183	2023-06-07 16:51:46.380014	f
 28	Prestige de l'Uniforme (Nouvelle Édition)	Comédie	11	Paul Forvolino est un chercheur qui végète dans un grand laboratoire. Il travaille trop, sans la moindre reconnaissance, néglige sa famille, ses amis. Jusqu'au jour où une expérience sur un lichen tourne mal et le contamine. Progressivement, le parasite prend le contrôle, le transforme. Ce qui semble d'abord être une bénédiction devient vite la ruine de sa vie sociale.\n\nLoo Hui Phang, scénariste, réalisatrice et artiste contemporaine, dénonce l'aliénation des sociétés contemporaines ; Hugues Micol utilise une palette rugueuse, qui évoque autant Der Blaue Reiter que Swamp Thing. Avant Vivès, Ruppert et Mulot, les auteurs croisent les mythes de la pop culture avec une critique acide de la société.\nL'album, précédemment paru dans la collection Expresso des Éditions Dupuis, avait été sélectionné avec pertinence au Festival d'Angoulême 2006. Une nouvelle édition dans le label de prestige Aire Libre lui offre une nouvelle vie... Les héros ne meurent jamais !	21	2023-06-07 16:51:45.955817	2023-06-07 16:51:46.083289	f
@@ -866,20 +869,20 @@ COPY public.books (id, name, category, price, description, user_id, created_at, 
 65	Le Policier Qui Rit	Police/Thriller	6	Stockholm, 1967.Dans un quartier périphérique de la capitale suédoise, tard lors d'une soirée pluvieuse, neuf personnes ordinaires sont massacrées à l'arme à feu dans un bus de la ligne 47. Aucun mobile apparent, aucun indice sérieux. Il y a pourtant un détail surprenant dans cette sinistre affaire : l'une des victimes était un officier de police.Que faisait-il à cet endroit à cette heure, loin de son environnement habituel ? Le commissaire Martin Beck et son équipe se mettent au travail.	11	2023-06-07 16:53:19.4109	2023-06-07 17:06:15.066394	t
 64	e Cybertueur (tome 5) : La Secte	Police/Thriller	1.5	Le délire et la folie se sont emparés du monde et ont fait déferler la panique générale. Tout ça à cause de Kewin Mulford, jeune homme qui, une fois mort, continuait de vivre une existence virtuelle par le biais des réseaux informatiques, harcelant sans répit son ancienne aimée. Il était vite devenu l'ennemi public numéro un. L'inspecteur O'Grady avait pourtant réussi à l'anéantir. Du moins l'avait-il cru. Car Mulford continue de lui faire vivre un cauchemar absolu. D'autant plus qu'aujourd'hui, le FBI et même la Maison Blanche veulent à tout prix lui mettre la main dessus et l'empêcher d'agir. Est-ce parce qu'ils le croient fou, ou bien, pire encore, est-ce parce qu'ils sont eux aussi manipulés par Kewin, dangereux terroriste aussi fantomatique qu'informatique.\nCe dernier tome du cyber-cauchemar créé par Godard et Plumail est une formidable course poursuite haletante et sans répit.	11	2023-06-07 16:53:19.277502	2023-06-07 16:53:19.396327	f
 75	Journal d'un fantôme	Drame	10	Dans Journal d'un fantôme, Nicolas de Crécy nous emmène avec lui en voyage. En voyages pour être précis. Voyages au-delà des frontières pour commencer. Sans être vraiment casanier, Nicolas de Crécy n'aime cependant pas beaucoup voyager (trop loin). Car il lui faut prendre l'avion, et Nicolas déteste l'avion ! Dans Journal d'un fantôme, le vrai voyage proposé par l'auteur, est celui du processus créatif. Comment concilier créativité artistique et travail de commande? Comment faire quand on est un dessinateur qui apprécie une certaine solitude, pour sortir, aller croquer le monde et s'exposer ainsi au regard trop curieux des autres? Avec son humour si personnel, Nicolas de Crécy en profite pour poser quelques questions embarrassantes sur le statut de l'image dans notre monde et plus encore, sur celui du créateur.	10	2023-06-07 17:07:47.004514	2023-06-07 17:07:47.062734	f
-81	La belle mort	Fantastique	5	À quoi bon résister ? Voilà ce que se répètent jour après jour Wayne, Jeremiah et Scham, uniques survivants de l'invasion dévastatrice d'insectes extraterrestres.\r\nLa fin de l'humanité a eu lieu. Cherchant un but, une destinée justifiant leur futile présence dans un monde en ruine, ils ne se doutent pas qu'ils font partie d'un plan bien plus vaste, de quelque chose qui les dépasse complètement et qui implique un autre survivant...	26	2023-06-07 17:50:47.459205	2023-06-07 17:50:47.53777	f
 76	Ana et l'entremonde	Action/Aventure	4.5	1492. Îles Canaries. Ana et Domingo, deux jeunes orphelins, ravitaillent les navires faisant halte au port de Las Palmas. Alors qu'ils chargent le Santa Maria, ils se retrouvent embarqués dans la fameuse expédition de Christophe Colomb : direction les Indes ! Malheureusement pour eux, dans cette version de l’Histoire, la Terre est plate. Arrivés aux chutes du bout du monde, ils se retrouvent projetés dans un univers fantastique peuplé de pirates en tous genres : l’entremonde ! D’aventure en aventure, Ana, désormais séparée de ses amis, va devoir s’adapter à cette nouvelle contrée insolite, apprendre ses codes et apprivoiser ses curieux habitants. Peu à peu, elle va réaliser qu’un personnage menace l’entremonde et que ce lieu est encore plus surprenant qu’elle ne le pensait…	10	2023-06-07 17:42:45.831241	2023-06-07 17:42:45.896932	f
-78	Kodi	Comédie	5	Quelque part en Alaska, Katya passe ses vacances chez sa grand-mère. Ses seuls amis, elle les trouve dans les bandes dessinées.\r\nUn jour, sa route croise celle d'un ours kodiak. Blessé, affamé, il fait peine à voir. Pas le choix ! Il faut l'aider. La naissance d'une solide amitié, ça tient parfois à rien	24	2023-06-07 17:46:09.078668	2023-06-07 17:46:09.145238	f
-80	La boite à musique	Action/Aventure	2	Pour son huitième anniversaire, Nola, petite fille espiègle, reçoit de la part de son père Martin la boîte à musique de sa mère, Annah, récemment décédée. Cette boîte est un symbole pour la petite fille, mais très vite, la fillette croit voir des signes de vie à l'intérieur. Oui, elle ne rêve pas : quelqu'un lui fait signe et lui demande de l'aide.	26	2023-06-07 17:49:45.33841	2023-06-07 17:49:45.377777	f
+78	Kodi	Comédie	5	Quelque part en Alaska, Katya passe ses vacances chez sa grand-mère. Ses seuls amis, elle les trouve dans les bandes dessinées.\r\nUn jour, sa route croise celle d'un ours kodiak. Blessé, affamé, il fait peine à voir. Pas le choix ! Il faut l'aider. La naissance d'une solide amitié, ça tient parfois à rien	24	2023-06-07 17:46:09.078668	2023-06-08 15:35:21.849636	t
 66	Les Clavicules de Salomon	Police/Thriller	2	En Août 1957, sur une île des Seychelles, une vieille femme trouve par hasard un coffre très ancien. Incapable de déchiffrer le parchemin qu'elle y découvre, elle le fait parvenir à la Bibliothèque Nationale de Paris. La clef de l'énigme se dissimulerait dans un ouvrage énigmatique, intitulé les clavicules de Salomon. Flash-back: Goa, comptoir portugais des Indes Orientales. Le vice-roi, Luis Xavier de Meneses, s'apprête à rentrer au Portugal. Pris dans une tempête, le 'Nossa Senhora do Cabo', qui transporte toute la fortune du vice-roi, est forcé d'accoster sur l'île Bourbon au large de Madagascar, repaire de forbans et de pirates. Si les malfrats comme les notables se sont battus pour récupérer ce sublime trésor, en 1957 au sein de la Bibliothèque Nationale, les conflits sont tout aussi violents et mesquins. Ce parchemin, censé indiquer l'emplacement de ce trésor, suscite bien des convoitises.	12	2023-06-07 16:53:19.535078	2023-06-08 08:53:27.033265	t
+80	La boite à musique	Action/Aventure	2	Pour son huitième anniversaire, Nola, petite fille espiègle, reçoit de la part de son père Martin la boîte à musique de sa mère, Annah, récemment décédée. Cette boîte est un symbole pour la petite fille, mais très vite, la fillette croit voir des signes de vie à l'intérieur. Oui, elle ne rêve pas : quelqu'un lui fait signe et lui demande de l'aide.	26	2023-06-07 17:49:45.33841	2023-06-09 06:58:02.945393	t
+81	La belle mort	Fantastique	5	À quoi bon résister ? Voilà ce que se répètent jour après jour Wayne, Jeremiah et Scham, uniques survivants de l'invasion dévastatrice d'insectes extraterrestres.\r\nLa fin de l'humanité a eu lieu. Cherchant un but, une destinée justifiant leur futile présence dans un monde en ruine, ils ne se doutent pas qu'ils font partie d'un plan bien plus vaste, de quelque chose qui les dépasse complètement et qui implique un autre survivant...	26	2023-06-07 17:50:47.459205	2023-06-09 07:15:12.472672	t
+74	L'homme gribouille	Roman Graphique	14	Dans la famille Couvreur, il y a Maud, 75 ans, auteur de romans pour enfants dont le succès n'a d'égal que la discrétion. Il y a Betty, sa fille au caractère ombrageux, sujette à des crises d'aphasie qui la privent littéralement de parole. Et il y a Clara, la fille de Betty, lycéenne brillante et fabulatrice qui rêve d'aller vivre avec son père à Londres…	7	2023-06-07 17:05:54.256346	2023-06-09 06:57:36.988951	t
 70	Le retour à la terre	Comédie	2	Ah, la campagne, les petites fleurs, les bébêtes qui montent qui montent, et tout et tout... Quel citadin n'a rêvé d'aller s'y ressourcer ? Manu Larcenet a chopé le virus l'an dernier. A lui et à Mariette, sa compagne, le gazouillis des oiseaux, le doux bruit des ruisseaux et tout et tout ! Quand, comme Manu, on a passé sa vie en banlieue parisienne, ça change. Toujours timide, Manu était à cent années-lumière d'imaginer que le récit de sa nouvelle vie pouvait intéresser le moindre lecteur. Et puis, il est difficile de s'occuper d'un châtaignier de 45 mètres déposé dans son jardin par des voisins sympas tout en s'observant par la fenêtre !	1	2023-06-07 16:59:12.842824	2023-06-07 16:59:12.901168	f
 68	Poker: Short Stack (Tome1)	Police/Thriller	2	Le « Cercle » est tout-puissant. Composé d'hommes et de femmes au pouvoir sans limites, le « Cercle » est responsable de la mort des parents de Mark Middleton. Pour les éliminer, ce dernier a choisi d'exercer ses dons dans le seul domaine capable d'attirer leur attention : le poker ! Avant de devenir une étoile du circuit pro, il lui faut toutefois gravir les échelons et contenir son désir de vengeance. Car, dans cet univers impitoyable, il faut payer pour voir ! J.C. Derrien et S. Van Liemt font, mieux que jamais, rimer thriller et poker.	13	2023-06-07 16:53:19.817128	2023-06-07 16:53:19.937143	f
 69	Secrets Bancaires USA (tome 6) : Mafia Rouge	Police/Thriller	5	Conclusion magistrale d'une série qui révèle les dessous troubles de la finance internationale !\n\nCapelli et Horowitz sont maintenant persuadés que la mort de l'avocat fiscaliste Sam Simpson était un meurtre camouflé en accident. Ce dernier faisait profiter à d'obscurs clients étrangers des avantages fiscaux offerts par certains États américains. Cette piste amène nos agents du FBI à se pencher donc très sérieusement sur le milieu de la finance frauduleuse. Pire encore, la mafia russe elle-même serait impliquée.Servi par le trait dynamique de Dominique Hé dont le talent ne cesse de se bonifier, Philippe Richelle, scénariste d'Amours Fragiles et des Coulisses du Pouvoir, entraîne le lecteur dans une intrigue d'une densité et d'une subtilité trop rare en bande dessinée.	13	2023-06-07 16:53:19.952844	2023-06-07 16:53:20.069025	f
 71	Béa Wolf	Action/Aventure	10	Découvrez les exploits de la fière béa wolf, porte-drapeau de la cabane Coeur-d'arbre!\r\n\r\nLa cabane de Coeur-d'arbre est un sanctuaire créé par des enfants infatigables qui passent leurs journées à jouer, à manger des sucreries, à faire des bêtises et à repousser l'ombre de l'âge adulte. Mais un jour, leur sinistre voisin Grindle s'attaque à Coeur-d'arbre et transforme une dizaine d'entre eux en adolescents boutonneux ! Les survivants du premier assaut réclament un nouveau champion capable de les protéger... Ils ont besoin de béa wolf !	1	2023-06-07 17:00:10.129803	2023-06-07 17:00:10.177464	f
 72	Le retour à la terre T2	Comédie	5	Manu et Mariette ont émigré à la campagne. Manu veut faire un potager et Mariette un enfant. Mais Manu, qui fête dans la liesse la naissance de son premier radis, n'assume pas l'idée de l'enfant : c'est dur d'avouer à son bébé qu'on ne sait pas changer les vis platinées. Donc, il se planque dans les cartons de déménagement, qui traînent toujours au milieu du décor.	7	2023-06-07 17:03:16.670444	2023-06-07 17:03:16.729598	f
 73	Par les force des arbres	Histoire/Bio	8	Comment retrouver de l'air quand le quotidien et son rythme infernal nous étouffe ?\r\nEdouard Cortès a choisi, pour se libérer du « monde d'en bas », d'aller vers celui « du haut » : au bord du gouffre, il va quitter femme et enfants pendant plusieurs mois pour vivre dans une cabane de sa propre construction, nichée dans un arbre en pleine forêt. Loin des réseaux sociaux et du tumulte de la société, il trouve une échappatoire dans le silence et la contemplation solitaire, et redécouvre des sensations essentielles au bien-être de chacun. Après avoir retranscrit son histoire en roman, il laisse à Dominique Mermoux le soin d'adapter avec justesse et sensibilité cet étonnant récit de vie.	7	2023-06-07 17:04:21.895636	2023-06-07 17:04:58.33142	f
-74	L'homme gribouille	Roman Graphique	14	Dans la famille Couvreur, il y a Maud, 75 ans, auteur de romans pour enfants dont le succès n'a d'égal que la discrétion. Il y a Betty, sa fille au caractère ombrageux, sujette à des crises d'aphasie qui la privent littéralement de parole. Et il y a Clara, la fille de Betty, lycéenne brillante et fabulatrice qui rêve d'aller vivre avec son père à Londres…	7	2023-06-07 17:05:54.256346	2023-06-07 17:05:54.326368	f
-77	Un océan d'amour	Roman Graphique	8	Chaque matin, Monsieur part pêcher au large des côtes bretonnes. Mais ce jour-là, c'est lui qui est pêché par un effrayant bateau-usine. Pendant ce temps, Madame attend. Sourde aux complaintes des bigoudènes, convaincue que son homme est en vie, elle part à sa recherche. C'est le début d'un périlleux chassé-croisé, sur un océan dans tous ses états. Une histoire muette avec moult mouettes.	10	2023-06-07 17:44:13.918489	2023-06-07 17:44:13.991086	f
 67	Plein les Yeux	Police/Thriller	4	\nUn homme se retrouve au commissariat de police pour un interrogatoire. Un de ses collègues a été retrouvé mort dans des circonstances mystérieuses. Lui-même connaît des difficultés d'argent. Pourra-t-il reconstituer son emploi du temps et débrouiller des souvernirs que l'alcool rend confus ?\nCe polar à la trame simple et au traitement déroutant est signé par l'un des maîtres de la bande dessinée ibérique. Keko recycle ou détourne toute l'imagerie populaire des années 50, plongeant le lecteur dans un bain visuel psychédélique et envoûtant.	12	2023-06-07 16:53:19.656056	2023-06-08 08:48:05.24438	t
+113	Kodi	Action/Aventure	8	Descent : Légendes des Ténèbres - Fantasy Flight Games\r\nBD trop cool	44	2023-06-09 08:28:26.692638	2023-06-09 08:28:43.566258	f
 \.
 
 
@@ -892,6 +895,11 @@ COPY public.orders (id, user_id, book_id, created_at, updated_at, delivery_addre
 2	1	67	2023-06-08 08:48:05.252244	2023-06-08 08:48:10.559746	15 rue panel	13000	Marseille	t
 3	1	48	2023-06-08 08:48:59.324199	2023-06-08 08:49:03.963244	15 rue panel	13000	Marseille	t
 4	1	66	2023-06-08 08:53:27.043326	2023-06-08 08:53:33.117123	15 rue panel	13000	Marseille	t
+7	1	78	2023-06-08 15:35:21.852909	2023-06-08 15:35:21.852909	15 rue panel	13000	Marseille	f
+8	10	74	2023-06-09 06:57:36.992834	2023-06-09 06:57:42.607106	15 rue panel	45785	Paris	t
+9	10	80	2023-06-09 06:58:02.94813	2023-06-09 06:58:05.4983	15 rue panel	45785	Paris	t
+10	1	81	2023-06-09 07:15:12.476054	2023-06-09 07:15:15.853127	15 rue panel	13000	Marseille	t
+11	44	23	2023-06-09 08:27:31.939903	2023-06-09 08:27:49.485019	ertyui	12450	ljbdls	t
 \.
 
 
@@ -905,6 +913,11 @@ COPY public.reviews (id, rating, comment, user_id, created_at, updated_at) FROM 
 3	3	\N	7	2023-06-08 08:49:03.940166	2023-06-08 08:49:03.940166
 4	3	\N	12	2023-06-08 08:53:33.092056	2023-06-08 08:53:33.092056
 5	4	\N	24	2023-06-08 10:21:57.500563	2023-06-08 10:21:57.500563
+6	4	\N	24	2023-06-08 15:25:51.811946	2023-06-08 15:25:51.811946
+7	5	\N	7	2023-06-09 06:57:42.593769	2023-06-09 06:57:42.593769
+8	5	\N	26	2023-06-09 06:58:05.480457	2023-06-09 06:58:05.480457
+9	4	\N	26	2023-06-09 07:15:15.832167	2023-06-09 07:15:15.832167
+10	5	\N	22	2023-06-09 08:27:49.462442	2023-06-09 08:27:49.462442
 \.
 
 
@@ -973,6 +986,9 @@ COPY public.users (id, email, encrypted_password, reset_password_token, reset_pa
 39	maxime@gmail.com	$2a$12$e3PB8xFxVY5b7/FhdazfCOz2FvQ1VtsPJ0BwjUukxE2GWiYOOPERe	\N	\N	\N	2023-06-07 16:50:55.188612	2023-06-07 16:50:55.188612	Maxime	Durant	wine	f	15 rue panel	Annecy	74000
 40	florine@gmail.com	$2a$12$c5gGl0xJxvXmefWoiv4fPufwYAXGdKqzrfm9f7KL0p7R/Nvu1JUwW	\N	\N	\N	2023-06-07 16:50:55.638563	2023-06-07 16:50:55.638563	Florine	Ponsard	wine85	f	15 rue panel	Marseille	13000
 41	nico@gmail.com	$2a$12$bYueMCE1Q/ifjQC6DTjBLenbbzoMW6v09bCMW1Zeg3mXu2ntbK1De	\N	\N	\N	2023-06-08 10:20:40.849742	2023-06-08 10:20:40.849742	Nicolas	Gil	Proto	t	15 rue panel	Lyon	69000
+42	julie@gmail.com	$2a$12$F8bHX87dWvKT8qGP9l88T.VYDEEIG54NzlsQKz.MWfhwTWPY1rnPu	\N	\N	\N	2023-06-09 07:30:26.035272	2023-06-09 07:30:26.035272	julie	nom	test	f	zojjndaozjnd	roder	12450
+43	admin@gmail.com	$2a$12$RWO1eUHfyKRk.UrNhwEisOPUPJc0xkaCT3k3w2rrmdHF2eZGeBhyC	\N	\N	\N	2023-06-09 08:18:33.278971	2023-06-09 08:18:33.278971	Nicolas	Admin	Admin	t	15 rue panel	Lyon	69000
+44	claire@gmail.com	$2a$12$FLj32VV1wQ20G0p7rgCzf.nRBxlj7cVui2bcEhi46wk/bKVn.azgG	\N	\N	\N	2023-06-09 08:27:02.762736	2023-06-09 08:27:02.762736	claire	mligno	Claire	f	ertyui	ljbdls	12450
 \.
 
 
@@ -980,14 +996,14 @@ COPY public.users (id, email, encrypted_password, reset_password_token, reset_pa
 -- Name: active_storage_attachments_id_seq; Type: SEQUENCE SET; Schema: public; Owner: claire
 --
 
-SELECT pg_catalog.setval('public.active_storage_attachments_id_seq', 227, true);
+SELECT pg_catalog.setval('public.active_storage_attachments_id_seq', 230, true);
 
 
 --
 -- Name: active_storage_blobs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: claire
 --
 
-SELECT pg_catalog.setval('public.active_storage_blobs_id_seq', 227, true);
+SELECT pg_catalog.setval('public.active_storage_blobs_id_seq', 230, true);
 
 
 --
@@ -1001,28 +1017,28 @@ SELECT pg_catalog.setval('public.active_storage_variant_records_id_seq', 1, fals
 -- Name: books_id_seq; Type: SEQUENCE SET; Schema: public; Owner: claire
 --
 
-SELECT pg_catalog.setval('public.books_id_seq', 112, true);
+SELECT pg_catalog.setval('public.books_id_seq', 113, true);
 
 
 --
 -- Name: orders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: claire
 --
 
-SELECT pg_catalog.setval('public.orders_id_seq', 5, true);
+SELECT pg_catalog.setval('public.orders_id_seq', 11, true);
 
 
 --
 -- Name: reviews_id_seq; Type: SEQUENCE SET; Schema: public; Owner: claire
 --
 
-SELECT pg_catalog.setval('public.reviews_id_seq', 5, true);
+SELECT pg_catalog.setval('public.reviews_id_seq', 10, true);
 
 
 --
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: claire
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 41, true);
+SELECT pg_catalog.setval('public.users_id_seq', 44, true);
 
 
 --

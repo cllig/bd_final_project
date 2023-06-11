@@ -15,7 +15,6 @@
                         label: "Nom d'utilisateur"%>
           <%= f.input :email,
                         required: true,
-                        autofocus: true,
                         input_html: { autocomplete: "email" }%>
           <%= f.input :password,
                         required: true,
@@ -30,31 +29,26 @@
           <div class="d-flex justify-content-between">
             <%= f.input :first_name,
                           required: true,
-                          autofocus: true,
                           input_html: { autocomplete: "first_name" },
                           label: "Prénom" %>
             <%= f.input :last_name,
                           required: true,
-                          autofocus: true,
                           input_html: { autocomplete: "last_name" },
                           label: "Nom de famille"%>
           </div>
 
             <%= f.input :address,
                         required: true,
-                        autofocus: true,
                         input_html: { autocomplete: "address" },
                         label: "Adresse"%>
 
             <div class="d-flex justify-content-between">
               <%= f.input :postal_code,
                           required: true,
-                          autofocus: true,
                           input_html: { autocomplete: "postal_code" },
                           label: "Code postal"%>
               <%= f.input :city,
                           required: true,
-                          autofocus: true,
                           input_html: { autocomplete: "city" },
                           label: "Ville"%>
             </div>

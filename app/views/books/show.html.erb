@@ -1,6 +1,6 @@
 <div class="container">
 
-  <%= image_tag "arrow.svg", onclick: "window.history.back();", class: 'btn-arrow'%>
+  <%= image_tag "arrow.svg", onclick: "window.history.back();", class: 'btn-arrow', alt: "flèche de retour"%>
 
   <div class="d-flex flex-wrap row justify-content-center">
     <div class="detail-book-carousel col-12 col-md-10 col-lg-4 col-xl-4 text-center">
@@ -9,7 +9,7 @@
           <div class="carousel-inner">
             <% @book.photos.each_with_index do |photo, index| %>
               <div class="carousel-item carousel-img <%= index == 0 ? "active" : ""%> ">
-                <%= image_tag photo, crop: :fill, class: "d-block w-100", id: "slide#{index} " %>
+                <%= image_tag photo, crop: :fill, class: "d-block w-100", id: "slide#{index}", alt: "photos de bandes dessinées" %>
               </div>
             <% end %>
           </div>
@@ -23,7 +23,7 @@
           </button>
         </div>
       <% else %>
-        <%= image_tag "conversation.png", class: "default-img" %>
+        <%= image_tag "conversation.png", class: "default-img", alt: "photo par défaut" %>
       <% end %>
     </div>
 
@@ -38,9 +38,9 @@
       <p class="mb-2"><b>Vendu par :</b></p>
       <div class="d-flex ms-4 mb-4">
         <% if @book.user.avatar.attached? %>
-          <%= image_tag @book.user.avatar, class: "avatar-large me-2 my-auto", crop: :fill %>
+          <%= image_tag @book.user.avatar, class: "avatar-large me-2 my-auto", crop: :fill, alt: "avatar de l'utilisateur" %>
         <% else %>
-          <%= image_tag "profile-user.png", class: "avatar-large me-2 my-auto", crop: :fill%>
+          <%= image_tag "profile-user.png", class: "avatar-large me-2 my-auto", crop: :fill, alt: "avatar par défaut"%>
         <% end %>
         <div>
           <p><b><%= @book.user.username %></b></p>
