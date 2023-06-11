@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <%= link_to "/", class: "navbar-brand" do %>
       <div class='d-flex align-items-center'>
-        <%= image_tag "conversation.png", class:'logo-app' %>
+        <%= image_tag "conversation.png", class:'logo-app', alt:"logo" %>
         <div>
           <h5>Vintage</h5>
           <h5>Comics</h5>
@@ -29,7 +29,7 @@
               class: "form-control searchbar-input",
               placeholder: "Rechercher une BD"
             %>
-            <%= image_submit_tag("search-interface-symbol.png", class: "btn btn-purple searchbar-icon") %>
+            <%= image_submit_tag("search-interface-symbol.png", class: "btn btn-purple searchbar-icon", alt:"loupe") %>
           <% end %>
         </li>
 
@@ -40,9 +40,9 @@
         <% if user_signed_in? %>
           <li class="nav-item dropdown d-flex justify-content-center">
             <% if current_user.avatar.attached? %>
-              <%= image_tag current_user.avatar,  crop: :fill, class: "dropdown-toggle avatar", id: "navbarDropdown", "data-bs-toggle":"dropdown", 'aria-haspopup': true, 'aria-expanded':false %>
+              <%= image_tag current_user.avatar,  crop: :fill, class: "dropdown-toggle avatar", id: "navbarDropdown", "data-bs-toggle":"dropdown", 'aria-haspopup': true, 'aria-expanded':false, alt: "avatar de l'utilisateur" %>
             <% else %>
-              <%= image_tag "profile-user.png", class: "dropdown-toggle avatar", id: "navbarDropdown", "data-bs-toggle":"dropdown", 'aria-haspopup': true, 'aria-expanded':false %>
+              <%= image_tag "profile-user.png", class: "dropdown-toggle avatar", id: "navbarDropdown", "data-bs-toggle":"dropdown", 'aria-haspopup': true, 'aria-expanded':false, alt:"avatar par défaut" %>
             <% end %>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <%= link_to "Mes BD en vente", user_books_path, class: "dropdown-item"  %>

@@ -7,9 +7,9 @@
         <% @current_user_books.each do |current_user_book| %>
           <%= link_to book_path(current_user_book), :class => "card" do %>
             <% if current_user_book.photos.attached? %>
-              <%= image_tag current_user_book.photos.first, class: "card-img" %>
+              <%= image_tag current_user_book.photos.first, class: "card-img", alt: "bande desisnée" %>
             <% else %>
-              <%= image_tag "conversation.png", class: "card-img" %>
+              <%= image_tag "conversation.png", class: "card-img", alt: "bade dessinée par défaut" %>
             <% end %>
             <% if current_user_book.bought?  %>
               <p class="bg-success text-white p-2">Vendu</p>

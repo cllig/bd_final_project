@@ -1,7 +1,7 @@
 <div class="container">
 
   <%= link_to orders_path do %>
-    <%= image_tag "arrow.svg", class: 'btn-arrow'%>
+    <%= image_tag "arrow.svg", class: 'btn-arrow', alt: "flèche de retour"%>
   <% end %>
 
   <h3>Détails de la commande</h3>
@@ -11,7 +11,7 @@
 
     <p class="mb-2 fw-light">Article :</p>
     <div class="d-flex flex-wrap justify-content-start align-items-center mb-5 ms-5 gap-3">
-      <%= image_tag @order.book.photos.first, class: "me-4 miniature-img" %>
+      <%= image_tag @order.book.photos.first, class: "me-4 miniature-img", alt: "première photo de l'annonce" %>
       <p class="fw-bold me-4"><%= @order.book.name %></p>
       <p class="fw-bold"><%= @order.book.price.to_s.gsub('.', ',') %>€</p>
       <%= link_to "Voir l'annonce", book_path(@order.book), class:"btn btn-link" %>
@@ -33,9 +33,9 @@
     <p class="fw-light">Vendeur :</p>
     <div class="d-flex ms-4 mb-5">
       <% if @order.book.user.avatar.attached? %>
-        <%= image_tag @order.book.user.avatar, class: "avatar-large me-2 my-auto", crop: :fill %>
+        <%= image_tag @order.book.user.avatar, class: "avatar-large me-2 my-auto", crop: :fill, alt:"avatar de l'utilisateur" %>
       <% else %>
-        <%= image_tag "profile-user.png", class: "avatar-large me-2 my-auto", crop: :fill%>
+        <%= image_tag "profile-user.png", class: "avatar-large me-2 my-auto", crop: :fill, alt:"avatar par défaut"%>
       <% end %>
       <div>
         <p><b><%= @order.book.user.username %></b></p>

@@ -2,9 +2,9 @@
     <% @books.each do |book| %>
       <%= link_to book_path(book), :class => "card" do %>
         <% if book.photos.attached? %>
-          <%= image_tag book.photos.first, class: "card-img" %>
+          <%= image_tag book.photos.first, class: "card-img", alt: "photo de la bande dessinée" %>
         <% else %>
-          <%= image_tag "conversation.png", class: "card-img" %>
+          <%= image_tag "conversation.png", class: "logo de bande dessinée" %>
         <% end %>
         <% if book.bought?  %>
           <p class="bg-success text-white p-2">Vendu</p>

@@ -22,3 +22,7 @@ En cas de soucis avec le dump de la base de données, j'ai décidé de laisser m
 
 - rails db:migrate
 - rails db:seed
+
+Pour se connecter au compte admin :
+mail : admin@gmail.com
+mot de passe : password
